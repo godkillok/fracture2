@@ -1,0 +1,31 @@
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.csprojResolveAssemblyReference.cache
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.AboutBox1.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.Class1.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.decline.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.Form2.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.Form3.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.Form4.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.Form5.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.Form6.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.frmaccount.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.frmahp.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.frmdataprepare.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.frmLogin.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.frmwellevl.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.MathMethod.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.Plotting Form1.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.Plotting Form2.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.PrintControl.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.Properties.Resources.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.RibbonApplicationUserControl.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.RibbonForm1.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.UserControl1.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.WaitForm1.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.waterflooding.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.csproj.GenerateResource.Cache
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.exe.licenses
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\bin\Debug\fracture.exe
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.Plotting_Form3.resources
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\bin\Debug\fracture.pdb
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.exe
+D:\云盘同步文件夹\课外\水平井裂缝堵水\fracture\fracture\obj\Debug\fracture.pdb

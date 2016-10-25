@@ -1,0 +1,6 @@
+E:\水平井裂缝堵水\fracture\GlobalName\bin\Release\GlobalName.dll
+E:\水平井裂缝堵水\fracture\GlobalName\bin\Release\GlobalName.pdb
+E:\水平井裂缝堵水\fracture\GlobalName\obj\Release\GlobalName.dll
+E:\水平井裂缝堵水\fracture\GlobalName\obj\Release\GlobalName.pdb
+E:\水平井裂缝堵水\fracture\fracture\bin\Release\GlobalName.dll
+E:\水平井裂缝堵水\fracture\fracture\bin\Release\GlobalName.pdb

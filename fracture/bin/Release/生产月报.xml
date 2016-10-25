@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ChartXmlSerializer version="15.2.9.0">
+  <Chart AppearanceNameSerializable="Default" SelectionMode="None" SeriesSelectionMode="Series">
+    <DataContainer DataMember="" BoundSeriesSorting="None" RefreshDataOnRepaint="true">
+      <SeriesSerializable>
+        <Item1 Name="月产水量" ArgumentDataMember="生产年月YYYYMM" ValueDataMembersSerializable="月产水量" ArgumentScaleType="DateTime">
+          <View Color="125, 0, 128, 0" TypeNameSerializable="LineSeriesView" />
+        </Item1>
+        <Item2 Name="月产油量" ArgumentDataMember="生产年月YYYYMM" ValueDataMembersSerializable="月产油量" ArgumentScaleType="DateTime">
+          <View Color="125, 255, 0, 0" TypeNameSerializable="LineSeriesView" />
+        </Item2>
+        <Item3 Name="含水" ArgumentDataMember="生产年月YYYYMM" ValueDataMembersSerializable="含水" ArgumentScaleType="DateTime">
+          <View AxisYName="含水率" Color="125, 0, 0, 255" TypeNameSerializable="LineSeriesView" />
+        </Item3>
+      </SeriesSerializable>
+      <SeriesTemplate />
+    </DataContainer>
+    <Legend Visibility="True" HorizontalIndent="8" VerticalIndent="8" MaxHorizontalPercentage="50" MaxVerticalPercentage="50" AlignmentHorizontal="Left" TextOffset="8" MarkerSize="@2,Width=10@2,Height=10" TextColor="Black" Font="Arial, 9pt, style=Bold" EnableAntialiasing="False">
+      <Padding Left="4" Top="4" Right="4" Bottom="4" />
+      <Margins Left="8" Top="8" Right="8" Bottom="8" />
+    </Legend>
+    <Titles>
+      <Item1 Text="生产月报" Font="微软雅黑, 12pt" />
+    </Titles>
+    <Diagram TypeNameSerializable="XYDiagram">
+      <AxisX VisibleInPanesSerializable="-1">
+        <Title Visibility="True" Text="生产时间" Font="微软雅黑, 10pt" TextColor="Black" EnableAntialiasing="True" />
+        <GridLines Visible="true" />
+      </AxisX>
+      <AxisY Visibility="True" VisibleInPanesSerializable="-1">
+        <Title Visibility="True" Text="产量(方)" Font="微软雅黑, 10pt" TextColor="Black" EnableAntialiasing="True" />
+        <GridLines MinorVisible="true" />
+      </AxisY>
+      <SecondaryAxesY>
+        <Item1 AxisID="0" Color="Blue" VisibleInPanesSerializable="-1" Name="含水率">
+          <Title Visibility="True" Text="含水率（%）" Font="微软雅黑, 10pt" TextColor="Blue" />
+          <Label TextColor="Blue" />
+          <VisualRange Auto="false" MinValueSerializable="0" MaxValueSerializable="100" />
+          <WholeRange Auto="false" AutoSideMargins="false" SideMarginsValue="0" MinValueSerializable="0" MaxValueSerializable="100" />
+        </Item1>
+      </SecondaryAxesY>
+    </Diagram>
+    <CrosshairOptions ShowArgumentLabels="true" ShowValueLabels="true" ShowCrosshairLabels="false" ShowValueLine="true" ArgumentLineColor="DarkBlue" ValueLineColor="DarkBlue" />
+  </Chart>
+</ChartXmlSerializer>
