@@ -219,6 +219,8 @@ namespace fracture
             dt_TableAndField.Columns["源字段"].SetOrdinal(3);
             dt_TableAndField.Columns.Add("源表格", typeof(string));
             dt_TableAndField.Columns.Add("ID_字符类型", typeof(string));
+            string varTableName = dt_TableAndField.Rows[0]["TABLE_ID"].ToString();
+            dt_TableAndField=OleDbHelper.GetTableColumn(Globalname.DabaBasePath, varTableName, dt_TableAndField);
 
             DataTable tr3 = treeList3.DataSource as DataTable;
             if (tr3 != null)
@@ -306,7 +308,7 @@ namespace fracture
                 return;
             //accessFilePath = Application.StartupPath + "\\Database.mdb";
             string ExcelSql = string.Format("select * from [{0}]", sheetName);
-          
+         
             //+ 
             //INSERT INTO Persons (LastName, Address) VALUES ('Wilson', 'Champs-Elysees')
             OleDbHelper.InsertDataTable2(ExcelFilePath, sheetName, ExcelSql,  Globalname.DabaBasePath, gv3);

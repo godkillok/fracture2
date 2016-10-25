@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataTypeMaps>
+ <DataTypeMap dataBaseType="Access" version="">
+   <DataType code="0" name="Empty" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="2" name="SmallInt" comments="整型">
+    <Map language="C#" code="Int16" name="System.Int16" comments="" length=""/>
+   </DataType>
+   <DataType code="3" name="Integer" comments="长整型">
+    <Map language="C#" code="int" name="Int32" comments="" length=""/>
+   </DataType>
+   <DataType code="4" name="Single" comments="单精度">
+    <Map language="C#" code="Single" name="System.Single" comments="" length=""/>
+   </DataType>
+   <DataType code="5" name="Double" comments="双精度">
+    <Map language="C#" code="double" name="System.Double" comments="" length=""/>
+   </DataType>
+   <DataType code="6" name="Currency" comments="货币">
+    <Map language="C#" code="" name="decimal" comments="" length=""/>
+   </DataType>
+   <DataType code="7" name="Date" comments="日期">
+    <Map language="C#" code="DateTime" name="System.DateTime" comments="" length=""/>
+   </DataType>
+   <DataType code="8" name="BSTR" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="9" name="IDispatch" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="10" name="Error" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="11" name="Boolean" comments="布尔">
+    <Map language="C#" code="bool" name="System.Boolean" comments="布尔" length=""/>
+   </DataType>
+   <DataType code="12" name="Variant" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="13" name="IUnknown" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="14" name="Decimal" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="16" name="TinyInt" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="17" name="UnsignedTinyInt" comments="数字">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="18" name="UnsignedSmallInt" comments="">
+    <Map language="C#" code="byte" name="System.Byte" comments="" length=""/>
+   </DataType>
+   <DataType code="19" name="UnsignedInt" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="20" name="BigInt" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="21" name="UnsignedBigInt" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="64" name="FileTime" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="72" name="GUID" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="128" name="Binary" comments="ole">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="129" name="Char" comments="字符型">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="130" name="WChar" comments="文本/备注/超链接">
+    <Map language="C#" code="string" name="System.String" comments="" length=""/>
+   </DataType> 
+   <DataType code="131" name="Numeric" comments="小数">
+    <Map language="C#" code="decimal" name="System.Decimal" comments="" length=""/>
+   </DataType>
+   <DataType code="132" name="UserDefined" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="133" name="DBDate" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="134" name="DBTime" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="135" name="DBTimeStamp" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="136" name="Chapter" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="138" name="PropVariant" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="139" name="VarNumeric" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="200" name="VarChar" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="203" name="LongVarWChar" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="204" name="VarBinary" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>
+   <DataType code="205" name="LongVarChar" comments="">
+    <Map language="C#" code="" name="" comments="" length=""/>
+   </DataType>  
+ </DataTypeMap>
+</DataTypeMaps>
