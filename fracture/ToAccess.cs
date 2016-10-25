@@ -52,6 +52,16 @@ namespace fracture
                 lookup1.DisplayMember = dt.Columns[0].ToString();
                 lookup1.DataSource = dt;
                 gridView3.Columns["源字段"].ColumnEdit = lookup1;
+                DataTable tr3 = treeList3.DataSource as DataTable;
+                DataTable dt_TableAndField = gridControl3.DataSource as DataTable;
+                if (tr3 != null)
+                {
+                    for (int i = 0; i < dt_TableAndField.Rows.Count; i++)
+                    {
+                        dt_TableAndField.Rows[i]["源表格"] = treeList3.DataSource.ToString();
+                    }
+                    gridControl3.DataSource = dt_TableAndField;
+                }
             }
 
 
@@ -208,6 +218,8 @@ namespace fracture
             //添加列标题
             dt_TableAndField.Columns["源字段"].SetOrdinal(3);
             dt_TableAndField.Columns.Add("源表格", typeof(string));
+            dt_TableAndField.Columns.Add("ID_字符类型", typeof(string));
+
             DataTable tr3 = treeList3.DataSource as DataTable;
             if (tr3 != null)
             {
@@ -271,7 +283,7 @@ namespace fracture
                 {
                     string stringtr3 = tr3.Rows[j].ItemArray.GetValue(0).ToString();
                     string stringgv3 = gv3.Rows[i][m].ToString();
-                    if (stringtr3.IndexOf(stringgv3) >= 0)
+                  if (stringtr3.IndexOf(stringgv3) >= 0)
                         gv3.Rows[i][n] = tr3.Rows[j].ItemArray.GetValue(0).ToString();
 
                 }
@@ -290,7 +302,8 @@ namespace fracture
             DataTable gv3 = gridControl3.DataSource as DataTable;
             int n = gv3.Columns.IndexOf("源表格");
             string sheetName = gv3.Rows[0][n].ToString();//
-           
+            if (sheetName == "")
+                return;
             //accessFilePath = Application.StartupPath + "\\Database.mdb";
             string ExcelSql = string.Format("select * from [{0}]", sheetName);
           
