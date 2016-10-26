@@ -404,7 +404,7 @@ namespace fracture
                 return;
             }
 
-            WellHeadTemp childForm = new WellHeadTemp();
+            WellHeadPress childForm = new WellHeadPress();
             string formname = btnWellHeadTemp.Caption.ToString();
             AddDocumentManager();
             AddChildForm(childForm, formname);

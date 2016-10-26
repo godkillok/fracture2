@@ -108,4 +108,4 @@ E:\水平井裂缝堵水\fracture\fracture\bin\Release\fracture.pdb
 E:\水平井裂缝堵水\fracture\fracture\obj\Release\fracture.pdb
 E:\水平井裂缝堵水\fracture\fracture\bin\Release\GlobalName.pdb
 E:\水平井裂缝堵水\fracture\fracture\obj\Release\fracture.Pred.resources
-E:\水平井裂缝堵水\fracture\fracture\obj\Release\fracture.WellHeadTemp.resources
+E:\水平井裂缝堵水\fracture\fracture\obj\Release\fracture.WellHeadPress.resources
