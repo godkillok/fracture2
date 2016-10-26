@@ -83,7 +83,11 @@ namespace fracture
             string strDestination = Application.StartupPath+ "\\case\\demoproject\\project\\WellHeadPressure.xml";
             if (Globalname.localFilePath != "")
                 strDestination = Globalname.localFilePath + "\\project\\WellHeadPressure.xml";
-            temp_para = LoadNet(strDestination);
+            if (Directory.Exists(strDestination))
+            {
+                temp_para = LoadNet(strDestination);
+            }
+         
             initialvgridcontrol();
             //  snapControl1.Visible = false;
             snapControl1.Options.HorizontalRuler.Visibility = DevExpress.XtraRichEdit.RichEditRulerVisibility.Hidden;
