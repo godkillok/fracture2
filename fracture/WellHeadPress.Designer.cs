@@ -1,6 +1,6 @@
 ﻿namespace fracture
 {
-    partial class WellHeadTemp
+    partial class WellHeadPress
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WellHeadTemp));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WellHeadPress));
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.themesGalleryBarItem1 = new DevExpress.Snap.Extensions.UI.ThemesGalleryBarItem();
