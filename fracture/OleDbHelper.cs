@@ -8,6 +8,9 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using Aspose;
+using Aspose.Cells;
+using fracture.Properties;
 namespace fracture
 {
     public class datatypedic
@@ -519,6 +522,19 @@ namespace fracture
                     reader.Close();
             }
         }
+
+        public static DataTable ExcelToDataTable2(string sheetName, string pathName = "")
+        {
+            if (pathName == "")
+                pathName = Application.StartupPath + "\\Config\\ACCESS.xlsx";
+            sheetName = sheetName.Substring(0, sheetName.Length - 1);//主要用于剔除在对excelSQL加的$
+            Aspose.Cells.Workbook workbook1 = new Aspose.Cells.Workbook();
+            workbook1.Open(pathName);
+            Aspose.Cells.Worksheet cellSheet1 = workbook1.Worksheets[sheetName];
+            Cells cells1 = cellSheet1.Cells;
+
+            return cells1.ExportDataTableAsString(0, 0, cells1.MaxDataRow + 1, cells1.MaxDataColumn + 1, true);
+        }
         /// <summary>
         /// 目前暂时有问题
         /// </summary>
@@ -532,9 +548,9 @@ namespace fracture
             //try
             //{
             if (accessFilePath == "")
-                accessFilePath = Application.StartupPath + "\\case\\demoproject\\project\\Database.mdb";
-            DataTable accessformbasicinfo;
-            DataTable dt = ExcelToDataTable(sheetName, EXCELSql, ExcelpathName);
+                accessFilePath = Application.StartupPath +@"\case\demoproject\project\Database.mdb";
+           
+            DataTable dt = ExcelToDataTable2(sheetName, ExcelpathName);
             //ExcelToDataTable(string sheetName, string Sql,string pathName="")
             if (dt.Rows.Count > 0)
             {
@@ -544,9 +560,11 @@ namespace fracture
 
                 String connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + accessFilePath;
 
-                string SQL = "SELECT * FROM " + tableName;
-               
-                int m = dt.Columns.IndexOf("COLUMN_NAME");
+                //string SQL = "SELECT * FROM " + tableName;
+                OleDbConnection conn = new OleDbConnection(connectionString);
+                OleDbDataAdapter adapt = new OleDbDataAdapter();
+
+              
                 //OleConn.Open();
                 //DataTable dt = new DataTable();
                 //OleDbDataAdapter da = new OleDbDataAdapter();
@@ -576,17 +594,17 @@ namespace fracture
                 if (LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString() != "")
                     AcessSql = AcessSql + LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString();
                 else
-                    AcessSql = AcessSql.Substring(0, AcessSql.Length -3)+")";
+                    AcessSql = AcessSql.Substring(0, AcessSql.Length -2);
 
-                AcessSql = AcessSql + ");";
+                AcessSql = AcessSql + ")";
 
-                OleDbConnection OleConn = new OleDbConnection(connectionString);
-                OleDbDataAdapter OleAdp = new OleDbDataAdapter(SQL, OleConn);
-                OleAdp.InsertCommand = new OleDbCommand(AcessSql);
-
+                //OleDbConnection OleConn = new OleDbConnection(connectionString);
+                //OleDbDataAdapter OleAdp = new OleDbDataAdapter(SQL, OleConn);
+                //OleAdp.InsertCommand = new OleDbCommand(AcessSql);
+                var cmd = new OleDbCommand(AcessSql, conn);
                 //var cmd = new OleDbCommand(AcessSql, conn);
                 // string cmdstring = "";
-           
+
                 for (int ii = 0; ii < LinkSourceTarget.Rows.Count; ii++)
                 {
                     if (LinkSourceTarget.Rows[ii]["源字段"].ToString() != "")
@@ -631,13 +649,22 @@ namespace fracture
                             case "VarBinary": fTYPE = OleDbType.VarBinary; break;
                             case "LongVarChar": fTYPE = OleDbType.LongVarChar; break;
                         }
-                        OleAdp.InsertCommand.Parameters.Add(cmdstring, fTYPE, 255, cmdstring2);
+                        //OleAdp.InsertCommand.Parameters.Add(cmdstring, fTYPE, 255, cmdstring2);
+                        cmd.Parameters.Add(cmdstring, fTYPE, 255, cmdstring2);
                     }
                 }
-                OleAdp.InsertCommand.Connection = OleConn;
-                OleAdp.InsertCommand.Connection.Open();
-                int count = OleAdp.Update(dt);
-                OleAdp.InsertCommand.Connection.Close();
+
+              
+
+                //OleAdp.InsertCommand.Connection = OleConn;
+                //OleAdp.InsertCommand.Connection.Open();
+                //int count = OleAdp.Update(dt);
+                //OleAdp.InsertCommand.Connection.Close();
+                adapt.InsertCommand = cmd;
+                OleDbCommandBuilder builder = new OleDbCommandBuilder(adapt);
+                builder.QuotePrefix = "[";
+                builder.QuoteSuffix = "]";
+                int count = adapt.Update(dt);
                 MessageBox.Show("数据导入成功！" + count.ToString());
                 //}
 
