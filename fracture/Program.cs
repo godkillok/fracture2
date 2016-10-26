@@ -43,7 +43,7 @@ namespace fracture
               //  Application.Run(new declinepred());
            //  Application.Run(new fractureparameter());
             // Application.Run(new wellmap());
-        // Application.Run(new Pred());
+          //   Application.Run(new WellHeadTemp());
         }
     }
 }

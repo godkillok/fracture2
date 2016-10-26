@@ -27,7 +27,7 @@ namespace fracture
         public RibbonForm1()
         {
             InitializeComponent();
-
+            
             this.WindowState = FormWindowState.Maximized;
             UserInfo ui = new UserInfo();
             int n = 1;
@@ -394,6 +394,20 @@ namespace fracture
         private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
         {
 
+        }
+
+        private void btnWellHeadTemp_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (openflag == false)
+            {
+                MessageBox.Show("请登陆！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            WellHeadTemp childForm = new WellHeadTemp();
+            string formname = btnWellHeadTemp.Caption.ToString();
+            AddDocumentManager();
+            AddChildForm(childForm, formname);
         }
 
 

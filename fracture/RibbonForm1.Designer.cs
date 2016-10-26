@@ -64,6 +64,7 @@
             this.btnwellmap = new DevExpress.XtraBars.BarButtonItem();
             this.btnwellevlpred = new DevExpress.XtraBars.BarButtonItem();
             this.btn_productioncurve = new DevExpress.XtraBars.BarButtonItem();
+            this.btn_datacheck = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -75,7 +76,7 @@
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::fracture.WaitForm1), true, true);
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
-            this.btn_datacheck = new DevExpress.XtraBars.BarButtonItem();
+            this.btnWellHeadTemp = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             this.backstageViewControl1.SuspendLayout();
@@ -118,9 +119,10 @@
             this.btnwellmap,
             this.btnwellevlpred,
             this.btn_productioncurve,
-            this.btn_datacheck});
+            this.btn_datacheck,
+            this.btnWellHeadTemp});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 36;
+            this.ribbon.MaxItemId = 37;
             this.ribbon.MdiMergeStyle = DevExpress.XtraBars.Ribbon.RibbonMdiMergeStyle.Always;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -130,7 +132,7 @@
             this.repositoryItemDateEdit1,
             this.repositoryItemZoomTrackBar1});
             this.ribbon.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
-            this.ribbon.Size = new System.Drawing.Size(1241, 151);
+            this.ribbon.Size = new System.Drawing.Size(1241, 147);
             this.ribbon.Merge += new DevExpress.XtraBars.Ribbon.RibbonMergeEventHandler(this.ribbon_Merge);
             this.ribbon.Click += new System.EventHandler(this.ribbon_Click);
             // 
@@ -307,6 +309,7 @@
             this.btn_Predict.Id = 13;
             this.btn_Predict.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btn_Predict.LargeGlyph")));
             this.btn_Predict.Name = "btn_Predict";
+            this.btn_Predict.Visibility = DevExpress.XtraBars.BarItemVisibility.OnlyInCustomizing;
             this.btn_Predict.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonPredict_ItemClick);
             // 
             // btnnewcase
@@ -357,6 +360,7 @@
             this.btn_evaluate.Id = 22;
             this.btn_evaluate.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btn_evaluate.LargeGlyph")));
             this.btn_evaluate.Name = "btn_evaluate";
+            this.btn_evaluate.Visibility = DevExpress.XtraBars.BarItemVisibility.OnlyInCustomizing;
             this.btn_evaluate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnfront_ItemClick);
             // 
             // btncase
@@ -383,6 +387,7 @@
             this.btnwellmap.Id = 28;
             this.btnwellmap.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnwellmap.LargeGlyph")));
             this.btnwellmap.Name = "btnwellmap";
+            this.btnwellmap.Visibility = DevExpress.XtraBars.BarItemVisibility.OnlyInCustomizing;
             this.btnwellmap.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnwellevl_ItemClick);
             // 
             // btnwellevlpred
@@ -402,6 +407,15 @@
             this.btn_productioncurve.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btn_productioncurve.LargeGlyph")));
             this.btn_productioncurve.Name = "btn_productioncurve";
             this.btn_productioncurve.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_productioncurve_ItemClick);
+            // 
+            // btn_datacheck
+            // 
+            this.btn_datacheck.Caption = "数据查看";
+            this.btn_datacheck.Glyph = ((System.Drawing.Image)(resources.GetObject("btn_datacheck.Glyph")));
+            this.btn_datacheck.Id = 35;
+            this.btn_datacheck.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btn_datacheck.LargeGlyph")));
+            this.btn_datacheck.Name = "btn_datacheck";
+            this.btn_datacheck.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_datacheck_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -437,6 +451,7 @@
             this.ribbonPageGroup2.ItemLinks.Add(this.btn_productioncurve);
             this.ribbonPageGroup2.ItemLinks.Add(this.btnfracturepara);
             this.ribbonPageGroup2.ItemLinks.Add(this.btnplugagent);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnWellHeadTemp);
             this.ribbonPageGroup2.ItemLinks.Add(this.btnwellevlpred);
             this.ribbonPageGroup2.ItemLinks.Add(this.btn_Predict);
             this.ribbonPageGroup2.ItemLinks.Add(this.btn_evaluate);
@@ -487,14 +502,14 @@
             this.barButtonItem7.LargeGlyph = global::fracture.Properties.Resources.动态1;
             this.barButtonItem7.Name = "barButtonItem7";
             // 
-            // btn_datacheck
+            // btnWellHeadTemp
             // 
-            this.btn_datacheck.Caption = "数据查看";
-            this.btn_datacheck.Glyph = ((System.Drawing.Image)(resources.GetObject("btn_datacheck.Glyph")));
-            this.btn_datacheck.Id = 35;
-            this.btn_datacheck.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btn_datacheck.LargeGlyph")));
-            this.btn_datacheck.Name = "btn_datacheck";
-            this.btn_datacheck.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_datacheck_ItemClick);
+            this.btnWellHeadTemp.Caption = "井口温度计算";
+            this.btnWellHeadTemp.Glyph = ((System.Drawing.Image)(resources.GetObject("btnWellHeadTemp.Glyph")));
+            this.btnWellHeadTemp.Id = 36;
+            this.btnWellHeadTemp.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnWellHeadTemp.LargeGlyph")));
+            this.btnWellHeadTemp.Name = "btnWellHeadTemp";
+            this.btnWellHeadTemp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnWellHeadTemp_ItemClick);
             // 
             // RibbonForm1
             // 
@@ -575,5 +590,6 @@
         private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
         private DevExpress.XtraBars.BarButtonItem btn_productioncurve;
         private DevExpress.XtraBars.BarButtonItem btn_datacheck;
+        private DevExpress.XtraBars.BarButtonItem btnWellHeadTemp;
     }
 }

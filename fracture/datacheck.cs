@@ -109,6 +109,7 @@ namespace fracture
             }
             sSql = sSql + string.Format("{0} AS {1} From " + tablename, dt_TableAndField.Rows[dt_TableAndField.Rows.Count - 1][1], dt_TableAndField.Rows[dt_TableAndField.Rows.Count - 1][0]);
             dt = OleDbHelper.getTable(sSql,  Globalname.DabaBasePath);
+            dt.TableName = tablename;
             //string[] varTableName;
             //varTableName = OleDbHelper.GetTableColumn(DabaBasePath, dataname[1]);
       
@@ -207,7 +208,29 @@ namespace fracture
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            DataTable dt = gridControl1.DataSource as DataTable;
+            string tablename = dt.TableName;
+            //string DabaBasePath = "provider=microsoft.jet.oledb.4.0; Data Source=" + Application.StartupPath + "\\Database.mdb";
+            //string excelpath = Application.StartupPath + "\\ACCESS.xlsx";
+            string[] dataname;
+            DataTable dt_TableAndField = new DataTable();
+            string sheetName = "物理表汇总";
 
+            string TableAndField = string.Format("select 列显示名称 AS name ,库字段名称 as ID from [{0}$] where (库表名称='" + tablename + "')", sheetName);
+            dt_TableAndField = OleDbHelper.ExcelToDataTable(sheetName, TableAndField);
+            DataTable query = new DataTable();
+
+            //          string sSql = "SELECT T_DM_UNIT_CUR_INFOR.DM_UNIT_ID AS ParentID, T_WELL_INFOR.WELL_ID as KeyID,T_WELL_INFOR.WELL_NAME as Name FROM T_WELL_INFOR ,T_DM_UNIT_CUR_INFOR where T_WELL_INFOR.DM_UNIT_ID=T_DM_UNIT_CUR_INFOR.DM_UNIT_ID " +
+            //"UNION SELECT PARENT_DM_UNIT_ID AS ParentID,DM_UNIT_ID as KeyID,DM_UNIT_NAME as Name FROM T_DM_UNIT_CUR_INFOR";where [{0}$].库表名称 + tablename
+            string sSql = "select ";
+
+
+            for (int i = 0; i < dt_TableAndField.Rows.Count - 1; i++)
+            {
+                sSql = sSql + string.Format("{0} AS {1}, ", dt_TableAndField.Rows[i][1], dt_TableAndField.Rows[i][0]);
+            }
+            sSql = sSql + string.Format("{0} AS {1} From " + tablename, dt_TableAndField.Rows[dt_TableAndField.Rows.Count - 1][1], dt_TableAndField.Rows[dt_TableAndField.Rows.Count - 1][0]);
+            OleDbHelper.UpdateDataTable(sSql, Globalname.DabaBasePath, dt);
         }
 
         private void gridControl1_MouseUp(object sender, MouseEventArgs e)

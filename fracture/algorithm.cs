@@ -11,7 +11,7 @@ namespace fracture
 {
     class algorithm
     {
-      
+
 
         public void Compertz(int math_predic_num, double[] GMData, double[,] Compertz_reuslt, List<double> parameter_result)
         {
@@ -1665,8 +1665,9 @@ namespace fracture
             double limitL = .48 * Math.Pow((8 * G * Math.Pow(Q, 3) / ((1 - v) * mu)), (1.0 / 6)) * Math.Pow(tf, (2.0 / 3));   // %used for axis limits
             double limitW0 = 1.32 * Math.Pow((8 * (1 - v) * mu * Math.Pow(Q, 3) / G), (1.0 / 6)) * Math.Pow(tf, (1.0 / 3));
             // for (double t0 = tf / 50; t0 < tf; t0 = t0 + tf / 50)
-            double lratio = 28.7 / limitL;
-            double wratio = 7.01 / limitW0;
+            //double lratio = 28.7 / limitL;
+            double lratio = limitL;
+            double wratio = limitW0;
             double t0 = tf;
             {
 
@@ -1716,6 +1717,35 @@ namespace fracture
             //[~,h3]=suplabel(sprintf('time = %0.1g   min',t0));grid on;
             return dt;
         }
+
+        public static double kt(double Q, double C, double w, double t)
+    {
+   double  x=2*C*Math.Sqrt(Math.PI*t)/w;
+
+   double A = Q * w / 4 / Math.PI / Math.Pow(C, 2) * (Math.Exp(Math.Pow(x, 2)) * erfc(x) + 2 * x / Math.Sqrt(Math.PI) - 1);
+    return A;
+    }
+        /// <summary>
+        /// 误差函数
+        /// </summary>
+        /// <param name="B12"></param>
+        /// <returns></returns>
+        public static double erfc(double B12)
+        {
+            double A = 0.254829592 * B12 - 0.284496736 * Math.Pow(B12, 2) + 1.42143741 * Math.Pow(B12, 3) - 1.453152027 * Math.Pow(B12, 4) + 1.06140429 * Math.Pow(B12, 5);
+            return A;
+        }
+
+        public static double PKN_w(double Q, double vis, double L, double E = 2.555e10, double v = 0.27)
+        {
+            double tem = Math.Pow(1 / 60 * (1 - v * v) * Q * vis * L / E, 0.25);
+            //# 返回值为平均缝宽
+            return tem * Math.PI / 2 * 1.26;
+        }
+        //        # C 为综合滤失系数 m/sqrt(min)
+       
+
+
         /// <summary>
         /// PKN压裂模型(Assuming no leak off)  
         /// </summary>
@@ -1725,76 +1755,94 @@ namespace fracture
         /// <param name="v">岩石泊松比</param>
         /// <param name="mu">压裂液粘度</param>
         /// <param name="h">缝高</param>
-        public static DataTable PKN(double tf, double G, double Q, double v, double mu, double h)
+        public static double PKN(double tf, double G, double Q, double v, double mu, double h)
         {
             DataTable dt = new DataTable();
+            double error = 0.01;
+            double C = 0.0007;
+            double w = 0.01;
             dt.Columns.Add("L", typeof(double));
             dt.Columns.Add("W0", typeof(double));
             dt.Columns.Add("Pwi", typeof(double));
             dt.Columns.Add("time", typeof(double));
-            //for (double t0 = tf / 50; t0 < tf; t0 = t0 + tf / 50)//      %time step for visualization
-            double limitL = .68 * Math.Pow((G * Math.Pow(Q, 3) / ((1 - v) * mu * Math.Pow(h, 4))), (1.0 / 5)) * Math.Pow(tf, (4.0 / 5));//  %used for axis limits
-            double limitW0 = 2.5 * Math.Pow(((1 - v) * mu * Math.Pow(Q, 2) / (G * h)), (1.0 / 5)) * Math.Pow(tf, (1.0 / 5));
-            double lratio = 41.1 / limitL;
-            double wratio = 9.38 / limitW0;
-            double t0 = tf;
+            
+            double L = kt(Q, C, w, tf) / 2 / h;
+            for (int i = 0; i < 100; i++)// range(100):
             {
-
-                List<double> L = new List<double>();
-                List<double> W0 = new List<double>();
-                List<double> Pwi = new List<double>();
-                List<double> time = new List<double>();
-                for (double t = 0; t < t0; t = t + tf / 50)
-                {
-                    //ngr(i)=0;
-                    L.Add((.68 * Math.Pow((G * Math.Pow(Q, 3) / ((1 - v) * mu * Math.Pow(h, 4))), (1.0 / 5)) * Math.Pow(t, (4.0 / 5))) * lratio);  // %Fracture Length
-                    W0.Add((2.5 * Math.Pow(((1 - v) * mu * Math.Pow(Q, 2) / (G * h)), (1.0 / 5)) * Math.Pow(t, (1.0 / 5))) * wratio);    //  %Fracture opening width
-                    Pwi.Add(2.5 * Math.Pow((Math.Pow(Q, 2) * mu * Math.Pow(G, 4) / (Math.Pow((1 - v), 4) * Math.Pow(h, 6))), (1.0 / 5)) * Math.Pow(t, (1.0 / 5))); //  %wellbore net pressure
-                    time.Add(t);
-                    dt.Rows.Add(new object[] { L.Last(), W0.Last(), Pwi.Last(), time.Last() });
-                }
-                //timer=fliplr(time);
-
-                double h2 = 0.2 * limitL;
-                //z=h2/time.Last()*time+h2/2;
-                double A = G * Math.Pow(Q, 3) / ((1 - v) * mu * Math.Pow(h2, 4));
-                double a = Math.Pow(.68, (5.0 / 4)) * A;
-                double B = ((1 - v) * mu * Math.Pow(Q, 2)) / (G * h2);
-                double b = Math.Pow(2.5, 5) * B;
-                double c = h2 / time.Last();
-                //Z=z-h2/2-t0*c;
-
-
-                //第一幅图时间与L
-                //subplot(221)
-                //  plot(time,L)
-                //  ylabel('Length [ft]')
-                //  xlabel('time [min]')
-                //  axis([0 tf 0 limitL])
-                //  grid on;
-                //第2幅图时间与WW
-                //plot(time,W0)
-                //ylabel('max width [in]')
-                //xlabel('time [min]')
-                //axis([0 tf 0 limitW0])
-                //grid on;
-                //第4副图画的是那个半椭圆形
-                //  fL=fliplr(L);
-                //  plot3(fL,W0,ngr,'b');
-                //  hold;
-                //  plot3(fL,-W0,ngr,'b');
-                //  hold;
-                //  axis([0 limitL -2*limitW0 2*limitW0 -1 1]);
-                //  grid on;
-                //  ylabel('width [in]') 
-                //  xlabel('Length [ft]')
-                //  set(gca,'ztick',[]);
-                //  daspect([1,1.0/2,1]);
-
-                //[~,h3]=suplabel(sprintf('time = %0.1g   min \n PKN RESULTS \n',t0));grid on;
-                //hold off;
+                double temL = L;
+                w = PKN_w(Q, mu, L);
+                L = kt(Q, C, w, tf) / 2 / h;
+                //# print("L=%s\tw=%s" % (L, w))
+                if (Math.Abs(temL - L) < error)
+                    break;
             }
-            return dt;
+
+            return L;
+            ////for (double t0 = tf / 50; t0 < tf; t0 = t0 + tf / 50)//      %time step for visualization
+            //double limitL = .68 * Math.Pow((G * Math.Pow(Q, 3) / ((1 - v) * mu * Math.Pow(h, 4))), (1.0 / 5)) * Math.Pow(tf, (4.0 / 5));//  %used for axis limits
+            //double limitW0 = 2.5 * Math.Pow(((1 - v) * mu * Math.Pow(Q, 2) / (G * h)), (1.0 / 5)) * Math.Pow(tf, (1.0 / 5));
+            //double lratio = 41.1 / limitL;
+            //double wratio = 9.38 / limitW0;
+
+
+            //double t0 = tf;
+            //{
+
+            //    List<double> L = new List<double>();
+            //    List<double> W0 = new List<double>();
+            //    List<double> Pwi = new List<double>();
+            //    List<double> time = new List<double>();
+            //    for (double t = 0; t < t0; t = t + tf / 50)
+            //    {
+            //        //ngr(i)=0;
+            //        L.Add((.68 * Math.Pow((G * Math.Pow(Q, 3) / ((1 - v) * mu * Math.Pow(h, 4))), (1.0 / 5)) * Math.Pow(t, (4.0 / 5))) * lratio);  // %Fracture Length
+            //        W0.Add((2.5 * Math.Pow(((1 - v) * mu * Math.Pow(Q, 2) / (G * h)), (1.0 / 5)) * Math.Pow(t, (1.0 / 5))) * wratio);    //  %Fracture opening width
+            //        Pwi.Add(2.5 * Math.Pow((Math.Pow(Q, 2) * mu * Math.Pow(G, 4) / (Math.Pow((1 - v), 4) * Math.Pow(h, 6))), (1.0 / 5)) * Math.Pow(t, (1.0 / 5))); //  %wellbore net pressure
+            //        time.Add(t);
+            //        dt.Rows.Add(new object[] { L.Last(), W0.Last(), Pwi.Last(), time.Last() });
+            //    }
+            //    //timer=fliplr(time);
+
+            //    double h2 = 0.2 * limitL;
+            //    //z=h2/time.Last()*time+h2/2;
+            //    double A = G * Math.Pow(Q, 3) / ((1 - v) * mu * Math.Pow(h2, 4));
+            //    double a = Math.Pow(.68, (5.0 / 4)) * A;
+            //    double B = ((1 - v) * mu * Math.Pow(Q, 2)) / (G * h2);
+            //    double b = Math.Pow(2.5, 5) * B;
+            //    double c = h2 / time.Last();
+            //    //Z=z-h2/2-t0*c;
+
+
+            //    //第一幅图时间与L
+            //    //subplot(221)
+            //    //  plot(time,L)
+            //    //  ylabel('Length [ft]')
+            //    //  xlabel('time [min]')
+            //    //  axis([0 tf 0 limitL])
+            //    //  grid on;
+            //    //第2幅图时间与WW
+            //    //plot(time,W0)
+            //    //ylabel('max width [in]')
+            //    //xlabel('time [min]')
+            //    //axis([0 tf 0 limitW0])
+            //    //grid on;
+            //    //第4副图画的是那个半椭圆形
+            //    //  fL=fliplr(L);
+            //    //  plot3(fL,W0,ngr,'b');
+            //    //  hold;
+            //    //  plot3(fL,-W0,ngr,'b');
+            //    //  hold;
+            //    //  axis([0 limitL -2*limitW0 2*limitW0 -1 1]);
+            //    //  grid on;
+            //    //  ylabel('width [in]') 
+            //    //  xlabel('Length [ft]')
+            //    //  set(gca,'ztick',[]);
+            //    //  daspect([1,1.0/2,1]);
+
+            //    //[~,h3]=suplabel(sprintf('time = %0.1g   min \n PKN RESULTS \n',t0));grid on;
+            //    //hold off;
+            //}
+            //return dt;
         }
         /// <summary>
         /// 计算度及用量
@@ -1863,7 +1911,7 @@ namespace fracture
                         break;
                     }
                 //  聚合物凝胶堵剂可适当延长注入时间
-                case "聚合物":
+                default:
                     {
                         double t = (ts + tf) / 2;
                         vgel = vgel / t;

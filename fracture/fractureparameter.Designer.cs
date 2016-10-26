@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fractureparameter));
             DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
             this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
+            this.document5 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
+            this.document6 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btncal = new DevExpress.XtraBars.BarButtonItem();
             this.btnoutpic = new DevExpress.XtraBars.BarButtonItem();
@@ -57,9 +59,9 @@
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.document1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.document3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
-            this.document5 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
-            this.document6 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.document5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.document6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.dockPanel1.SuspendLayout();
@@ -77,8 +79,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.document1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.document3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.document5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.document6)).BeginInit();
             this.SuspendLayout();
             // 
             // documentGroup1
@@ -86,6 +86,26 @@
             this.documentGroup1.Items.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document[] {
             this.document5,
             this.document6});
+            // 
+            // document5
+            // 
+            this.document5.Caption = "结果图";
+            this.document5.ControlName = "dockPanel2";
+            this.document5.FloatLocation = new System.Drawing.Point(279, 378);
+            this.document5.FloatSize = new System.Drawing.Size(200, 200);
+            this.document5.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.True;
+            this.document5.Properties.AllowFloat = DevExpress.Utils.DefaultBoolean.True;
+            this.document5.Properties.AllowFloatOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
+            // 
+            // document6
+            // 
+            this.document6.Caption = "结果表";
+            this.document6.ControlName = "dockPanel3";
+            this.document6.FloatLocation = new System.Drawing.Point(358, 377);
+            this.document6.FloatSize = new System.Drawing.Size(200, 200);
+            this.document6.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.True;
+            this.document6.Properties.AllowFloat = DevExpress.Utils.DefaultBoolean.True;
+            this.document6.Properties.AllowFloatOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
             // 
             // ribbonControl1
             // 
@@ -98,12 +118,11 @@
             this.barButtonItem2,
             this.barButtonItem3});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ribbonControl1.MaxItemId = 6;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
             this.ribbonPageCategory1});
-            this.ribbonControl1.Size = new System.Drawing.Size(1012, 182);
+            this.ribbonControl1.Size = new System.Drawing.Size(759, 145);
             // 
             // btncal
             // 
@@ -192,29 +211,26 @@
             this.dockPanel1.Controls.Add(this.dockPanel1_Container);
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.dockPanel1.ID = new System.Guid("905b61df-f048-45dd-9028-84b5e4c6de90");
-            this.dockPanel1.Location = new System.Drawing.Point(0, 182);
-            this.dockPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dockPanel1.Location = new System.Drawing.Point(0, 145);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(202, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(202, 433);
+            this.dockPanel1.Size = new System.Drawing.Size(202, 347);
             this.dockPanel1.Text = "参数输入";
             // 
             // dockPanel1_Container
             // 
             this.dockPanel1_Container.Controls.Add(this.vGridControl1);
-            this.dockPanel1_Container.Location = new System.Drawing.Point(5, 28);
-            this.dockPanel1_Container.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 400);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(194, 320);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // vGridControl1
             // 
             this.vGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.vGridControl1.Location = new System.Drawing.Point(0, 0);
-            this.vGridControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.vGridControl1.Name = "vGridControl1";
-            this.vGridControl1.Size = new System.Drawing.Size(192, 400);
+            this.vGridControl1.Size = new System.Drawing.Size(194, 320);
             this.vGridControl1.TabIndex = 0;
             // 
             // dockPanel3
@@ -237,7 +253,7 @@
             this.dockPanel3_Container.Controls.Add(this.gridControl1);
             this.dockPanel3_Container.Location = new System.Drawing.Point(0, 0);
             this.dockPanel3_Container.Name = "dockPanel3_Container";
-            this.dockPanel3_Container.Size = new System.Drawing.Size(804, 398);
+            this.dockPanel3_Container.Size = new System.Drawing.Size(601, 318);
             this.dockPanel3_Container.TabIndex = 0;
             // 
             // gridControl1
@@ -247,7 +263,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.MenuManager = this.ribbonControl1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(804, 398);
+            this.gridControl1.Size = new System.Drawing.Size(601, 318);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -274,7 +290,7 @@
             this.dockPanel2_Container.Controls.Add(this.chartControl2);
             this.dockPanel2_Container.Location = new System.Drawing.Point(0, 0);
             this.dockPanel2_Container.Name = "dockPanel2_Container";
-            this.dockPanel2_Container.Size = new System.Drawing.Size(804, 398);
+            this.dockPanel2_Container.Size = new System.Drawing.Size(551, 318);
             this.dockPanel2_Container.TabIndex = 0;
             // 
             // chartControl2
@@ -283,7 +299,7 @@
             this.chartControl2.Location = new System.Drawing.Point(0, 0);
             this.chartControl2.Name = "chartControl2";
             this.chartControl2.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartControl2.Size = new System.Drawing.Size(804, 398);
+            this.chartControl2.Size = new System.Drawing.Size(551, 318);
             this.chartControl2.TabIndex = 0;
             // 
             // chartControl1
@@ -330,37 +346,18 @@
             this.document3.FloatLocation = new System.Drawing.Point(1793, 522);
             this.document3.FloatSize = new System.Drawing.Size(200, 200);
             // 
-            // document5
-            // 
-            this.document5.Caption = "结果图";
-            this.document5.ControlName = "dockPanel2";
-            this.document5.FloatLocation = new System.Drawing.Point(279, 378);
-            this.document5.FloatSize = new System.Drawing.Size(200, 200);
-            this.document5.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.True;
-            this.document5.Properties.AllowFloat = DevExpress.Utils.DefaultBoolean.True;
-            this.document5.Properties.AllowFloatOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
-            // 
-            // document6
-            // 
-            this.document6.Caption = "结果表";
-            this.document6.ControlName = "dockPanel3";
-            this.document6.FloatLocation = new System.Drawing.Point(358, 377);
-            this.document6.FloatSize = new System.Drawing.Size(200, 200);
-            this.document6.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.True;
-            this.document6.Properties.AllowFloat = DevExpress.Utils.DefaultBoolean.True;
-            this.document6.Properties.AllowFloatOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
-            // 
             // fractureparameter
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1012, 615);
+            this.ClientSize = new System.Drawing.Size(759, 492);
             this.Controls.Add(this.dockPanel1);
             this.Controls.Add(this.ribbonControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "fractureparameter";
             this.Text = "Form5";
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.document5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.document6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
             this.dockPanel1.ResumeLayout(false);
@@ -378,8 +375,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.document1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.document3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.document5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.document6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

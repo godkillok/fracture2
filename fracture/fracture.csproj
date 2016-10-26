@@ -169,6 +169,12 @@
       <DependentUpon>Form4.cs</DependentUpon>
     </Compile>
     <Compile Include="G2lobalname.cs" />
+    <Compile Include="WellHeadTemp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WellHeadTemp.Designer.cs">
+      <DependentUpon>WellHeadTemp.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlugAgent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form4.resx">
       <DependentUpon>Form4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WellHeadTemp.resx">
+      <DependentUpon>WellHeadTemp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlugAgent.resx">
       <DependentUpon>PlugAgent.cs</DependentUpon>

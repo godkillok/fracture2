@@ -83,9 +83,21 @@ namespace fracture
             double v = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowv"].Properties.Value);
             double mu = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowmu"].Properties.Value);
             double h = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowh"].Properties.Value);
+            double C = 0.0007;
+            //#缝高 m
+          double  H=20;
+            //# 粘度 pa*s
+             mu=0.002;
+           double Qt=35;
+            //# Q 为排量 m3/min
+            Q=2.8;
+            tf=Qt/Q;
+
+
             if (model == "PKN")
             {
-                dt=algorithm.PKN(tf, G, Q, v, mu, h);
+                double g=algorithm.PKN(tf, G, Q, v, mu, h);
+                MessageBox.Show(g.ToString());
             }
             else
             {

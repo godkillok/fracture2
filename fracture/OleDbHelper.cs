@@ -65,7 +65,7 @@ namespace fracture
         public static DataTable getTable(string sqlstr, string DabaBasePath = "")
         {
             if (DabaBasePath == "")
-                DabaBasePath = "provider=microsoft.jet.oledb.4.0; Data Source=" + Application.StartupPath + "\\case\\Database.mdb";
+                DabaBasePath = "provider=microsoft.jet.oledb.4.0; Data Source=" + Application.StartupPath + "\\case\\project\\Database.mdb";
             DataTable dt = new DataTable();
             OleDbDataAdapter da = new OleDbDataAdapter();
             try
@@ -544,7 +544,7 @@ namespace fracture
 
                 String connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + accessFilePath;
 
-                string SQL = "SELECT TOP 1 * FROM " + tableName;
+                string SQL = "SELECT * FROM " + tableName;
                
                 int m = dt.Columns.IndexOf("COLUMN_NAME");
                 //OleConn.Open();
@@ -629,7 +629,7 @@ namespace fracture
                             case "VarBinary": fTYPE = OleDbType.VarBinary; break;
                             case "LongVarChar": fTYPE = OleDbType.LongVarChar; break;
                         }
-                        OleAdp.InsertCommand.Parameters.Add(cmdstring, fTYPE, 255, cmdstring2);
+                        OleAdp.InsertCommand.Parameters.Add(cmdstring2, fTYPE, 255, cmdstring);
                     }
                 }
                 OleAdp.InsertCommand.Connection = OleConn;

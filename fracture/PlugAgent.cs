@@ -58,7 +58,7 @@ namespace fracture
             EditorRow datasmooth = new EditorRow("Type");
             datasmooth.Properties.Caption = "堵剂类型";
             RepositoryItemComboBox datasmoothedit = new RepositoryItemComboBox();
-            datasmoothedit.Items.AddRange(new string[] { "触变型", "聚合物" });
+            datasmoothedit.Items.AddRange(new string[] { "触变型", "聚合物", "SP-1" });
             // adding the Trademark row to the Main row's child collection 
             rowMain.ChildRows.Add(datasmooth);
             vGridControl1.RepositoryItems.Add(datasmoothedit);
@@ -91,7 +91,7 @@ namespace fracture
         }
         private void initialexcel(double widthf, double heightf, double lengthf, double porsand,
            double vs, double lengthm, double widthm, double heightm, double lengthgel, double pormbef,
-           double wgel, double wm, double a, double b, double c, string type, double ts, double tf)
+           double wgel, double wm, double a, double b, double c, string type, double ts, double tf, double vgel)
         {
             // The following line opens a specified document in a Snap application. 
             snapControl1.LoadDocument(Application.StartupPath + "\\PlugAgent.snx", SnapDocumentFormat.Snap);
@@ -121,7 +121,7 @@ namespace fracture
             dt2.Columns.Add("单位", Type.GetType("System.String"));
             dt2.Columns.Add("参数值", Type.GetType("System.String"));
 
-            dt2.Rows.Add(new object[] { "堵剂用量", "m3", "471.6" });
+            dt2.Rows.Add(new object[] { "堵剂用量", "m3", vgel.ToString() });
 
             DataSet dtset = new DataSet();
             dtset.Tables.Add(dt);
@@ -173,7 +173,7 @@ namespace fracture
             double vgel = algorithm.gel(widthf, heightf, lengthf, porsand, vs, lengthm, lengthgel, pormbef, widthm, heightm, wgel, wm);
             vgel = algorithm.gel(a, b, c, vgel);
             vgel = algorithm.gel(ts, tf, vgel, Type);
-            initialexcel(widthf, heightf, lengthf, porsand, vs, lengthm, widthm, heightm, lengthgel, pormbef, wgel, wm, a, b, c, Type, ts, tf);
+            initialexcel(widthf, heightf, lengthf, porsand, vs, lengthm, widthm, heightm, lengthgel, pormbef, wgel, wm, a, b, c, Type, ts, tf, vgel);
             //   GenerateLayout(snapControl1.Document); 
 
         }
