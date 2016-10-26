@@ -142,13 +142,7 @@ namespace fracture
             else
             datasmooth.Properties.Value = "聚合物";
             datasmooth.Properties.RowEdit = datasmoothedit;
-            temp_para.Type = vGridControl1.Rows["categoryMain"].ChildRows["rowType"].Properties.Value.ToString();
-            temp_para.Pi = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowpi"].Properties.Value);
-            temp_para.H = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowh"].Properties.Value);
-            temp_para.Wf = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowwf"].Properties.Value);
-            temp_para.V = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowv"].Properties.Value);
-            temp_para.Rou = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowrou"].Properties.Value);
-            temp_para.Radiu = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowradiu"].Properties.Value);
+
 
         }
         private void addNewRow(string name, string cap, double defaultvalue, string unitcap)
@@ -262,6 +256,13 @@ namespace fracture
 
        private void btnsave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
        {
+           temp_para.Type = vGridControl1.Rows["categoryMain"].ChildRows["rowType"].Properties.Value.ToString();
+           temp_para.Pi = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowpi"].Properties.Value);
+           temp_para.H = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowh"].Properties.Value);
+           temp_para.Wf = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowwf"].Properties.Value);
+           temp_para.V = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowv"].Properties.Value);
+           temp_para.Rou = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowrou"].Properties.Value);
+           temp_para.Radiu = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowradiu"].Properties.Value);
 
            string strDestination = Application.StartupPath + "\\case\\demoproject\\project\\WellHeadPressure.xml";
            if (Globalname.localFilePath != "")
