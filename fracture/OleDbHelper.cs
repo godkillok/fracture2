@@ -545,8 +545,8 @@ namespace fracture
         /// <param name="LinkSourceTarget"></param>
         public static void InsertDataTable2(string ExcelpathName, string sheetName, string EXCELSql, string accessFilePath, DataTable LinkSourceTarget)
         {
-            //try
-            //{
+            try
+            {
             if (accessFilePath == "")
                 accessFilePath = Application.StartupPath +@"\case\demoproject\project\Database.mdb";
            
@@ -665,13 +665,14 @@ namespace fracture
                 builder.QuotePrefix = "[";
                 builder.QuoteSuffix = "]";
                 int count = adapt.Update(dt);
+                adapt.InsertCommand.Connection.Close();
                 MessageBox.Show("数据导入成功！" + count.ToString());
-                //}
+                }
 
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show(ex.ToString());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
             }
         }
 
