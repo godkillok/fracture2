@@ -65,7 +65,7 @@ namespace fracture
         public static DataTable getTable(string sqlstr, string DabaBasePath = "")
         {
             if (DabaBasePath == "")
-                DabaBasePath = "provider=microsoft.jet.oledb.4.0; Data Source=" + Application.StartupPath + "\\case\\project\\Database.mdb";
+                DabaBasePath = "provider=microsoft.jet.oledb.4.0; Data Source=" + Application.StartupPath + "\\case\\demoproject\\project\\Database.mdb";
             DataTable dt = new DataTable();
             OleDbDataAdapter da = new OleDbDataAdapter();
             try
@@ -532,7 +532,7 @@ namespace fracture
             //try
             //{
             if (accessFilePath == "")
-                accessFilePath = Application.StartupPath + "\\case\\Database.mdb";
+                accessFilePath = Application.StartupPath + "\\case\\demoproject\\project\\Database.mdb";
             DataTable accessformbasicinfo;
             DataTable dt = ExcelToDataTable(sheetName, EXCELSql, ExcelpathName);
             //ExcelToDataTable(string sheetName, string Sql,string pathName="")
@@ -557,16 +557,16 @@ namespace fracture
 
 
                 //  string AcessSql = "insert into " + tableName + "(id,ItemGuid,StartTime) values (@id,@ItemGuid,@StartTime)";
-                string AcessSql = "insert into " + tableName + " (";
+                string AcessSql = "insert into " + tableName + "(";
                 for (int ii = 0; ii < LinkSourceTarget.Rows.Count - 1; ii++)
                 {
                     if (LinkSourceTarget.Rows[ii]["源字段"].ToString() != "")
-
                         AcessSql = AcessSql + LinkSourceTarget.Rows[ii]["ID"].ToString() + ",";
                 }
                 if (LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString() != "")
                     AcessSql = AcessSql + LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["ID"].ToString();
-
+                else
+                    AcessSql = AcessSql.Substring(0, AcessSql.Length - 1);
                 AcessSql = AcessSql + ") values (@";
                 for (int ii = 0; ii < LinkSourceTarget.Rows.Count - 1; ii++)
                 {
@@ -575,6 +575,8 @@ namespace fracture
                 }
                 if (LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString() != "")
                     AcessSql = AcessSql + LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString();
+                else
+                    AcessSql = AcessSql.Substring(0, AcessSql.Length -3)+")";
 
                 AcessSql = AcessSql + ");";
 
@@ -629,7 +631,7 @@ namespace fracture
                             case "VarBinary": fTYPE = OleDbType.VarBinary; break;
                             case "LongVarChar": fTYPE = OleDbType.LongVarChar; break;
                         }
-                        OleAdp.InsertCommand.Parameters.Add(cmdstring2, fTYPE, 255, cmdstring);
+                        OleAdp.InsertCommand.Parameters.Add(cmdstring, fTYPE, 255, cmdstring2);
                     }
                 }
                 OleAdp.InsertCommand.Connection = OleConn;
