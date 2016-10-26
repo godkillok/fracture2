@@ -545,9 +545,9 @@ namespace fracture
                 String connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + accessFilePath;
 
                 string SQL = "SELECT TOP 1 * FROM " + tableName;
-                OleDbConnection OleConn = new OleDbConnection(connectionString);
+               
                 int m = dt.Columns.IndexOf("COLUMN_NAME");
-                OleConn.Open();
+                //OleConn.Open();
                 //DataTable dt = new DataTable();
                 //OleDbDataAdapter da = new OleDbDataAdapter();
 
@@ -578,7 +578,7 @@ namespace fracture
 
                 AcessSql = AcessSql + ");";
 
-
+                OleDbConnection OleConn = new OleDbConnection(connectionString);
                 OleDbDataAdapter OleAdp = new OleDbDataAdapter(SQL, OleConn);
                 OleAdp.InsertCommand = new OleDbCommand(AcessSql);
 
@@ -629,13 +629,11 @@ namespace fracture
                             case "VarBinary": fTYPE = OleDbType.VarBinary; break;
                             case "LongVarChar": fTYPE = OleDbType.LongVarChar; break;
                         }
-                        OleAdp.InsertCommand.Parameters.Add(cmdstring, fTYPE, 20, cmdstring2);
+                        OleAdp.InsertCommand.Parameters.Add(cmdstring, fTYPE, 255, cmdstring2);
                     }
                 }
-
-
                 OleAdp.InsertCommand.Connection = OleConn;
-                //OleAdp.InsertCommand.Connection.Open();
+                OleAdp.InsertCommand.Connection.Open();
                 int count = OleAdp.Update(dt);
                 OleAdp.InsertCommand.Connection.Close();
                 MessageBox.Show("数据导入成功！" + count.ToString());
