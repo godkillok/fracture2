@@ -83,7 +83,7 @@ namespace fracture
             string strDestination = Application.StartupPath+ "\\case\\demoproject\\project\\WellHeadPressure.xml";
             if (Globalname.localFilePath != "")
                 strDestination = Globalname.localFilePath + "\\project\\WellHeadPressure.xml";
-            if (Directory.Exists(strDestination))
+            if (File.Exists(strDestination))
             {
                 temp_para = LoadNet(strDestination);
             }
