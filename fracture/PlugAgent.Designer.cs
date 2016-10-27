@@ -55,6 +55,7 @@
             this.snapDocumentManager1 = new DevExpress.Snap.Extensions.SnapDocumentManager(this.components);
             this.noDocumentsView1 = new DevExpress.XtraBars.Docking2010.Views.NoDocuments.NoDocumentsView(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.dockPanel1.SuspendLayout();
@@ -80,14 +81,15 @@
             this.barButtonItem2,
             this.barButtonItem3,
             this.fileSaveAsItem1,
-            this.commandBarItem1});
+            this.commandBarItem1,
+            this.barButtonItem4});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 1;
+            this.ribbonControl1.MaxItemId = 2;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
             this.ribbonPageCategory1});
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
-            this.ribbonControl1.Size = new System.Drawing.Size(951, 151);
+            this.ribbonControl1.Size = new System.Drawing.Size(951, 147);
             // 
             // barButtonItem1
             // 
@@ -120,8 +122,10 @@
             // 
             // barButtonItem3
             // 
-            this.barButtonItem3.Caption = "barButtonItem3";
+            this.barButtonItem3.Caption = "导入";
+            this.barButtonItem3.Glyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.Glyph")));
             this.barButtonItem3.Id = 4;
+            this.barButtonItem3.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.LargeGlyph")));
             this.barButtonItem3.Name = "barButtonItem3";
             this.barButtonItem3.Visibility = DevExpress.XtraBars.BarItemVisibility.OnlyInCustomizing;
             this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
@@ -165,17 +169,23 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.themesGalleryBarItem1);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem2);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem3);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem4);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "操作";
             // 
             // snapControl1
             // 
             this.snapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.snapControl1.Location = new System.Drawing.Point(200, 151);
+            this.snapControl1.EnableToolTips = true;
+            this.snapControl1.Location = new System.Drawing.Point(200, 147);
             this.snapControl1.MenuManager = this.ribbonControl1;
             this.snapControl1.Name = "snapControl1";
+            this.snapControl1.Options.Export.PlainText.ExportFinalParagraphMark = DevExpress.XtraRichEdit.Export.PlainText.ExportFinalParagraphMark.Never;
+            this.snapControl1.Options.Fields.EnableEmptyFieldDataAlias = true;
+            this.snapControl1.Options.Fields.ShowChartInfoPanel = true;
+            this.snapControl1.Options.Fields.UpdateFieldsInTextBoxes = false;
             this.snapControl1.Options.SnapMailMergeVisualOptions.DataSourceName = null;
-            this.snapControl1.Size = new System.Drawing.Size(551, 334);
+            this.snapControl1.Size = new System.Drawing.Size(551, 338);
             this.snapControl1.TabIndex = 7;
             this.snapControl1.Text = "snapControl1";
             // 
@@ -200,18 +210,18 @@
             this.dockPanel1.Controls.Add(this.dockPanel1_Container);
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.dockPanel1.ID = new System.Guid("a43651e6-d795-4431-9ae3-b859cbe3b5a7");
-            this.dockPanel1.Location = new System.Drawing.Point(0, 151);
+            this.dockPanel1.Location = new System.Drawing.Point(0, 147);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(200, 334);
+            this.dockPanel1.Size = new System.Drawing.Size(200, 338);
             this.dockPanel1.Text = "参数输入";
             // 
             // dockPanel1_Container
             // 
             this.dockPanel1_Container.Controls.Add(this.vGridControl1);
-            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 39);
+            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 291);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 311);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // vGridControl1
@@ -219,7 +229,7 @@
             this.vGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.vGridControl1.Location = new System.Drawing.Point(0, 0);
             this.vGridControl1.Name = "vGridControl1";
-            this.vGridControl1.Size = new System.Drawing.Size(192, 291);
+            this.vGridControl1.Size = new System.Drawing.Size(192, 311);
             this.vGridControl1.TabIndex = 0;
             // 
             // snapDockManager1
@@ -245,10 +255,10 @@
             this.panelContainer1.Controls.Add(this.fieldListDockPanel1);
             this.panelContainer1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
             this.panelContainer1.ID = new System.Guid("08737c82-eed0-4e46-995f-152d5f527376");
-            this.panelContainer1.Location = new System.Drawing.Point(751, 151);
+            this.panelContainer1.Location = new System.Drawing.Point(751, 147);
             this.panelContainer1.Name = "panelContainer1";
             this.panelContainer1.OriginalSize = new System.Drawing.Size(200, 120);
-            this.panelContainer1.Size = new System.Drawing.Size(200, 334);
+            this.panelContainer1.Size = new System.Drawing.Size(200, 338);
             this.panelContainer1.Text = "panelContainer1";
             // 
             // reportExplorerDockPanel1
@@ -258,15 +268,15 @@
             this.reportExplorerDockPanel1.ID = new System.Guid("4be6522e-b441-451f-937b-c9704c5688f8");
             this.reportExplorerDockPanel1.Location = new System.Drawing.Point(0, 0);
             this.reportExplorerDockPanel1.Name = "reportExplorerDockPanel1";
-            this.reportExplorerDockPanel1.OriginalSize = new System.Drawing.Size(233, 160);
-            this.reportExplorerDockPanel1.Size = new System.Drawing.Size(200, 169);
+            this.reportExplorerDockPanel1.OriginalSize = new System.Drawing.Size(200, 169);
+            this.reportExplorerDockPanel1.Size = new System.Drawing.Size(200, 171);
             this.reportExplorerDockPanel1.SnapControl = this.snapControl1;
             // 
             // reportExplorerDockPanel1_Container
             // 
-            this.reportExplorerDockPanel1_Container.Location = new System.Drawing.Point(4, 39);
+            this.reportExplorerDockPanel1_Container.Location = new System.Drawing.Point(4, 23);
             this.reportExplorerDockPanel1_Container.Name = "reportExplorerDockPanel1_Container";
-            this.reportExplorerDockPanel1_Container.Size = new System.Drawing.Size(192, 126);
+            this.reportExplorerDockPanel1_Container.Size = new System.Drawing.Size(192, 144);
             this.reportExplorerDockPanel1_Container.TabIndex = 0;
             // 
             // fieldListDockPanel1
@@ -274,17 +284,17 @@
             this.fieldListDockPanel1.Controls.Add(this.fieldListDockPanel1_Container);
             this.fieldListDockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Fill;
             this.fieldListDockPanel1.ID = new System.Guid("a56202ab-979b-4acd-933b-fc38ac18597c");
-            this.fieldListDockPanel1.Location = new System.Drawing.Point(0, 169);
+            this.fieldListDockPanel1.Location = new System.Drawing.Point(0, 171);
             this.fieldListDockPanel1.Name = "fieldListDockPanel1";
-            this.fieldListDockPanel1.OriginalSize = new System.Drawing.Size(233, 157);
-            this.fieldListDockPanel1.Size = new System.Drawing.Size(200, 165);
+            this.fieldListDockPanel1.OriginalSize = new System.Drawing.Size(200, 165);
+            this.fieldListDockPanel1.Size = new System.Drawing.Size(200, 167);
             this.fieldListDockPanel1.SnapControl = this.snapControl1;
             // 
             // fieldListDockPanel1_Container
             // 
-            this.fieldListDockPanel1_Container.Location = new System.Drawing.Point(4, 39);
+            this.fieldListDockPanel1_Container.Location = new System.Drawing.Point(4, 23);
             this.fieldListDockPanel1_Container.Name = "fieldListDockPanel1_Container";
-            this.fieldListDockPanel1_Container.Size = new System.Drawing.Size(192, 122);
+            this.fieldListDockPanel1_Container.Size = new System.Drawing.Size(192, 140);
             this.fieldListDockPanel1_Container.TabIndex = 0;
             // 
             // snapBarController1
@@ -300,10 +310,20 @@
             // 
             this.snapDocumentManager1.ClientControl = this.snapControl1;
             this.snapDocumentManager1.MenuManager = this.ribbonControl1;
+            this.snapDocumentManager1.ShowThumbnailsInTaskBar = DevExpress.Utils.DefaultBoolean.False;
             this.snapDocumentManager1.View = this.noDocumentsView1;
             this.snapDocumentManager1.ViewCollection.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseView[] {
             this.noDocumentsView1,
             this.tabbedView1});
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "保存";
+            this.barButtonItem4.Glyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.Glyph")));
+            this.barButtonItem4.Id = 1;
+            this.barButtonItem4.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.LargeGlyph")));
+            this.barButtonItem4.Name = "barButtonItem4";
+            this.barButtonItem4.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
             // 
             // PlugAgent
             // 
@@ -362,5 +382,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonPageCategory ribbonPageCategory1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
     }
 }

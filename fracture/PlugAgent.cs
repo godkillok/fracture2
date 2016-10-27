@@ -14,14 +14,161 @@ using System.Windows.Forms;
 using DevExpress.XtraRichEdit.API.Native;
 using System.Drawing.Printing;
 using DevExpress.XtraRichEdit;
+using Global;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 namespace fracture
 {
     public partial class PlugAgent : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         public CategoryRow rowMain = new CategoryRow("Main");
+        [Serializable]
+        public class plug
+        {
+
+            string type;
+
+            public string Type
+            {
+                get { return type; }
+                set { type = value; }
+            }
+            double widthf;
+
+            public double Widthf
+            {
+                get { return widthf; }
+                set { widthf = value; }
+            }
+            double heightf;
+
+            public double Heightf
+            {
+                get { return heightf; }
+                set { heightf = value; }
+            }
+            double lengthf;
+
+            public double Lengthf
+            {
+                get { return lengthf; }
+                set { lengthf = value; }
+            }
+            double porsand;
+
+            public double Porsand
+            {
+                get { return porsand; }
+                set { porsand = value; }
+            }
+            double vs;
+
+            public double Vs
+            {
+                get { return vs; }
+                set { vs = value; }
+            }
+            double lengthm;
+
+            public double Lengthm
+            {
+                get { return lengthm; }
+                set { lengthm = value; }
+            }
+            double widthm;
+
+            public double Widthm
+            {
+                get { return widthm; }
+                set { widthm = value; }
+            }
+            double heightm;
+
+            public double Heightm
+            {
+                get { return heightm; }
+                set { heightm = value; }
+            }
+            double lengthgel;
+
+            public double Lengthgel
+            {
+                get { return lengthgel; }
+                set { lengthgel = value; }
+            }
+            double pormbef;
+
+            public double Pormbef
+            {
+                get { return pormbef; }
+                set { pormbef = value; }
+            }
+            double wgel;
+
+            public double Wgel
+            {
+                get { return wgel; }
+                set { wgel = value; }
+            }
+            double wm;
+
+            public double Wm
+            {
+                get { return wm; }
+                set { wm = value; }
+            }
+            double a;
+
+            public double A
+            {
+                get { return a; }
+                set { a = value; }
+            }
+            double b;
+
+            public double B
+            {
+                get { return b; }
+                set { b = value; }
+            }
+            double c;
+
+            public double C
+            {
+                get { return c; }
+                set { c = value; }
+            }
+            double ts;
+
+            public double Ts
+            {
+                get { return ts; }
+                set { ts = value; }
+            }
+            double tf;
+
+            public double Tf
+            {
+                get { return tf; }
+                set { tf = value; }
+            }
+
+        
+        
+        }
+
+        plug plugagent = new plug();
         public PlugAgent()
         {
             InitializeComponent();
+            string strDestination = Application.StartupPath + "\\case\\demoproject\\project\\PlugAgent.xml";
+            if (Globalname.localFilePath != "")
+                strDestination = Globalname.localFilePath + "\\project\\PlugAgent.xml";
+            if (File.Exists(strDestination))
+            {
+                plugagent = LoadNet(strDestination);
+            }
+
             initialvgridcontrol();
             //  snapControl1.Visible = false;
             snapControl1.Options.HorizontalRuler.Visibility = DevExpress.XtraRichEdit.RichEditRulerVisibility.Hidden;
@@ -31,30 +178,61 @@ namespace fracture
             snapControl1.Document.Sections[0].Page.PaperKind = PaperKind.A4;
             // snapControl1.ActiveViewType = RichEditViewType.Simple;
         }
-
+        private static plug LoadNet(string FilePath)
+        {
+            FileStream fs = new FileStream(FilePath, FileMode.Open);
+            BinaryFormatter formatter = new BinaryFormatter();
+            plug net = (plug)formatter.Deserialize(fs);
+            fs.Close();
+            return net;
+        }
         private void initialvgridcontrol()
         {
             vGridControl1.ShowButtonMode = ShowButtonModeEnum.ShowAlways;
             vGridControl1.LayoutStyle = LayoutViewStyle.SingleRecordView;
             vGridControl1.Rows.Add(rowMain);
 
+            if (plugagent.Type != null)
+            {
+              addNewRow("widthf","裂缝宽度",plugagent.Widthf,"mm");
+                addNewRow("heightf","裂缝高度",plugagent.Heightf,"m");
+                addNewRow("lengthf","半缝长",plugagent.Lengthf,"m");
+                addNewRow("porsand","平均砂比",plugagent.Porsand,"%");
+                addNewRow("vs","压裂液体积",plugagent.Vs,"m");
+                addNewRow("lengthm","高渗基质长",plugagent.Lengthm,"m");
+                addNewRow("widthm","高渗基质宽",plugagent.Widthm,"m");
+                addNewRow("heightm","高渗基质高",plugagent.Heightm,"m");
+                addNewRow("lengthgel","堵剂充填范围",plugagent.Lengthgel,"m");
+                addNewRow("pormbef","原地层基质孔隙度",plugagent.Pormbef,"%");
+                addNewRow("wgel","封堵宽度",plugagent.Wgel,"m");
+                addNewRow("wm","基质宽度",plugagent.Wm,"m");
+                addNewRow("a","滤失系数a",plugagent.A,"");
+                addNewRow("b","滤失系数b",plugagent.B,"");
+                addNewRow("c","滤失系数c",plugagent.C,"");
+   addNewRow("ts","初凝时间",plugagent.Ts,"h");
+                addNewRow("tf","终凝时间",plugagent.Tf,"h");
 
-            addNewRow("widthf", "裂缝宽度", 1.41, "mm");
-            addNewRow("heightf", "裂缝高度", 20.1, "m");
-            addNewRow("lengthf", "半缝长", 105.7, "m");
-            addNewRow("porsand", "平均砂比", 34.2, "%");
-            addNewRow("vs", "压裂液体积", 58.2, "m");
-            addNewRow("lengthm", "高渗基质长", 28.7, "m");
-            addNewRow("widthm", "高渗基质宽", 25.7, "m");
-            addNewRow("heightm", "高渗基质高", 29.1, "m");
-            addNewRow("lengthgel", "堵剂充填范围", 8, "m");
-            addNewRow("pormbef", "原地层基质孔隙度", 9.86, "%");
-            addNewRow("wgel", "封堵宽度", 2, "m");
-            addNewRow("wm", "基质宽度", 28.2, "m");
-            addNewRow("a", "滤失系数a", 0.083, "");
-            addNewRow("b", "滤失系数b", 0.8, "");
-            addNewRow("c", "滤失系数c", 0.61, "");
-
+            }
+            else
+            {
+                addNewRow("widthf", "裂缝宽度", 1.41, "mm");
+                addNewRow("heightf", "裂缝高度", 20.1, "m");
+                addNewRow("lengthf", "半缝长", 105.7, "m");
+                addNewRow("porsand", "平均砂比", 34.2, "%");
+                addNewRow("vs", "压裂液体积", 58.2, "m");
+                addNewRow("lengthm", "高渗基质长", 28.7, "m");
+                addNewRow("widthm", "高渗基质宽", 25.7, "m");
+                addNewRow("heightm", "高渗基质高", 29.1, "m");
+                addNewRow("lengthgel", "堵剂充填范围", 8, "m");
+                addNewRow("pormbef", "原地层基质孔隙度", 9.86, "%");
+                addNewRow("wgel", "封堵宽度", 2, "m");
+                addNewRow("wm", "基质宽度", 28.2, "m");
+                addNewRow("a", "滤失系数a", 0.083, "");
+                addNewRow("b", "滤失系数b", 0.8, "");
+                addNewRow("c", "滤失系数c", 0.61, "");
+                addNewRow("ts", "初凝时间", 8, "h");
+                addNewRow("tf", "终凝时间", 20, "h");
+            }
             EditorRow datasmooth = new EditorRow("Type");
             datasmooth.Properties.Caption = "堵剂类型";
             RepositoryItemComboBox datasmoothedit = new RepositoryItemComboBox();
@@ -64,13 +242,15 @@ namespace fracture
             vGridControl1.RepositoryItems.Add(datasmoothedit);
             //Now you can define the repository item as an inplace editor of columns
             // populating the combo box with data
-            datasmooth.Properties.Value = "聚合物";
+            if (plugagent.Type != null)
+            {
+                datasmooth.Properties.Value = plugagent.Type;
+            }
+            else
+            {
+                datasmooth.Properties.Value = "聚合物";
+            }
             datasmooth.Properties.RowEdit = datasmoothedit;
-
-
-            addNewRow("ts", "初凝时间", 8, "h");
-            addNewRow("tf", "终凝时间", 20, "h");
-
 
         }
         private void addNewRow(string name, string cap, double defaultvalue, string unitcap)
@@ -218,6 +398,47 @@ namespace fracture
 
 
 
+        }
+
+        private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            plugagent.Type = vGridControl1.Rows["categoryMain"].ChildRows["rowType"].Properties.Value.ToString();
+            plugagent.Widthf = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowwidthf"].Properties.Value);
+            plugagent.Heightf = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowheightf"].Properties.Value);
+            plugagent.Lengthf = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowlengthf"].Properties.Value);
+            plugagent.Porsand = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowporsand"].Properties.Value);
+            plugagent.Vs = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowvs"].Properties.Value);
+            plugagent.Lengthm = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowlengthm"].Properties.Value);
+            plugagent.Widthm = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowwidthm"].Properties.Value);
+            plugagent.Heightm = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowheightm"].Properties.Value);
+            plugagent.Lengthgel = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowlengthgel"].Properties.Value);
+            plugagent.Pormbef = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowpormbef"].Properties.Value);
+            plugagent.Wgel = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowwgel"].Properties.Value);
+            plugagent.Wm = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowwm"].Properties.Value);
+            plugagent.A = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowa"].Properties.Value);
+            plugagent.B = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowb"].Properties.Value);
+            plugagent.C = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowc"].Properties.Value);
+            plugagent.Ts = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowts"].Properties.Value);
+            plugagent.Tf = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowtf"].Properties.Value);
+
+
+            string strDestination = Application.StartupPath + "\\case\\demoproject\\project\\PlugAgent.xml";
+            if (Globalname.localFilePath != "")
+                strDestination = Globalname.localFilePath + "\\project\\PlugAgent.xml";
+
+            string strPath = Path.GetDirectoryName(strDestination);
+            if (!Directory.Exists(strPath))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(strPath));
+            }
+            SaveNet(plugagent, strDestination);
+        }
+        private static void SaveNet(plug Net, string FilePath)
+        {
+            FileStream fs = new FileStream(FilePath, FileMode.Create);
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(fs, Net);
+            fs.Close();
         }
 
 
