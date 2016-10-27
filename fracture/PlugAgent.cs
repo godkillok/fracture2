@@ -29,7 +29,7 @@ namespace fracture
             snapControl1.LoadDocument(Application.StartupPath + "\\PlugAgent.snx", SnapDocumentFormat.Snap);
             ribbonControl1.Visible = true;
             snapControl1.Document.Sections[0].Page.PaperKind = PaperKind.A4;
-           // snapControl1.ActiveViewType = RichEditViewType.Simple;
+            // snapControl1.ActiveViewType = RichEditViewType.Simple;
         }
 
         private void initialvgridcontrol()
@@ -39,19 +39,19 @@ namespace fracture
             vGridControl1.Rows.Add(rowMain);
 
 
-            addNewRow("widthf", "裂缝宽度", 7.01, "mm");
-            addNewRow("heightf", "裂缝高度", 29.1, "m");
-            addNewRow("lengthf", "半缝长", 28.7, "m");
-            addNewRow("porsand", "平均砂比", 35.2, "%");
+            addNewRow("widthf", "裂缝宽度", 1.41, "mm");
+            addNewRow("heightf", "裂缝高度", 20.1, "m");
+            addNewRow("lengthf", "半缝长", 105.7, "m");
+            addNewRow("porsand", "平均砂比", 34.2, "%");
             addNewRow("vs", "压裂液体积", 58.2, "m");
             addNewRow("lengthm", "高渗基质长", 28.7, "m");
             addNewRow("widthm", "高渗基质宽", 25.7, "m");
             addNewRow("heightm", "高渗基质高", 29.1, "m");
-            addNewRow("lengthgel", "堵剂充填范围", 5, "m");
-            addNewRow("pormbef", "原地层基质孔隙度", 7.16, "%");
-            addNewRow("wgel", "封堵宽度", 5, "m");
+            addNewRow("lengthgel", "堵剂充填范围", 8, "m");
+            addNewRow("pormbef", "原地层基质孔隙度", 9.86, "%");
+            addNewRow("wgel", "封堵宽度", 2, "m");
             addNewRow("wm", "基质宽度", 28.2, "m");
-            addNewRow("a", "滤失系数a", 0.83, "");
+            addNewRow("a", "滤失系数a", 0.083, "");
             addNewRow("b", "滤失系数b", 0.8, "");
             addNewRow("c", "滤失系数c", 0.61, "");
 
@@ -91,7 +91,7 @@ namespace fracture
         }
         private void initialexcel(double widthf, double heightf, double lengthf, double porsand,
            double vs, double lengthm, double widthm, double heightm, double lengthgel, double pormbef,
-           double wgel, double wm, double a, double b, double c, string type, double ts, double tf, double vgel)
+           double wgel, double wm, double a, double b, double c, string type, double ts, double tf, double[]vgel)
         {
             // The following line opens a specified document in a Snap application. 
             snapControl1.LoadDocument(Application.StartupPath + "\\PlugAgent.snx", SnapDocumentFormat.Snap);
@@ -121,8 +121,9 @@ namespace fracture
             dt2.Columns.Add("单位", Type.GetType("System.String"));
             dt2.Columns.Add("参数值", Type.GetType("System.String"));
 
-            dt2.Rows.Add(new object[] { "堵剂用量", "m3", vgel.ToString() });
-
+            dt2.Rows.Add(new object[] { "堵剂用量", "m3", vgel[0].ToString() });
+            dt2.Rows.Add(new object[] { "前置液用量", "m3", vgel[1].ToString() });
+            dt2.Rows.Add(new object[] { "施工排量", "m3/h", vgel[2].ToString() });
             DataSet dtset = new DataSet();
             dtset.Tables.Add(dt);
             dtset.Tables.Add(dt2);
@@ -131,7 +132,7 @@ namespace fracture
             //xmlDataSet.ReadXml("C:\\Users\\Public\\Documents\\DevExpress Demos 14.1\\Components\\Data\\Cars.xml");
             snapControl1.DataSource = dtset;
             snapControl1.Document.Fields.Update();
-     
+
             snapControl1.Visible = true;
 
         }
@@ -144,7 +145,7 @@ namespace fracture
 
         private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-           // snapControl1.Options.Layout.SimpleView.=DevExpress.XtraRichEdit.RichEditViewType.Simple;//;// SimpleView;
+            // snapControl1.Options.Layout.SimpleView.=DevExpress.XtraRichEdit.RichEditViewType.Simple;//;// SimpleView;
             snapControl1.LoadDocument(Application.StartupPath + "\\PlugAgent.snx", SnapDocumentFormat.Snap);
         }
 
@@ -168,13 +169,54 @@ namespace fracture
             double c = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowc"].Properties.Value);
             double ts = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowts"].Properties.Value);
             double tf = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowtf"].Properties.Value);
-            pormbef = pormbef / 100;
-            porsand = porsand / 100;
-            double vgel = algorithm.gel(widthf, heightf, lengthf, porsand, vs, lengthm, lengthgel, pormbef, widthm, heightm, wgel, wm);
-            vgel = algorithm.gel(a, b, c, vgel);
-            vgel = algorithm.gel(ts, tf, vgel, Type);
+      
+            //double vgel = algorithm.gel(widthf, heightf, lengthf, porsand, vs, lengthm, lengthgel, pormbef, widthm, heightm, wgel, wm);
+            //vgel = algorithm.gel(a, b, c, vgel);
+            //vgel = algorithm.gel(ts, tf, vgel, Type);
+            double[] vgel = new double[3];
+            vgel = gel(ts, tf, Type, heightf, widthf, lengthf, a, wgel, pormbef);
             initialexcel(widthf, heightf, lengthf, porsand, vs, lengthm, widthm, heightm, lengthgel, pormbef, wgel, wm, a, b, c, Type, ts, tf, vgel);
             //   GenerateLayout(snapControl1.Document); 
+
+        }
+
+        private double[] gel(double startTime, double endTime, string agentType, double h, double wf, double length, double C, double shutLength, double poro)
+        {
+           
+            poro = poro / 100;
+            wf = wf / 1000;
+            double[] vgel = new double[3];
+            double totalTime = (startTime + endTime) / 2;
+
+            double fracVolume = h * wf * length / (1 - C);
+            double agentVolume = h * shutLength * length / (1 - C) * poro;
+            double resAgentVolume = agentVolume;
+
+            switch (agentType)
+            {
+                //    触变凝胶堵剂注入体积一般较小
+                case "聚合物":
+                    {
+                        resAgentVolume = agentVolume * 0.85;
+                        break;
+                    }
+                //  聚合物凝胶堵剂可适当延长注入时间
+                default:
+                    {
+                        resAgentVolume = agentVolume * 0.1;
+                        break;
+                    }
+            }
+
+            double beforeVolume = fracVolume + resAgentVolume * 0.4;
+            double LastAgentVolume = fracVolume + resAgentVolume;
+            vgel[0] = resAgentVolume;
+            vgel[1] = beforeVolume;
+            vgel[2] = LastAgentVolume / totalTime;
+            return vgel;
+
+
+
 
         }
 
