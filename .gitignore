@@ -16,6 +16,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+fracture.exe
+fracture.vshost.exe
 
 # =========================
 # Operating System Files
@@ -23,11 +25,13 @@ $RECYCLE.BIN/
 
 # OSX
 # =========================
-
+.targets
 .DS_Store
 .AppleDouble
 .LSOverride
-
+.pdb
+.tmplic
+.manifest
 # Thumbnails
 ._*
 
