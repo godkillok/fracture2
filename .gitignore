@@ -45,3 +45,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+fracture/obj/Release/fracture.pdb
+*.pdb
+fracture/obj/Release/fracture.exe
+*.Cache
+*.tmplic

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RibbonForm1));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.backstageViewControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
@@ -70,10 +71,10 @@
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.galleryDropDown1 = new DevExpress.XtraBars.Ribbon.GalleryDropDown();
-            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager();
-            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager();
-            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView();
+            this.galleryDropDown1 = new DevExpress.XtraBars.Ribbon.GalleryDropDown(this.components);
+            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
+            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
+            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::fracture.WaitForm1), true, true);
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
@@ -131,7 +132,7 @@
             this.repositoryItemDateEdit1,
             this.repositoryItemZoomTrackBar1});
             this.ribbon.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
-            this.ribbon.Size = new System.Drawing.Size(1241, 151);
+            this.ribbon.Size = new System.Drawing.Size(1241, 147);
             this.ribbon.Merge += new DevExpress.XtraBars.Ribbon.RibbonMergeEventHandler(this.ribbon_Merge);
             this.ribbon.Click += new System.EventHandler(this.ribbon_Click);
             // 
@@ -378,6 +379,7 @@
             this.btnabout.Id = 25;
             this.btnabout.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnabout.LargeGlyph")));
             this.btnabout.Name = "btnabout";
+            this.btnabout.Visibility = DevExpress.XtraBars.BarItemVisibility.OnlyInCustomizing;
             this.btnabout.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnabout_ItemClick);
             // 
             // btnwellmap
