@@ -121,9 +121,9 @@ namespace fracture
             dt2.Columns.Add("单位", Type.GetType("System.String"));
             dt2.Columns.Add("参数值", Type.GetType("System.String"));
 
-            dt2.Rows.Add(new object[] { "堵剂用量", "m3", vgel[0].ToString() });
-            dt2.Rows.Add(new object[] { "前置液用量", "m3", vgel[1].ToString() });
-            dt2.Rows.Add(new object[] { "施工排量", "m3/h", vgel[2].ToString() });
+            dt2.Rows.Add(new object[] { "堵剂用量", "m3", vgel[0].ToString("#0.00") });
+            dt2.Rows.Add(new object[] { "前置液用量", "m3", vgel[1].ToString("#0.00") });
+            dt2.Rows.Add(new object[] { "施工排量", "m3/h", vgel[2].ToString("#0.00") });
             DataSet dtset = new DataSet();
             dtset.Tables.Add(dt);
             dtset.Tables.Add(dt2);
