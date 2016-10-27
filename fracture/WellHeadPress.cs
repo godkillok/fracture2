@@ -40,13 +40,22 @@ namespace fracture
                 set { h = value; }
             }
 
-            double wf;
-            //缝宽
-            public double Wf
+            double a;
+
+            public double A
             {
-                get { return wf; }
-                set { wf = value; }
+                get { return a; }
+                set { a = value; }
             }
+
+            double b;
+
+            public double B
+            {
+                get { return b; }
+                set { b = value; }
+            }
+          
             double v;
             //注入速度
             public double V
@@ -114,19 +123,21 @@ namespace fracture
             {
                 addNewRow("pi", "原始地层压力",temp_para.Pi, "MPa");
                 addNewRow("h", "井深", temp_para.H, "m");
-                addNewRow("wf", "缝宽", temp_para.Wf, "mm");
+                addNewRow("a", "实验参数a", temp_para.A, "");
+                addNewRow("b", "实验参数b", temp_para.B, "");
                 addNewRow("v", "注入速度", temp_para.V, "m^3/min");
                 addNewRow("rou", "密度", temp_para.Rou, "kg/m^3");
                 addNewRow("radiu", "封堵半径", temp_para.Radiu, "m");
             }
             else
             {
-                addNewRow("pi", "原始地层压力", 7.01, "MPa");
-                addNewRow("h", "井深", 29.1, "m");
-                addNewRow("wf", "缝宽", 28.7, "mm");
-                addNewRow("v", "注入速度", 35.2, "m^3/min");
-                addNewRow("rou", "密度", 58.2, "kg/m^3");
-                addNewRow("radiu", "封堵半径", 28.7, "m");
+                addNewRow("pi", "原始地层压力", 15, "MPa");
+                addNewRow("h", "井深", 1999.1, "m");
+                addNewRow("a", "实验参数a",0.03, "");
+                addNewRow("b", "实验参数b", 0.05, "");
+                addNewRow("v", "注入速度", 16.5, "m^3/min");
+                addNewRow("rou", "密度", 985, "kg/m^3");
+                addNewRow("radiu", "封堵半径", 40, "m");
             }
 
         
@@ -182,9 +193,9 @@ namespace fracture
    
 
             dt.Rows.Add(new object[] { "原始地层压力", "MPa", temp_para.Pi.ToString(), "井深", "m",  temp_para.H.ToString() });
-            dt.Rows.Add(new object[] { "缝宽", "mm", temp_para.Wf.ToString(), "注入速度", "m^3/min", temp_para.V .ToString() });
+            dt.Rows.Add(new object[] { "实验参数a", "", temp_para.A.ToString(), "实验参数b", "", temp_para.B.ToString() });
             dt.Rows.Add(new object[] { "密度", "kg/m^3", temp_para.Rou.ToString(), "封堵半径", "m", temp_para.Radiu.ToString() });
-            dt.Rows.Add(new object[] { "类型", "", temp_para.Type.ToString() });
+            dt.Rows.Add(new object[] { "注入速度", "m^3/min", temp_para.V .ToString(),"类型", "", temp_para.Type.ToString() });
             DataTable dt2 = new DataTable();
             //dt.Rows.Add(new object[] { "计算结果", "", "", "" });
             //dt.Rows.Add(new object[] { "堵剂的最终用量", " m3", "", "" });
@@ -192,7 +203,7 @@ namespace fracture
             dt2.Columns.Add("单位", Type.GetType("System.String"));
             dt2.Columns.Add("参数值", Type.GetType("System.String"));
 
-            dt2.Rows.Add(new object[] { "井口压力", "MPa", vgel.ToString() });
+            dt2.Rows.Add(new object[] { "井口压力", "MPa", vgel.ToString("#0.00") });
 
             DataSet dtset = new DataSet();
             dtset.Tables.Add(dt);
@@ -224,12 +235,13 @@ namespace fracture
             temp_para.Type = vGridControl1.Rows["categoryMain"].ChildRows["rowType"].Properties.Value.ToString();
             temp_para.Pi = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowpi"].Properties.Value);
             temp_para.H = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowh"].Properties.Value);
-            temp_para.Wf = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowwf"].Properties.Value);
+            temp_para.A = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowa"].Properties.Value);
+            temp_para.B = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowb"].Properties.Value);
             temp_para.V = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowv"].Properties.Value);
             temp_para.Rou = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowrou"].Properties.Value);
             temp_para.Radiu = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowradiu"].Properties.Value);
 
-         double wellheadtemp=temp_para.Pi+delat()*temp_para.Radiu+temp_para.Rou*9.8*temp_para.H;
+            double wellheadtemp = temp_para.Pi + delat() * temp_para.Radiu - temp_para.Rou * 9.8 * temp_para.H / 1000000;
             
             initialexcel(wellheadtemp);
             //   GenerateLayout(snapControl1.Document); 
@@ -239,21 +251,22 @@ namespace fracture
        private double  delat()
        {
            double delatp = 0;
-           switch (temp_para.Type)
-           {
-               //    触变凝胶堵剂注入体积一般较小
-               case "触变型":
-                   {
-                       delatp =Math.Pow(10,1.4637-0.0931*temp_para.Wf)*temp_para.V+51.704*Math.Pow(temp_para.Wf,-0.2535);
-                       break;
-                   }
-               //  聚合物凝胶堵剂可适当延长注入时间
-               default:
-                   {
-                       delatp =Math.Pow(10,1.4676-0.0542*temp_para.Wf)*temp_para.V+63.96*Math.Pow(temp_para.Wf,-0.2037);
-                       break;
-                   }
-           }
+           //switch (temp_para.Type)
+           //{
+           //    //    触变凝胶堵剂注入体积一般较小
+           //    case "触变型":
+           //        {
+           //            delatp =Math.Pow(10,1.4637-0.0931*temp_para.Wf)*temp_para.V+51.704*Math.Pow(temp_para.Wf,-0.2535);
+           //            break;
+           //        }
+           //    //  聚合物凝胶堵剂可适当延长注入时间
+           //    default:
+           //        {
+           //            delatp =Math.Pow(10,1.4676-0.0542*temp_para.Wf)*temp_para.V+63.96*Math.Pow(temp_para.Wf,-0.2037);
+           //            break;
+           //        }
+           //}
+           delatp = temp_para.A * temp_para.V + temp_para.B;
            return delatp;
        
        }
@@ -263,7 +276,8 @@ namespace fracture
            temp_para.Type = vGridControl1.Rows["categoryMain"].ChildRows["rowType"].Properties.Value.ToString();
            temp_para.Pi = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowpi"].Properties.Value);
            temp_para.H = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowh"].Properties.Value);
-           temp_para.Wf = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowwf"].Properties.Value);
+           temp_para.A = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowa"].Properties.Value);
+           temp_para.B = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowb"].Properties.Value);
            temp_para.V = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowv"].Properties.Value);
            temp_para.Rou = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowrou"].Properties.Value);
            temp_para.Radiu = Convert.ToDouble(vGridControl1.Rows["categoryMain"].ChildRows["rowradiu"].Properties.Value);
