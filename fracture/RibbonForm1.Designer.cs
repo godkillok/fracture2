@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RibbonForm1));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.backstageViewControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
@@ -65,18 +64,18 @@
             this.btnwellevlpred = new DevExpress.XtraBars.BarButtonItem();
             this.btn_productioncurve = new DevExpress.XtraBars.BarButtonItem();
             this.btn_datacheck = new DevExpress.XtraBars.BarButtonItem();
+            this.btnWellHeadTemp = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.galleryDropDown1 = new DevExpress.XtraBars.Ribbon.GalleryDropDown(this.components);
-            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
-            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
-            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
+            this.galleryDropDown1 = new DevExpress.XtraBars.Ribbon.GalleryDropDown();
+            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager();
+            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager();
+            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView();
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::fracture.WaitForm1), true, true);
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
-            this.btnWellHeadTemp = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             this.backstageViewControl1.SuspendLayout();
@@ -132,7 +131,7 @@
             this.repositoryItemDateEdit1,
             this.repositoryItemZoomTrackBar1});
             this.ribbon.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
-            this.ribbon.Size = new System.Drawing.Size(1241, 147);
+            this.ribbon.Size = new System.Drawing.Size(1241, 151);
             this.ribbon.Merge += new DevExpress.XtraBars.Ribbon.RibbonMergeEventHandler(this.ribbon_Merge);
             this.ribbon.Click += new System.EventHandler(this.ribbon_Click);
             // 
@@ -417,6 +416,15 @@
             this.btn_datacheck.Name = "btn_datacheck";
             this.btn_datacheck.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_datacheck_ItemClick);
             // 
+            // btnWellHeadTemp
+            // 
+            this.btnWellHeadTemp.Caption = "井口压力计算";
+            this.btnWellHeadTemp.Glyph = ((System.Drawing.Image)(resources.GetObject("btnWellHeadTemp.Glyph")));
+            this.btnWellHeadTemp.Id = 36;
+            this.btnWellHeadTemp.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnWellHeadTemp.LargeGlyph")));
+            this.btnWellHeadTemp.Name = "btnWellHeadTemp";
+            this.btnWellHeadTemp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnWellHeadTemp_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -501,15 +509,6 @@
             this.barButtonItem7.Id = 8;
             this.barButtonItem7.LargeGlyph = global::fracture.Properties.Resources.动态1;
             this.barButtonItem7.Name = "barButtonItem7";
-            // 
-            // btnWellHeadTemp
-            // 
-            this.btnWellHeadTemp.Caption = "井口温度计算";
-            this.btnWellHeadTemp.Glyph = ((System.Drawing.Image)(resources.GetObject("btnWellHeadTemp.Glyph")));
-            this.btnWellHeadTemp.Id = 36;
-            this.btnWellHeadTemp.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnWellHeadTemp.LargeGlyph")));
-            this.btnWellHeadTemp.Name = "btnWellHeadTemp";
-            this.btnWellHeadTemp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnWellHeadTemp_ItemClick);
             // 
             // RibbonForm1
             // 

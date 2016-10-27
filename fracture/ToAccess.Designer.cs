@@ -201,7 +201,7 @@
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.dockPanel1.ID = new System.Guid("18dd2a9e-fac8-4b85-b51d-6d3f3761c2c6");
             this.dockPanel1.Location = new System.Drawing.Point(0, 0);
-            this.dockPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dockPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(242, 200);
             this.dockPanel1.Size = new System.Drawing.Size(242, 533);
@@ -211,7 +211,7 @@
             // 
             this.dockPanel1_Container.Controls.Add(this.treeList1);
             this.dockPanel1_Container.Location = new System.Drawing.Point(4, 39);
-            this.dockPanel1_Container.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dockPanel1_Container.Margin = new System.Windows.Forms.Padding(2);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
             this.dockPanel1_Container.Size = new System.Drawing.Size(234, 490);
             this.dockPanel1_Container.TabIndex = 0;
@@ -221,7 +221,7 @@
             this.treeList1.Cursor = System.Windows.Forms.Cursors.Default;
             this.treeList1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeList1.Location = new System.Drawing.Point(0, 0);
-            this.treeList1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.treeList1.Margin = new System.Windows.Forms.Padding(2);
             this.treeList1.Name = "treeList1";
             this.treeList1.Size = new System.Drawing.Size(234, 490);
             this.treeList1.TabIndex = 0;
@@ -372,6 +372,7 @@
             this.btn_import.Size = new System.Drawing.Size(120, 23);
             this.btn_import.TabIndex = 3;
             this.btn_import.Text = "导入配置文件";
+            this.btn_import.Visible = false;
             this.btn_import.Click += new System.EventHandler(this.btn_import_Click);
             // 
             // btn_export
@@ -383,6 +384,7 @@
             this.btn_export.Size = new System.Drawing.Size(115, 23);
             this.btn_export.TabIndex = 2;
             this.btn_export.Text = "导出配置文件";
+            this.btn_export.Visible = false;
             this.btn_export.Click += new System.EventHandler(this.btn_export_Click);
             // 
             // btn_run
@@ -416,7 +418,7 @@
             this.dockPanel7.Location = new System.Drawing.Point(0, 0);
             this.dockPanel7.Name = "dockPanel7";
             this.dockPanel7.OriginalSize = new System.Drawing.Size(200, 200);
-            this.dockPanel7.Size = new System.Drawing.Size(595, 451);
+            this.dockPanel7.Size = new System.Drawing.Size(535, 451);
             this.dockPanel7.Text = "dockPanel7";
             // 
             // dockPanel7_Container
@@ -424,7 +426,7 @@
             this.dockPanel7_Container.Controls.Add(this.gridControl1);
             this.dockPanel7_Container.Location = new System.Drawing.Point(0, 0);
             this.dockPanel7_Container.Name = "dockPanel7_Container";
-            this.dockPanel7_Container.Size = new System.Drawing.Size(595, 451);
+            this.dockPanel7_Container.Size = new System.Drawing.Size(535, 451);
             this.dockPanel7_Container.TabIndex = 0;
             // 
             // gridControl1
@@ -433,7 +435,7 @@
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(595, 451);
+            this.gridControl1.Size = new System.Drawing.Size(535, 451);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -448,7 +450,7 @@
             this.layoutControl1.Controls.Add(this.buttonEdit1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.layoutControl1.Location = new System.Drawing.Point(242, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(724, 192, 312, 437);
             this.layoutControl1.Root = this.layoutControlGroup1;
@@ -459,7 +461,7 @@
             // buttonEdit1
             // 
             this.buttonEdit1.Location = new System.Drawing.Point(76, 12);
-            this.buttonEdit1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonEdit1.Margin = new System.Windows.Forms.Padding(2);
             this.buttonEdit1.Name = "buttonEdit1";
             this.buttonEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -525,7 +527,7 @@
             this.ClientSize = new System.Drawing.Size(783, 533);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.dockPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ToAccess";
             this.Text = "Form5";
             this.Load += new System.EventHandler(this.ToAccess_Load);

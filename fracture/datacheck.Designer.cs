@@ -84,20 +84,20 @@
             this.dockPanel1.Controls.Add(this.dockPanel1_Container);
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.dockPanel1.ID = new System.Guid("e13a97ec-6062-4ac0-88ed-22d3acc95b01");
-            this.dockPanel1.Location = new System.Drawing.Point(0, 147);
+            this.dockPanel1.Location = new System.Drawing.Point(0, 151);
             this.dockPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(200, 365);
+            this.dockPanel1.Size = new System.Drawing.Size(200, 361);
             this.dockPanel1.Text = "数据库表";
             // 
             // dockPanel1_Container
             // 
             this.dockPanel1_Container.Controls.Add(this.treeList1);
-            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
+            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 39);
             this.dockPanel1_Container.Margin = new System.Windows.Forms.Padding(4);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 338);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 318);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // treeList1
@@ -107,7 +107,7 @@
             this.treeList1.Location = new System.Drawing.Point(0, 0);
             this.treeList1.Margin = new System.Windows.Forms.Padding(4);
             this.treeList1.Name = "treeList1";
-            this.treeList1.Size = new System.Drawing.Size(192, 338);
+            this.treeList1.Size = new System.Drawing.Size(192, 318);
             this.treeList1.TabIndex = 0;
             // 
             // ribbonControl1
@@ -130,7 +130,7 @@
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemTextEdit1});
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
-            this.ribbonControl1.Size = new System.Drawing.Size(866, 147);
+            this.ribbonControl1.Size = new System.Drawing.Size(866, 151);
             // 
             // copy
             // 
@@ -162,6 +162,7 @@
             this.barButtonItem1.Id = 13;
             this.barButtonItem1.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.LargeGlyph")));
             this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.Visibility = DevExpress.XtraBars.BarItemVisibility.OnlyInCustomizing;
             this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // delete
@@ -217,12 +218,12 @@
             this.gridControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gridControl1.Location = new System.Drawing.Point(200, 147);
+            this.gridControl1.Location = new System.Drawing.Point(200, 151);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl1.MenuManager = this.ribbonControl1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(666, 365);
+            this.gridControl1.Size = new System.Drawing.Size(666, 361);
             this.gridControl1.TabIndex = 5;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -263,7 +264,7 @@
             // 
             this.toolBar_insert.Name = "toolBar_insert";
             this.toolBar_insert.Size = new System.Drawing.Size(152, 22);
-            this.toolBar_insert.Text = "黏贴行";
+            this.toolBar_insert.Text = "插入复制行";
             this.toolBar_insert.Click += new System.EventHandler(this.toolBar_insert_Click);
             // 
             // gridView1
