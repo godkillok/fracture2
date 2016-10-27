@@ -1666,8 +1666,8 @@ namespace fracture
             double limitW0 = 1.32 * Math.Pow((8 * (1 - v) * mu * Math.Pow(Q, 3) / G), (1.0 / 6)) * Math.Pow(tf, (1.0 / 3));
             // for (double t0 = tf / 50; t0 < tf; t0 = t0 + tf / 50)
             //double lratio = 28.7 / limitL;
-            double lratio = limitL;
-            double wratio = limitW0;
+            double lratio =1;
+            double wratio = 1;
             double t0 = tf;
             {
 
@@ -1720,10 +1720,11 @@ namespace fracture
 
         public static double kt(double Q, double C, double w, double t)
     {
-   double  x=2*C*Math.Sqrt(Math.PI*t)/w;
-
-   double A = Q * w / 4 / Math.PI / Math.Pow(C, 2) * (Math.Exp(Math.Pow(x, 2)) * erfc(x) + 2 * x / Math.Sqrt(Math.PI) - 1);
-    return A;
+        double x = (2 * C * Math.Sqrt(Math.PI * t) / w<30 ? 2 * C * Math.Sqrt(Math.PI * t) / w:30);
+   double y = 1 / (1 + 0.3275911 * x);
+  // double A = Q * w / 4 / Math.PI / Math.Pow(C, 2) * (Math.Exp(Math.Pow(x, 2)) * erfc(y) + 2 * x / Math.Sqrt(Math.PI) - 1);
+   double A = Q * w / 4 / Math.PI / Math.Pow(C, 2) * (erfc(y) + 2 * x / Math.Sqrt(Math.PI) - 1);
+            return A;
     }
         /// <summary>
         /// 误差函数
@@ -1732,15 +1733,15 @@ namespace fracture
         /// <returns></returns>
         public static double erfc(double B12)
         {
-            double A = 0.254829592 * B12 - 0.284496736 * Math.Pow(B12, 2) + 1.42143741 * Math.Pow(B12, 3) - 1.453152027 * Math.Pow(B12, 4) + 1.06140429 * Math.Pow(B12, 5);
-            return A;
+            double C = 0.254829592 * B12 - 0.284496736 * Math.Pow(B12, 2) + 1.42143741 * Math.Pow(B12, 3) - 1.453152027 * Math.Pow(B12, 4) + 1.06140429 * Math.Pow(B12, 5);
+            return C;
         }
 
         public static double PKN_w(double Q, double vis, double L, double E = 2.555e10, double v = 0.27)
         {
-            double tem = Math.Pow(1 / 60 * (1 - v * v) * Q * vis * L / E, 0.25);
+            double tem = Math.Pow(1 / 60.0 * (1 - v * v) * Q * vis * L / E, 0.25);
             //# 返回值为平均缝宽
-            return tem * Math.PI / 2 * 1.26;
+            return tem * Math.PI / 2.0 * 1.26;
         }
         //        # C 为综合滤失系数 m/sqrt(min)
        
@@ -1755,7 +1756,7 @@ namespace fracture
         /// <param name="v">岩石泊松比</param>
         /// <param name="mu">压裂液粘度</param>
         /// <param name="h">缝高</param>
-        public static double PKN(double tf, double G, double Q, double v, double mu, double h)
+        public static DataTable PKN(double tf, double G, double Q, double v, double mu, double h)
         {
             DataTable dt = new DataTable();
             double error = 0.01;
@@ -1765,19 +1766,21 @@ namespace fracture
             dt.Columns.Add("W0", typeof(double));
             dt.Columns.Add("Pwi", typeof(double));
             dt.Columns.Add("time", typeof(double));
-            
-            double L = kt(Q, C, w, tf) / 2 / h;
-            for (int i = 0; i < 100; i++)// range(100):
+            for (double t0 = tf / 50; t0 < tf; t0 = t0 + tf / 50)//      %time step for visualization
             {
-                double temL = L;
-                w = PKN_w(Q, mu, L);
-                L = kt(Q, C, w, tf) / 2 / h;
-                //# print("L=%s\tw=%s" % (L, w))
-                if (Math.Abs(temL - L) < error)
-                    break;
+                double L = kt(Q, C, w, t0) / 2 / h;
+                for (int i = 0; i < 100; i++)// range(100):
+                {
+                    double temL = L;
+                    w = PKN_w(Q, mu, L,G,v); 
+                    L = kt(Q, C, w, t0) / 2 / h;
+                    //# print("L=%s\tw=%s" % (L, w))
+                    if (Math.Abs(temL - L) < error)
+                        break;
+                }
+                dt.Rows.Add(new object[] { L, w*1000, 0, t0 });
             }
-
-            return L;
+            return dt;
             ////for (double t0 = tf / 50; t0 < tf; t0 = t0 + tf / 50)//      %time step for visualization
             //double limitL = .68 * Math.Pow((G * Math.Pow(Q, 3) / ((1 - v) * mu * Math.Pow(h, 4))), (1.0 / 5)) * Math.Pow(tf, (4.0 / 5));//  %used for axis limits
             //double limitW0 = 2.5 * Math.Pow(((1 - v) * mu * Math.Pow(Q, 2) / (G * h)), (1.0 / 5)) * Math.Pow(tf, (1.0 / 5));
