@@ -13,19 +13,19 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
-
+*.suo
 # Windows shortcuts
 *.lnk
 fracture.exe
 fracture.vshost.exe
-
+ILNumerics_deploy/*
 # =========================
 # Operating System Files
 # =========================
 
 # OSX
 # =========================
-.targets
+*.targets
 .DS_Store
 .AppleDouble
 .LSOverride
