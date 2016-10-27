@@ -46,11 +46,11 @@ namespace fracture
             datasmooth.Properties.Value = "KGD";
             datasmooth.Properties.RowEdit = datasmoothedit;
 
-            addNewRow("tf", "施工时间", 2, "min");
-            addNewRow("G", "岩石弹性模量", 15200, "MPa");
+            addNewRow("tf", "施工时间", 40, "min");
+            addNewRow("G", "岩石弹性模量", 25200, "MPa");
             addNewRow("Q", "施工排量", 2, "m3/min");
-            addNewRow("v", "岩石泊松比", 0.291, "");
-            addNewRow("mu", "压裂液粘度", 93, "mPa·s");
+            addNewRow("v", "岩石泊松比", 0.007, "");
+            addNewRow("mu", "压裂液粘度", 20, "mPa·s");
             addNewRow("h", "缝高", 29, "m");
 
         }
@@ -93,19 +93,21 @@ namespace fracture
           //  Q=2.8;
           //  tf=Qt/Q;
 
-
+          
             if (model == "PKN")
             {
-                double g=algorithm.PKN(tf, G, Q, v, mu, h);
-                MessageBox.Show(g.ToString());
+                G = G * 10e6;
+                mu = mu / 1000;
+                dt = algorithm.PKN(tf, G, Q, v, mu, h);
+                //MessageBox.Show(g.ToString());
             }
             else
             {
                 dt=algorithm.KGD(tf, G, Q, v, mu, h);
-                addNewPic(dt);
+               
             }
 
-      
+            addNewPic(dt);
         }
 
         private void addNewPic(DataTable dt)
@@ -197,7 +199,7 @@ namespace fracture
             // Customize the appearance of the Y-axis title.
             diagram.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
             diagram.AxisY.Title.Alignment = StringAlignment.Center;
-            diagram.AxisY.Title.Text = "缝长（m）";
+            diagram.AxisY.Title.Text = "缝宽(mm)";
             diagram.AxisY.Title.TextColor = Color.Black;
             diagram.AxisY.Title.Antialiasing = true;
             diagram.AxisY.Title.Font = new Font("Microsoft YaHei", 10);
@@ -216,7 +218,7 @@ namespace fracture
             view.AxisX = diagram.SecondaryAxesX[axesPosition2];
             view.AxisX.WholeRange.SideMarginsValue = 0;
             diagram.SecondaryAxesX[axesPosition2].Title.Text = "时间（min）";
-            diagram.SecondaryAxesY[axesPosition].Title.Text = "缝宽(mm)";
+            diagram.SecondaryAxesY[axesPosition].Title.Text = "缝长(m)";
             diagram.SecondaryAxesX[axesPosition2].Title.Font = new Font("Microsoft YaHei", 10, FontStyle.Bold);
             diagram.SecondaryAxesY[axesPosition].Title.Font = new Font("Microsoft YaHei", 10, FontStyle.Bold);
             diagram.SecondaryAxesX[axesPosition2].Title.Visible = true;
@@ -233,6 +235,11 @@ namespace fracture
             
             if (e.Control == null)
                 e.Control = new System.Windows.Forms.Control();
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
         }
 
     }

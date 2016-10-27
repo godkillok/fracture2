@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fractureparameter));
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btncal = new DevExpress.XtraBars.BarButtonItem();
@@ -38,13 +39,13 @@
             this.ribbonPageCategory1 = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager();
+            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.vGridControl1 = new DevExpress.XtraVerticalGrid.VGridControl();
             this.chartControl1 = new DevExpress.XtraCharts.ChartControl();
-            this.document1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document();
-            this.document3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document();
+            this.document1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
+            this.document3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.chartControl2 = new DevExpress.XtraCharts.ChartControl();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -72,7 +73,7 @@
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
             this.ribbonPageCategory1});
-            this.ribbonControl1.Size = new System.Drawing.Size(759, 144);
+            this.ribbonControl1.Size = new System.Drawing.Size(759, 145);
             // 
             // btncal
             // 
@@ -97,6 +98,8 @@
             this.barButtonItem1.Id = 3;
             this.barButtonItem1.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.LargeGlyph")));
             this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.Visibility = DevExpress.XtraBars.BarItemVisibility.OnlyInCustomizing;
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // barButtonItem2
             // 
@@ -105,6 +108,7 @@
             this.barButtonItem2.Id = 4;
             this.barButtonItem2.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.LargeGlyph")));
             this.barButtonItem2.Name = "barButtonItem2";
+            this.barButtonItem2.Visibility = DevExpress.XtraBars.BarItemVisibility.OnlyInCustomizing;
             // 
             // barButtonItem3
             // 
@@ -112,6 +116,7 @@
             this.barButtonItem3.Id = 5;
             this.barButtonItem3.LargeGlyph = global::fracture.Properties.Resources.excel;
             this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.Visibility = DevExpress.XtraBars.BarItemVisibility.OnlyInCustomizing;
             // 
             // ribbonPageCategory1
             // 
@@ -159,18 +164,18 @@
             this.dockPanel1.Controls.Add(this.dockPanel1_Container);
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.dockPanel1.ID = new System.Guid("905b61df-f048-45dd-9028-84b5e4c6de90");
-            this.dockPanel1.Location = new System.Drawing.Point(0, 144);
+            this.dockPanel1.Location = new System.Drawing.Point(0, 145);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(202, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(202, 348);
+            this.dockPanel1.Size = new System.Drawing.Size(202, 347);
             this.dockPanel1.Text = "参数输入";
             // 
             // dockPanel1_Container
             // 
             this.dockPanel1_Container.Controls.Add(this.vGridControl1);
-            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 39);
+            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(194, 305);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(194, 320);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // vGridControl1
@@ -178,7 +183,7 @@
             this.vGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.vGridControl1.Location = new System.Drawing.Point(0, 0);
             this.vGridControl1.Name = "vGridControl1";
-            this.vGridControl1.Size = new System.Drawing.Size(194, 305);
+            this.vGridControl1.Size = new System.Drawing.Size(194, 320);
             this.vGridControl1.TabIndex = 0;
             // 
             // chartControl1
@@ -209,10 +214,11 @@
             // chartControl2
             // 
             this.chartControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartControl2.Location = new System.Drawing.Point(202, 144);
+            this.chartControl2.Location = new System.Drawing.Point(202, 145);
             this.chartControl2.Name = "chartControl2";
+            this.chartControl2.PaletteName = "Violet II";
             this.chartControl2.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartControl2.Size = new System.Drawing.Size(557, 348);
+            this.chartControl2.Size = new System.Drawing.Size(557, 347);
             this.chartControl2.TabIndex = 3;
             // 
             // fractureparameter
