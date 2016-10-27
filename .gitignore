@@ -50,3 +50,4 @@ fracture/obj/Release/fracture.pdb
 fracture/obj/Release/fracture.exe
 *.Cache
 *.tmplic
+*.suo
