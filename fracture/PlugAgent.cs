@@ -236,7 +236,7 @@ namespace fracture
             EditorRow datasmooth = new EditorRow("Type");
             datasmooth.Properties.Caption = "堵剂类型";
             RepositoryItemComboBox datasmoothedit = new RepositoryItemComboBox();
-            datasmoothedit.Items.AddRange(new string[] { "触变型", "聚合物", "SP-1" });
+            datasmoothedit.Items.AddRange(new string[] { "触变型", "聚合物", "SPD-1" });
             // adding the Trademark row to the Main row's child collection 
             rowMain.ChildRows.Add(datasmooth);
             vGridControl1.RepositoryItems.Add(datasmoothedit);
@@ -381,7 +381,7 @@ namespace fracture
                         break;
                     }
                 //  聚合物凝胶堵剂可适当延长注入时间
-                default:
+                case "SPD-1":
                     {
                         resAgentVolume = agentVolume * 0.1;
                         break;
