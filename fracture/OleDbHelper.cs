@@ -165,7 +165,7 @@ namespace fracture
         public static DataTable GetTableColumn(string database_path, string varTableName, DataTable dt_source)
         {
             if (database_path == "")
-                database_path = Application.StartupPath + "\\case\\Database.mdb";
+                database_path = Application.StartupPath + "\\case\\demoproject\\project\\Database.mdb";
             string connectionstring = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database_path;
             DataTable dt = new DataTable();
             //try
@@ -535,6 +535,7 @@ namespace fracture
 
             return cells1.ExportDataTableAsString(0, 0, cells1.MaxDataRow + 1, cells1.MaxDataColumn + 1, true);
         }
+        
         /// <summary>
         /// 目前暂时有问题
         /// </summary>
@@ -615,6 +616,7 @@ namespace fracture
                         OleDbType fTYPE = new OleDbType();
                         switch (LinkSourceTarget.Rows[ii]["ID_字符类型"].ToString())
                         {
+                               
                             case "Empty": fTYPE = OleDbType.Empty; break;
                             case "SmallInt": fTYPE = OleDbType.SmallInt; break;
                             case "Integer": fTYPE = OleDbType.Integer; break;
