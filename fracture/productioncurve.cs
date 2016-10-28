@@ -59,7 +59,7 @@ namespace fracture
         { 	
             ChartControl chart = chartControl1 ;//= chart;//= new ChartControl(); 
                  chart.Series.Clear();
-                 string excelpath = Application.StartupPath + "\\生产月报.xml";
+                 string excelpath = Application.StartupPath + "\\Config\\生产月报.xml";
                  chart.LoadFromFile(excelpath);
                  dt.Columns.Add("生产年月YYYYMM", Type.GetType("System.DateTime"));
                  for (int i = 0; i < dt.Rows.Count; i++)
