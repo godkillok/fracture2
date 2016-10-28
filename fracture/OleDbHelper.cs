@@ -168,8 +168,8 @@ namespace fracture
                 database_path = Application.StartupPath + "\\case\\demoproject\\project\\Database.mdb";
             string connectionstring = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database_path;
             DataTable dt = new DataTable();
-            //try
-            //{
+            try
+            {
             conn = new OleDbConnection();
             conn.ConnectionString = connectionstring;
             conn.Open();
@@ -201,15 +201,15 @@ namespace fracture
 
 
             return dt_source;
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
-            //finally
-            //{
-            //    conn.Close();
-            //}
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
         public static List<datatypedic> readxml()
         {
@@ -668,6 +668,8 @@ namespace fracture
                 builder.QuoteSuffix = "]";
                 int count = adapt.Update(dt);
                 adapt.InsertCommand.Connection.Close();
+                conn.Close();
+                closeConnection();
                 MessageBox.Show("数据导入成功！" + count.ToString());
                 }
 
