@@ -30,10 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ToAccess));
-            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
+            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
             this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
             this.document1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
-            this.document2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.dockPanel3 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel3_Container = new DevExpress.XtraBars.Docking.ControlContainer();
@@ -71,7 +70,6 @@
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.document1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.document2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.dockPanel3.SuspendLayout();
             this.dockPanel2.SuspendLayout();
@@ -111,8 +109,7 @@
             // documentGroup1
             // 
             this.documentGroup1.Items.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document[] {
-            this.document1,
-            this.document2});
+            this.document1});
             // 
             // document1
             // 
@@ -124,26 +121,16 @@
             this.document1.Properties.AllowFloat = DevExpress.Utils.DefaultBoolean.True;
             this.document1.Properties.AllowFloatOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
             // 
-            // document2
-            // 
-            this.document2.Caption = "数据预览";
-            this.document2.ControlName = "dockPanel7";
-            this.document2.FloatLocation = new System.Drawing.Point(0, 0);
-            this.document2.FloatSize = new System.Drawing.Size(200, 200);
-            this.document2.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.True;
-            this.document2.Properties.AllowFloat = DevExpress.Utils.DefaultBoolean.True;
-            this.document2.Properties.AllowFloatOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
-            // 
             // dockManager1
             // 
             this.dockManager1.Form = this;
             this.dockManager1.HiddenPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
             this.dockPanel3,
-            this.dockPanel2});
+            this.dockPanel2,
+            this.dockPanel7});
             this.dockManager1.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
             this.dockPanel1,
-            this.dockPanel6,
-            this.dockPanel7});
+            this.dockPanel6});
             this.dockManager1.TopZIndexControls.AddRange(new string[] {
             "DevExpress.XtraBars.BarDockControl",
             "DevExpress.XtraBars.StandaloneBarDockControl",
@@ -204,7 +191,7 @@
             this.dockPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(242, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(242, 533);
+            this.dockPanel1.Size = new System.Drawing.Size(242, 552);
             this.dockPanel1.Text = "目的表列表";
             // 
             // dockPanel1_Container
@@ -213,7 +200,7 @@
             this.dockPanel1_Container.Location = new System.Drawing.Point(4, 39);
             this.dockPanel1_Container.Margin = new System.Windows.Forms.Padding(2);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(234, 490);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(234, 509);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // treeList1
@@ -223,7 +210,7 @@
             this.treeList1.Location = new System.Drawing.Point(0, 0);
             this.treeList1.Margin = new System.Windows.Forms.Padding(2);
             this.treeList1.Name = "treeList1";
-            this.treeList1.Size = new System.Drawing.Size(234, 490);
+            this.treeList1.Size = new System.Drawing.Size(234, 509);
             this.treeList1.TabIndex = 0;
             // 
             // dockPanel6
@@ -238,7 +225,7 @@
             this.dockPanel6.OriginalSize = new System.Drawing.Size(200, 200);
             this.dockPanel6.SavedIndex = 1;
             this.dockPanel6.SavedMdiDocument = true;
-            this.dockPanel6.Size = new System.Drawing.Size(535, 451);
+            this.dockPanel6.Size = new System.Drawing.Size(787, 470);
             this.dockPanel6.Text = "dockPanel6";
             // 
             // dockPanel6_Container
@@ -246,7 +233,7 @@
             this.dockPanel6_Container.Controls.Add(this.splitContainerControl2);
             this.dockPanel6_Container.Location = new System.Drawing.Point(0, 0);
             this.dockPanel6_Container.Name = "dockPanel6_Container";
-            this.dockPanel6_Container.Size = new System.Drawing.Size(535, 451);
+            this.dockPanel6_Container.Size = new System.Drawing.Size(787, 470);
             this.dockPanel6_Container.TabIndex = 0;
             // 
             // splitContainerControl2
@@ -262,8 +249,8 @@
             this.splitContainerControl2.Panel2.Controls.Add(this.panelControl3);
             this.splitContainerControl2.Panel2.Controls.Add(this.panelControl2);
             this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(535, 451);
-            this.splitContainerControl2.SplitterPosition = 198;
+            this.splitContainerControl2.Size = new System.Drawing.Size(787, 470);
+            this.splitContainerControl2.SplitterPosition = 207;
             this.splitContainerControl2.TabIndex = 0;
             this.splitContainerControl2.Text = "splitContainerControl2";
             // 
@@ -279,8 +266,8 @@
             this.splitContainerControl3.Panel2.Controls.Add(this.treeList3);
             this.splitContainerControl3.Panel2.Controls.Add(this.panelControl1);
             this.splitContainerControl3.Panel2.Text = "Panel2";
-            this.splitContainerControl3.Size = new System.Drawing.Size(535, 198);
-            this.splitContainerControl3.SplitterPosition = 232;
+            this.splitContainerControl3.Size = new System.Drawing.Size(787, 207);
+            this.splitContainerControl3.SplitterPosition = 341;
             this.splitContainerControl3.TabIndex = 0;
             this.splitContainerControl3.Text = "splitContainerControl3";
             // 
@@ -290,7 +277,7 @@
             this.treeList2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeList2.Location = new System.Drawing.Point(0, 0);
             this.treeList2.Name = "treeList2";
-            this.treeList2.Size = new System.Drawing.Size(232, 198);
+            this.treeList2.Size = new System.Drawing.Size(342, 207);
             this.treeList2.TabIndex = 0;
             this.treeList2.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.treeList2_FocusedNodeChanged);
             // 
@@ -300,7 +287,7 @@
             this.treeList3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeList3.Location = new System.Drawing.Point(0, 33);
             this.treeList3.Name = "treeList3";
-            this.treeList3.Size = new System.Drawing.Size(291, 165);
+            this.treeList3.Size = new System.Drawing.Size(433, 174);
             this.treeList3.TabIndex = 1;
             // 
             // panelControl1
@@ -309,7 +296,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(291, 33);
+            this.panelControl1.Size = new System.Drawing.Size(433, 33);
             this.panelControl1.TabIndex = 0;
             // 
             // btn_smartmatch
@@ -331,7 +318,7 @@
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl3.Location = new System.Drawing.Point(0, 43);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(535, 198);
+            this.panelControl3.Size = new System.Drawing.Size(787, 208);
             this.panelControl3.TabIndex = 2;
             // 
             // gridControl3
@@ -340,7 +327,7 @@
             this.gridControl3.Location = new System.Drawing.Point(0, 0);
             this.gridControl3.MainView = this.gridView3;
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(535, 198);
+            this.gridControl3.Size = new System.Drawing.Size(787, 208);
             this.gridControl3.TabIndex = 0;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -360,7 +347,7 @@
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl2.Location = new System.Drawing.Point(0, 0);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(535, 43);
+            this.panelControl2.Size = new System.Drawing.Size(787, 43);
             this.panelControl2.TabIndex = 1;
             // 
             // btn_import
@@ -415,11 +402,14 @@
             this.dockPanel7.Dock = DevExpress.XtraBars.Docking.DockingStyle.Float;
             this.dockPanel7.DockedAsTabbedDocument = true;
             this.dockPanel7.ID = new System.Guid("7d1bb030-bd0e-4b90-86ad-18ad977d73e9");
-            this.dockPanel7.Location = new System.Drawing.Point(0, 0);
+            this.dockPanel7.Location = new System.Drawing.Point(-32768, -32768);
             this.dockPanel7.Name = "dockPanel7";
             this.dockPanel7.OriginalSize = new System.Drawing.Size(200, 200);
+            this.dockPanel7.SavedIndex = 2;
+            this.dockPanel7.SavedMdiDocument = true;
             this.dockPanel7.Size = new System.Drawing.Size(535, 451);
             this.dockPanel7.Text = "dockPanel7";
+            this.dockPanel7.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden;
             // 
             // dockPanel7_Container
             // 
@@ -454,7 +444,7 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(724, 192, 312, 437);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(541, 51);
+            this.layoutControl1.Size = new System.Drawing.Size(793, 51);
             this.layoutControl1.TabIndex = 7;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -465,7 +455,7 @@
             this.buttonEdit1.Name = "buttonEdit1";
             this.buttonEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.buttonEdit1.Size = new System.Drawing.Size(453, 20);
+            this.buttonEdit1.Size = new System.Drawing.Size(705, 20);
             this.buttonEdit1.StyleController = this.layoutControl1;
             this.buttonEdit1.TabIndex = 4;
             this.buttonEdit1.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEdit1_Properties_ButtonClick);
@@ -480,7 +470,7 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.OptionsItemText.TextToControlDistance = 4;
-            this.layoutControlGroup1.Size = new System.Drawing.Size(541, 51);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(793, 51);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem1
@@ -488,7 +478,7 @@
             this.layoutControlItem1.Control = this.buttonEdit1;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(521, 31);
+            this.layoutControlItem1.Size = new System.Drawing.Size(773, 31);
             this.layoutControlItem1.Text = "导入Excel  ";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(60, 14);
             // 
@@ -504,11 +494,10 @@
             this.tabbedView1.DocumentGroups.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup[] {
             this.documentGroup1});
             this.tabbedView1.Documents.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseDocument[] {
-            this.document2,
             this.document1});
-            dockingContainer1.Element = this.documentGroup1;
+            dockingContainer3.Element = this.documentGroup1;
             this.tabbedView1.RootContainer.Nodes.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer[] {
-            dockingContainer1});
+            dockingContainer3});
             // 
             // imageCollection1
             // 
@@ -524,7 +513,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(783, 533);
+            this.ClientSize = new System.Drawing.Size(1035, 552);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.dockPanel1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -533,7 +522,6 @@
             this.Load += new System.EventHandler(this.ToAccess_Load);
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.document1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.document2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
             this.dockPanel3.ResumeLayout(false);
             this.dockPanel2.ResumeLayout(false);
@@ -596,7 +584,6 @@
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView tabbedView1;
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup documentGroup1;
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.Document document1;
-        private DevExpress.XtraBars.Docking2010.Views.Tabbed.Document document2;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl3;
         private DevExpress.XtraTreeList.TreeList treeList2;
