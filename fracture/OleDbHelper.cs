@@ -170,37 +170,37 @@ namespace fracture
             DataTable dt = new DataTable();
             try
             {
-            conn = new OleDbConnection();
-            conn.ConnectionString = connectionstring;
-            conn.Open();
-            dt = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, varTableName, null });
-            int n = dt.Rows.Count;
-            string[] strTable = new string[n];
-            List<datatypedic> dt2 = readxml();
-            dt.Columns.Add("DATA_TYPE_字符类型", typeof(string));
-            int m = dt.Columns.IndexOf("COLUMN_NAME");
-            for (int i = 0; i < n; i++)
-            {
-                DataRow m_DataRow = dt.Rows[i];
-                //strTable[i] = m_DataRow.ItemArray.GetValue(m).ToString();
-                foreach (datatypedic idt in dt2)
-                    if (idt.DataTypeint == dt.Rows[i]["DATA_TYPE"].ToString())
-                        dt.Rows[i]["DATA_TYPE_字符类型"] = idt.DataTypestring;
-            }
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < dt_source.Rows.Count; j++)
-                    if (dt.Rows[i]["COLUMN_NAME"].ToString() == dt_source.Rows[j]["ID"].ToString())
-                    {
-                        dt_source.Rows[j]["ID_字符类型"] = dt.Rows[i]["DATA_TYPE_字符类型"];
+                conn = new OleDbConnection();
+                conn.ConnectionString = connectionstring;
+                conn.Open();
+                dt = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, varTableName, null });
+                int n = dt.Rows.Count;
+                string[] strTable = new string[n];
+                List<datatypedic> dt2 = readxml();
+                dt.Columns.Add("DATA_TYPE_字符类型", typeof(string));
+                int m = dt.Columns.IndexOf("COLUMN_NAME");
+                for (int i = 0; i < n; i++)
+                {
+                    DataRow m_DataRow = dt.Rows[i];
+                    //strTable[i] = m_DataRow.ItemArray.GetValue(m).ToString();
+                    foreach (datatypedic idt in dt2)
+                        if (idt.DataTypeint == dt.Rows[i]["DATA_TYPE"].ToString())
+                            dt.Rows[i]["DATA_TYPE_字符类型"] = idt.DataTypestring;
+                }
+                for (int i = 0; i < n; i++)
+                {
+                    for (int j = 0; j < dt_source.Rows.Count; j++)
+                        if (dt.Rows[i]["COLUMN_NAME"].ToString() == dt_source.Rows[j]["ID"].ToString())
+                        {
+                            dt_source.Rows[j]["ID_字符类型"] = dt.Rows[i]["DATA_TYPE_字符类型"];
 
-                    }
+                        }
 
-            }
+                }
 
 
 
-            return dt_source;
+                return dt_source;
             }
             catch (Exception ex)
             {
@@ -389,91 +389,7 @@ namespace fracture
             }
 
         }
-        public static void InsertDataTable(string ExcelpathName, string sheetName, string EXCELSql, string accessFilePath, DataTable LinkSourceTarget)
-        {
-            try
-            {
-                DataTable dt = ExcelToDataTable(ExcelpathName, sheetName, EXCELSql);
 
-                if (dt.Rows.Count > 0)
-                {
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        string AcessSql = "insert into " + LinkSourceTarget.Rows[0]["TABLE_ID"].ToString() + " (";
-                        for (int ii = 0; ii < LinkSourceTarget.Rows.Count - 1; ii++)
-                        {
-                            if (LinkSourceTarget.Rows[ii]["源字段"].ToString() != "")
-                                if (dt.Rows[i][LinkSourceTarget.Rows[ii]["源字段"].ToString()].ToString() != "")
-                                    AcessSql = AcessSql + LinkSourceTarget.Rows[ii]["ID"] + ",";
-                        }
-                        if (LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString() != "")
-                            if (dt.Rows[i][LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString()].ToString() != "")
-                                AcessSql = AcessSql + LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["ID"];
-
-                        AcessSql = AcessSql + ")  values('";
-                        for (int ii = 0; ii < LinkSourceTarget.Rows.Count - 1; ii++)
-                        {
-                            if (LinkSourceTarget.Rows[ii]["源字段"].ToString() != "")
-                                if (dt.Rows[i][LinkSourceTarget.Rows[ii]["源字段"].ToString()].ToString() != "")
-                                    AcessSql = AcessSql + dt.Rows[i][LinkSourceTarget.Rows[ii]["源字段"].ToString()] + "','";
-                        }
-                        if (LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString() != "")
-                            if (dt.Rows[i][LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString()].ToString() != "")
-                                AcessSql = AcessSql + (dt.Rows[i][LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString()]) + "'";
-
-                        AcessSql = AcessSql + ");";
-                        updateAccessTable(AcessSql, accessFilePath);
-                    }
-                    MessageBox.Show("数据导入成功！");
-                }
-                else
-                {
-                    MessageBox.Show("请检查你的Excel中是否存在数据");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-        //更新或者插入数据到access数据库
-
-        //dataFilePath指定access文件的路径
-
-        //sql指定数据库的更新或者插入语句
-
-        //返回值int表示此次更新影响的行数
-
-        public static int updateAccessTable(string sql, string dataFilePath)
-        {
-
-            // 连接数据库 
-
-            OleDbConnection connct = new OleDbConnection();
-
-            string oleDB = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + dataFilePath;
-
-            connct.ConnectionString = oleDB;
-
-            //打开数据库
-
-            connct.Open();
-
-            //执行命令
-
-            OleDbCommand myCommand = new OleDbCommand(sql, connct);
-
-            int res = myCommand.ExecuteNonQuery();
-
-
-
-            // 关闭连接 
-
-            connct.Close();
-
-            return res;
-
-        }
         public void ConvertDataTableToXML(DataTable xmlDS, string dg)
         {
             //MemoryStream stream = null;
@@ -535,148 +451,146 @@ namespace fracture
 
             return cells1.ExportDataTableAsString(0, 0, cells1.MaxDataRow + 1, cells1.MaxDataColumn + 1, true);
         }
-        
+        public static void InsertDataTable2(DataTable dt, string accessFilePath, DataTable LinkSourceTarget)
+        {
+            if (accessFilePath == "")
+                accessFilePath = Application.StartupPath + @"\case\demoproject\project\Database.mdb";
+            try
+            {
+
+                if (dt.Rows.Count > 0)
+                {
+
+
+                    String tableName = LinkSourceTarget.Rows[0]["TABLE_ID"].ToString();
+
+                    String connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + accessFilePath;
+
+                    //string SQL = "SELECT * FROM " + tableName;
+                    OleDbConnection conn = new OleDbConnection(connectionString);
+                    OleDbDataAdapter adapt = new OleDbDataAdapter();
+
+                    //  string AcessSql = "insert into " + tableName + "(id,ItemGuid,StartTime) values (@id,@ItemGuid,@StartTime)";
+                    string AcessSql = "insert into " + tableName + "(";
+                    for (int ii = 0; ii < LinkSourceTarget.Rows.Count - 1; ii++)
+                    {
+                        if (LinkSourceTarget.Rows[ii]["源字段"].ToString() != "")
+                            AcessSql = AcessSql + LinkSourceTarget.Rows[ii]["ID"].ToString() + ",";
+                    }
+                    if (LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString() != "")
+                        AcessSql = AcessSql + LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["ID"].ToString();
+                    else
+                        AcessSql = AcessSql.Substring(0, AcessSql.Length - 1);
+                    AcessSql = AcessSql + ") values (@";
+                    for (int ii = 0; ii < LinkSourceTarget.Rows.Count - 1; ii++)
+                    {
+                        if (LinkSourceTarget.Rows[ii]["源字段"].ToString() != "")
+                            AcessSql = AcessSql + LinkSourceTarget.Rows[ii]["源字段"].ToString() + ",@";
+                    }
+                    if (LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString() != "")
+                        AcessSql = AcessSql + LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString();
+                    else
+                        AcessSql = AcessSql.Substring(0, AcessSql.Length - 2);
+
+                    AcessSql = AcessSql + ")";
+
+                    //OleDbConnection OleConn = new OleDbConnection(connectionString);
+                    //OleDbDataAdapter OleAdp = new OleDbDataAdapter(SQL, OleConn);
+                    //OleAdp.InsertCommand = new OleDbCommand(AcessSql);
+                    var cmd = new OleDbCommand(AcessSql, conn);
+                    //var cmd = new OleDbCommand(AcessSql, conn);
+                    // string cmdstring = "";
+
+                    for (int ii = 0; ii < LinkSourceTarget.Rows.Count; ii++)
+                    {
+                        if (LinkSourceTarget.Rows[ii]["源字段"].ToString() != "")
+                        {
+                            string cmdstring = "@" + LinkSourceTarget.Rows[ii]["ID"].ToString();
+                            string cmdstring2 = LinkSourceTarget.Rows[ii]["源字段"].ToString();
+                            // OleAdp.InsertCommand.Parameters.Add(cmdstring,OleDbType.,8,cmdstring2);
+                            OleDbType fTYPE = new OleDbType();
+                            switch (LinkSourceTarget.Rows[ii]["ID_字符类型"].ToString())
+                            {
+
+                                case "Empty": fTYPE = OleDbType.Empty; break;
+                                case "SmallInt": fTYPE = OleDbType.SmallInt; break;
+                                case "Integer": fTYPE = OleDbType.Integer; break;
+                                case "Single": fTYPE = OleDbType.Single; break;
+                                case "Double": fTYPE = OleDbType.Double; break;
+                                case "Currency": fTYPE = OleDbType.Currency; break;
+                                case "Date": fTYPE = OleDbType.Date; break;
+                                case "BSTR": fTYPE = OleDbType.BSTR; break;
+                                case "IDispatch": fTYPE = OleDbType.IDispatch; break;
+                                case "Error": fTYPE = OleDbType.Error; break;
+                                case "Boolean": fTYPE = OleDbType.Boolean; break;
+                                case "Variant": fTYPE = OleDbType.Variant; break;
+                                case "IUnknown": fTYPE = OleDbType.IUnknown; break;
+                                case "Decimal": fTYPE = OleDbType.Decimal; break;
+                                case "TinyInt": fTYPE = OleDbType.TinyInt; break;
+                                case "UnsignedTinyInt": fTYPE = OleDbType.UnsignedTinyInt; break;
+                                case "UnsignedSmallInt": fTYPE = OleDbType.UnsignedSmallInt; break;
+                                case "UnsignedInt": fTYPE = OleDbType.UnsignedInt; break;
+                                case "BigInt": fTYPE = OleDbType.BigInt; break;
+                                case "UnsignedBigInt": fTYPE = OleDbType.UnsignedBigInt; break;
+                                case "Binary": fTYPE = OleDbType.Binary; break;
+                                case "Char": fTYPE = OleDbType.Char; break;
+                                case "WChar": fTYPE = OleDbType.WChar; break;
+                                case "Numeric": fTYPE = OleDbType.Numeric; break;
+                                case "DBDate": fTYPE = OleDbType.DBDate; break;
+                                case "DBTime": fTYPE = OleDbType.DBTime; break;
+                                case "DBTimeStamp": fTYPE = OleDbType.DBTimeStamp; break;
+                                case "PropVariant": fTYPE = OleDbType.PropVariant; break;
+                                case "VarNumeric": fTYPE = OleDbType.VarNumeric; break;
+                                case "VarChar": fTYPE = OleDbType.VarChar; break;
+                                case "LongVarWChar": fTYPE = OleDbType.LongVarWChar; break;
+                                case "VarBinary": fTYPE = OleDbType.VarBinary; break;
+                                case "LongVarChar": fTYPE = OleDbType.LongVarChar; break;
+                            }
+                            //OleAdp.InsertCommand.Parameters.Add(cmdstring, fTYPE, 255, cmdstring2);
+                            cmd.Parameters.Add(cmdstring, fTYPE, 255, cmdstring2);
+                        }
+                    }
+
+                    adapt.InsertCommand = cmd;
+                    OleDbCommandBuilder builder = new OleDbCommandBuilder(adapt);
+                    builder.QuotePrefix = "[";
+                    builder.QuoteSuffix = "]";
+                    int count = adapt.Update(dt);
+                    adapt.InsertCommand.Connection.Close();
+                    conn.Close();
+                    closeConnection();
+                    MessageBox.Show("数据导入成功！" + count.ToString());
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         /// <summary>
-        /// 目前暂时有问题
+        /// 有个潜在问题：excel的表头有些限制，不能包括（）、空格
         /// </summary>
         /// <param name="ExcelpathName"></param>
         /// <param name="sheetName"></param>
         /// <param name="EXCELSql"></param>
         /// <param name="accessFilePath"></param>
         /// <param name="LinkSourceTarget"></param>
-        public static void InsertDataTable2(string ExcelpathName, string sheetName, string EXCELSql, string accessFilePath, DataTable LinkSourceTarget)
+        public static void InsertDataTable(string ExcelpathName, string sheetName, string EXCELSql, string accessFilePath, DataTable LinkSourceTarget)
         {
             try
             {
-            if (accessFilePath == "")
-                accessFilePath = Application.StartupPath +@"\case\demoproject\project\Database.mdb";
-           
-            DataTable dt = ExcelToDataTable2(sheetName, ExcelpathName);
-            //ExcelToDataTable(string sheetName, string Sql,string pathName="")
-            if (dt.Rows.Count > 0)
+                if (accessFilePath == "")
+                    accessFilePath = Application.StartupPath + @"\case\demoproject\project\Database.mdb";
+
+                DataTable dt = ExcelToDataTable2(sheetName, ExcelpathName);
+                //ExcelToDataTable(string sheetName, string Sql,string pathName="")
+                InsertDataTable2(dt, accessFilePath, LinkSourceTarget);
+            }
+            catch (Exception ex)
             {
-
-
-                String tableName = LinkSourceTarget.Rows[0]["TABLE_ID"].ToString();
-
-                String connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + accessFilePath;
-
-                //string SQL = "SELECT * FROM " + tableName;
-                OleDbConnection conn = new OleDbConnection(connectionString);
-                OleDbDataAdapter adapt = new OleDbDataAdapter();
-
-              
-                //OleConn.Open();
-                //DataTable dt = new DataTable();
-                //OleDbDataAdapter da = new OleDbDataAdapter();
-
-                //openConnection(connectionString);
-                //    comm.CommandType = CommandType.Text;
-
-
-
-                //  string AcessSql = "insert into " + tableName + "(id,ItemGuid,StartTime) values (@id,@ItemGuid,@StartTime)";
-                string AcessSql = "insert into " + tableName + "(";
-                for (int ii = 0; ii < LinkSourceTarget.Rows.Count - 1; ii++)
-                {
-                    if (LinkSourceTarget.Rows[ii]["源字段"].ToString() != "")
-                        AcessSql = AcessSql + LinkSourceTarget.Rows[ii]["ID"].ToString() + ",";
-                }
-                if (LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString() != "")
-                    AcessSql = AcessSql + LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["ID"].ToString();
-                else
-                    AcessSql = AcessSql.Substring(0, AcessSql.Length - 1);
-                AcessSql = AcessSql + ") values (@";
-                for (int ii = 0; ii < LinkSourceTarget.Rows.Count - 1; ii++)
-                {
-                    if (LinkSourceTarget.Rows[ii]["源字段"].ToString() != "")
-                        AcessSql = AcessSql + LinkSourceTarget.Rows[ii]["源字段"].ToString() + ",@";
-                }
-                if (LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString() != "")
-                    AcessSql = AcessSql + LinkSourceTarget.Rows[LinkSourceTarget.Rows.Count - 1]["源字段"].ToString();
-                else
-                    AcessSql = AcessSql.Substring(0, AcessSql.Length -2);
-
-                AcessSql = AcessSql + ")";
-
-                //OleDbConnection OleConn = new OleDbConnection(connectionString);
-                //OleDbDataAdapter OleAdp = new OleDbDataAdapter(SQL, OleConn);
-                //OleAdp.InsertCommand = new OleDbCommand(AcessSql);
-                var cmd = new OleDbCommand(AcessSql, conn);
-                //var cmd = new OleDbCommand(AcessSql, conn);
-                // string cmdstring = "";
-
-                for (int ii = 0; ii < LinkSourceTarget.Rows.Count; ii++)
-                {
-                    if (LinkSourceTarget.Rows[ii]["源字段"].ToString() != "")
-                    {
-                        string cmdstring = "@" + LinkSourceTarget.Rows[ii]["ID"].ToString();
-                        string cmdstring2 = LinkSourceTarget.Rows[ii]["源字段"].ToString();
-                        // OleAdp.InsertCommand.Parameters.Add(cmdstring,OleDbType.,8,cmdstring2);
-                        OleDbType fTYPE = new OleDbType();
-                        switch (LinkSourceTarget.Rows[ii]["ID_字符类型"].ToString())
-                        {
-                               
-                            case "Empty": fTYPE = OleDbType.Empty; break;
-                            case "SmallInt": fTYPE = OleDbType.SmallInt; break;
-                            case "Integer": fTYPE = OleDbType.Integer; break;
-                            case "Single": fTYPE = OleDbType.Single; break;
-                            case "Double": fTYPE = OleDbType.Double; break;
-                            case "Currency": fTYPE = OleDbType.Currency; break;
-                            case "Date": fTYPE = OleDbType.Date; break;
-                            case "BSTR": fTYPE = OleDbType.BSTR; break;
-                            case "IDispatch": fTYPE = OleDbType.IDispatch; break;
-                            case "Error": fTYPE = OleDbType.Error; break;
-                            case "Boolean": fTYPE = OleDbType.Boolean; break;
-                            case "Variant": fTYPE = OleDbType.Variant; break;
-                            case "IUnknown": fTYPE = OleDbType.IUnknown; break;
-                            case "Decimal": fTYPE = OleDbType.Decimal; break;
-                            case "TinyInt": fTYPE = OleDbType.TinyInt; break;
-                            case "UnsignedTinyInt": fTYPE = OleDbType.UnsignedTinyInt; break;
-                            case "UnsignedSmallInt": fTYPE = OleDbType.UnsignedSmallInt; break;
-                            case "UnsignedInt": fTYPE = OleDbType.UnsignedInt; break;
-                            case "BigInt": fTYPE = OleDbType.BigInt; break;
-                            case "UnsignedBigInt": fTYPE = OleDbType.UnsignedBigInt; break;
-                            case "Binary": fTYPE = OleDbType.Binary; break;
-                            case "Char": fTYPE = OleDbType.Char; break;
-                            case "WChar": fTYPE = OleDbType.WChar; break;
-                            case "Numeric": fTYPE = OleDbType.Numeric; break;
-                            case "DBDate": fTYPE = OleDbType.DBDate; break;
-                            case "DBTime": fTYPE = OleDbType.DBTime; break;
-                            case "DBTimeStamp": fTYPE = OleDbType.DBTimeStamp; break;
-                            case "PropVariant": fTYPE = OleDbType.PropVariant; break;
-                            case "VarNumeric": fTYPE = OleDbType.VarNumeric; break;
-                            case "VarChar": fTYPE = OleDbType.VarChar; break;
-                            case "LongVarWChar": fTYPE = OleDbType.LongVarWChar; break;
-                            case "VarBinary": fTYPE = OleDbType.VarBinary; break;
-                            case "LongVarChar": fTYPE = OleDbType.LongVarChar; break;
-                        }
-                        //OleAdp.InsertCommand.Parameters.Add(cmdstring, fTYPE, 255, cmdstring2);
-                        cmd.Parameters.Add(cmdstring, fTYPE, 255, cmdstring2);
-                    }
-                }
-
-              
-
-                //OleAdp.InsertCommand.Connection = OleConn;
-                //OleAdp.InsertCommand.Connection.Open();
-                //int count = OleAdp.Update(dt);
-                //OleAdp.InsertCommand.Connection.Close();
-                adapt.InsertCommand = cmd;
-                OleDbCommandBuilder builder = new OleDbCommandBuilder(adapt);
-                builder.QuotePrefix = "[";
-                builder.QuoteSuffix = "]";
-                int count = adapt.Update(dt);
-                adapt.InsertCommand.Connection.Close();
-                conn.Close();
-                closeConnection();
-                MessageBox.Show("数据导入成功！" + count.ToString());
-                }
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.ToString());
             }
         }
 
