@@ -311,7 +311,7 @@ namespace fracture
          
             //+ 
             //INSERT INTO Persons (LastName, Address) VALUES ('Wilson', 'Champs-Elysees')
-            OleDbHelper.InsertDataTable2(ExcelFilePath, sheetName, ExcelSql,  Globalname.DabaBasePath, gv3);
+            OleDbHelper.InsertDataTable(ExcelFilePath, sheetName, ExcelSql,  Globalname.DabaBasePath, gv3);
         }
 
         private void btn_export_Click(object sender, EventArgs e)
