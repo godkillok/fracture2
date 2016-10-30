@@ -50,9 +50,6 @@
             this.btnmanul = new DevExpress.XtraBars.BarButtonItem();
             this.btncal = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutpic = new DevExpress.XtraBars.BarButtonItem();
-            this.spreadsheetCommandBarButtonItem2 = new DevExpress.XtraSpreadsheet.UI.SpreadsheetCommandBarButtonItem();
-            this.spreadsheetCommandBarButtonItem8 = new DevExpress.XtraSpreadsheet.UI.SpreadsheetCommandBarButtonItem();
-            this.spreadsheetCommandBarButtonItem9 = new DevExpress.XtraSpreadsheet.UI.SpreadsheetCommandBarButtonItem();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btn_excel_output = new DevExpress.XtraBars.BarButtonItem();
             this.barCheckItem2 = new DevExpress.XtraBars.BarCheckItem();
@@ -157,6 +154,13 @@
             this.showLineNumberingFormItem1 = new DevExpress.XtraRichEdit.UI.ShowLineNumberingFormItem();
             this.changePageColorItem1 = new DevExpress.XtraRichEdit.UI.ChangePageColorItem();
             this.commandBarItem1 = new DevExpress.Snap.Extensions.UI.CommandBarItem();
+            this.btn_upload = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonPageCategory1 = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
+            this.fileRibbonPage1 = new DevExpress.XtraSpreadsheet.UI.FileRibbonPage();
+            this.commonRibbonPageGroup1 = new DevExpress.XtraSpreadsheet.UI.CommonRibbonPageGroup();
+            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.tableToolsRibbonPageCategory1 = new DevExpress.XtraRichEdit.UI.TableToolsRibbonPageCategory();
             this.tableDesignRibbonPage1 = new DevExpress.XtraRichEdit.UI.TableDesignRibbonPage();
             this.tableStyleOptionsRibbonPageGroup1 = new DevExpress.XtraRichEdit.UI.TableStyleOptionsRibbonPageGroup();
@@ -169,11 +173,6 @@
             this.tableMergeRibbonPageGroup1 = new DevExpress.XtraRichEdit.UI.TableMergeRibbonPageGroup();
             this.tableCellSizeRibbonPageGroup1 = new DevExpress.XtraRichEdit.UI.TableCellSizeRibbonPageGroup();
             this.tableAlignmentRibbonPageGroup1 = new DevExpress.XtraRichEdit.UI.TableAlignmentRibbonPageGroup();
-            this.fileRibbonPage1 = new DevExpress.XtraSpreadsheet.UI.FileRibbonPage();
-            this.commonRibbonPageGroup1 = new DevExpress.XtraSpreadsheet.UI.CommonRibbonPageGroup();
-            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.decMethodchecked = new DevExpress.XtraEditors.RadioGroup();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
@@ -201,7 +200,6 @@
             this.dockPanel2 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.treeList1 = new DevExpress.XtraTreeList.TreeList();
-            this.spreadsheetBarController1 = new DevExpress.XtraSpreadsheet.UI.SpreadsheetBarController();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
@@ -228,7 +226,6 @@
             this.printItem2 = new DevExpress.XtraRichEdit.UI.PrintItem();
             this.printPreviewItem2 = new DevExpress.XtraRichEdit.UI.PrintPreviewItem();
             this.commandBarItem3 = new DevExpress.Snap.Extensions.UI.CommandBarItem();
-            this.ribbonPageCategory1 = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.document1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.document2)).BeginInit();
@@ -262,7 +259,6 @@
             this.dockPanel2.SuspendLayout();
             this.dockPanel2_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spreadsheetBarController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).BeginInit();
@@ -390,9 +386,6 @@
             this.btnmanul,
             this.btncal,
             this.btnOutpic,
-            this.spreadsheetCommandBarButtonItem2,
-            this.spreadsheetCommandBarButtonItem8,
-            this.spreadsheetCommandBarButtonItem9,
             this.btnAdd,
             this.btn_excel_output,
             this.barCheckItem2,
@@ -493,9 +486,10 @@
             this.toggleParagraphSuppressLineNumbersItem1,
             this.showLineNumberingFormItem1,
             this.changePageColorItem1,
-            this.commandBarItem1});
+            this.commandBarItem1,
+            this.btn_upload});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 122;
+            this.ribbonControl1.MaxItemId = 123;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
             this.ribbonPageCategory1,
@@ -552,36 +546,6 @@
             this.btnOutpic.LargeGlyph = global::fracture.Properties.Resources.Menu_Export_Picture32x32;
             this.btnOutpic.Name = "btnOutpic";
             this.btnOutpic.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOutpic_ItemClick);
-            // 
-            // spreadsheetCommandBarButtonItem2
-            // 
-            this.spreadsheetCommandBarButtonItem2.Caption = "打开";
-            this.spreadsheetCommandBarButtonItem2.CommandName = "FileOpen";
-            this.spreadsheetCommandBarButtonItem2.Enabled = false;
-            this.spreadsheetCommandBarButtonItem2.Glyph = ((System.Drawing.Image)(resources.GetObject("spreadsheetCommandBarButtonItem2.Glyph")));
-            this.spreadsheetCommandBarButtonItem2.Id = 10;
-            this.spreadsheetCommandBarButtonItem2.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("spreadsheetCommandBarButtonItem2.LargeGlyph")));
-            this.spreadsheetCommandBarButtonItem2.Name = "spreadsheetCommandBarButtonItem2";
-            // 
-            // spreadsheetCommandBarButtonItem8
-            // 
-            this.spreadsheetCommandBarButtonItem8.Caption = "返回";
-            this.spreadsheetCommandBarButtonItem8.CommandName = "FileUndo";
-            this.spreadsheetCommandBarButtonItem8.Enabled = false;
-            this.spreadsheetCommandBarButtonItem8.Glyph = ((System.Drawing.Image)(resources.GetObject("spreadsheetCommandBarButtonItem8.Glyph")));
-            this.spreadsheetCommandBarButtonItem8.Id = 16;
-            this.spreadsheetCommandBarButtonItem8.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("spreadsheetCommandBarButtonItem8.LargeGlyph")));
-            this.spreadsheetCommandBarButtonItem8.Name = "spreadsheetCommandBarButtonItem8";
-            // 
-            // spreadsheetCommandBarButtonItem9
-            // 
-            this.spreadsheetCommandBarButtonItem9.Caption = "撤销";
-            this.spreadsheetCommandBarButtonItem9.CommandName = "FileRedo";
-            this.spreadsheetCommandBarButtonItem9.Enabled = false;
-            this.spreadsheetCommandBarButtonItem9.Glyph = ((System.Drawing.Image)(resources.GetObject("spreadsheetCommandBarButtonItem9.Glyph")));
-            this.spreadsheetCommandBarButtonItem9.Id = 17;
-            this.spreadsheetCommandBarButtonItem9.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("spreadsheetCommandBarButtonItem9.LargeGlyph")));
-            this.spreadsheetCommandBarButtonItem9.Name = "spreadsheetCommandBarButtonItem9";
             // 
             // btnAdd
             // 
@@ -1245,6 +1209,63 @@
             this.commandBarItem1.Name = "commandBarItem1";
             this.commandBarItem1.SnapCommand = DevExpress.Snap.Extensions.UI.SnapCommand.ExportDocument;
             // 
+            // btn_upload
+            // 
+            this.btn_upload.Caption = "上传";
+            this.btn_upload.Glyph = ((System.Drawing.Image)(resources.GetObject("btn_upload.Glyph")));
+            this.btn_upload.Id = 122;
+            this.btn_upload.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btn_upload.LargeGlyph")));
+            this.btn_upload.Name = "btn_upload";
+            this.btn_upload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_upload_ItemClick);
+            // 
+            // ribbonPageCategory1
+            // 
+            this.ribbonPageCategory1.Name = "ribbonPageCategory1";
+            this.ribbonPageCategory1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
+            this.fileRibbonPage1});
+            this.ribbonPageCategory1.Text = "操作";
+            // 
+            // fileRibbonPage1
+            // 
+            this.fileRibbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.commonRibbonPageGroup1,
+            this.ribbonPageGroup4,
+            this.ribbonPageGroup1,
+            this.ribbonPageGroup2});
+            this.fileRibbonPage1.Name = "fileRibbonPage1";
+            this.fileRibbonPage1.Text = "操作";
+            // 
+            // commonRibbonPageGroup1
+            // 
+            this.commonRibbonPageGroup1.ItemLinks.Add(this.fileOpenItem1);
+            this.commonRibbonPageGroup1.Name = "commonRibbonPageGroup1";
+            this.commonRibbonPageGroup1.Text = "文件";
+            // 
+            // ribbonPageGroup4
+            // 
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnSelect);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnAdd);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnNull);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnmanul);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btncal);
+            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
+            this.ribbonPageGroup4.Text = "拟合操作";
+            // 
+            // ribbonPageGroup1
+            // 
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnOutpic);
+            this.ribbonPageGroup1.ItemLinks.Add(this.fileSaveAsItem1);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btn_upload);
+            this.ribbonPageGroup1.Name = "ribbonPageGroup1";
+            this.ribbonPageGroup1.Text = "结果导出";
+            // 
+            // ribbonPageGroup2
+            // 
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnhelp);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barCheckItem2);
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            this.ribbonPageGroup2.Text = "设置";
+            // 
             // tableToolsRibbonPageCategory1
             // 
             this.tableToolsRibbonPageCategory1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(233)))), ((int)(((byte)(20)))));
@@ -1345,49 +1366,6 @@
             this.tableAlignmentRibbonPageGroup1.ItemLinks.Add(this.toggleTableCellsBottomRightAlignmentItem1);
             this.tableAlignmentRibbonPageGroup1.ItemLinks.Add(this.showTableOptionsFormItem1);
             this.tableAlignmentRibbonPageGroup1.Name = "tableAlignmentRibbonPageGroup1";
-            // 
-            // fileRibbonPage1
-            // 
-            this.fileRibbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.commonRibbonPageGroup1,
-            this.ribbonPageGroup4,
-            this.ribbonPageGroup1,
-            this.ribbonPageGroup2});
-            this.fileRibbonPage1.Name = "fileRibbonPage1";
-            this.fileRibbonPage1.Text = "操作";
-            // 
-            // commonRibbonPageGroup1
-            // 
-            this.commonRibbonPageGroup1.ItemLinks.Add(this.spreadsheetCommandBarButtonItem2);
-            this.commonRibbonPageGroup1.ItemLinks.Add(this.spreadsheetCommandBarButtonItem8);
-            this.commonRibbonPageGroup1.ItemLinks.Add(this.spreadsheetCommandBarButtonItem9);
-            this.commonRibbonPageGroup1.ItemLinks.Add(this.fileOpenItem1);
-            this.commonRibbonPageGroup1.Name = "commonRibbonPageGroup1";
-            this.commonRibbonPageGroup1.Text = "文件";
-            // 
-            // ribbonPageGroup4
-            // 
-            this.ribbonPageGroup4.ItemLinks.Add(this.btnSelect);
-            this.ribbonPageGroup4.ItemLinks.Add(this.btnAdd);
-            this.ribbonPageGroup4.ItemLinks.Add(this.btnNull);
-            this.ribbonPageGroup4.ItemLinks.Add(this.btnmanul);
-            this.ribbonPageGroup4.ItemLinks.Add(this.btncal);
-            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
-            this.ribbonPageGroup4.Text = "拟合操作";
-            // 
-            // ribbonPageGroup1
-            // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnOutpic);
-            this.ribbonPageGroup1.ItemLinks.Add(this.fileSaveAsItem1);
-            this.ribbonPageGroup1.Name = "ribbonPageGroup1";
-            this.ribbonPageGroup1.Text = "结果导出";
-            // 
-            // ribbonPageGroup2
-            // 
-            this.ribbonPageGroup2.ItemLinks.Add(this.btnhelp);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barCheckItem2);
-            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            this.ribbonPageGroup2.Text = "设置";
             // 
             // groupControl4
             // 
@@ -1658,12 +1636,6 @@
             this.treeList1.Name = "treeList1";
             this.treeList1.Size = new System.Drawing.Size(192, 495);
             this.treeList1.TabIndex = 0;
-            // 
-            // spreadsheetBarController1
-            // 
-            this.spreadsheetBarController1.BarItems.Add(this.spreadsheetCommandBarButtonItem2);
-            this.spreadsheetBarController1.BarItems.Add(this.spreadsheetCommandBarButtonItem8);
-            this.spreadsheetBarController1.BarItems.Add(this.spreadsheetCommandBarButtonItem9);
             // 
             // ribbonPage1
             // 
@@ -1973,13 +1945,6 @@
             this.commandBarItem3.Name = "commandBarItem3";
             this.commandBarItem3.SnapCommand = DevExpress.Snap.Extensions.UI.SnapCommand.NewDataSource;
             // 
-            // ribbonPageCategory1
-            // 
-            this.ribbonPageCategory1.Name = "ribbonPageCategory1";
-            this.ribbonPageCategory1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
-            this.fileRibbonPage1});
-            this.ribbonPageCategory1.Text = "操作";
-            // 
             // decline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2026,7 +1991,6 @@
             this.dockPanel2.ResumeLayout(false);
             this.dockPanel2_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spreadsheetBarController1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).EndInit();
@@ -2068,15 +2032,11 @@
         private DevExpress.XtraBars.BarButtonItem btnmanul;
         private DevExpress.XtraBars.BarButtonItem btncal;
         private DevExpress.XtraBars.BarButtonItem btnOutpic;
-        private DevExpress.XtraSpreadsheet.UI.SpreadsheetCommandBarButtonItem spreadsheetCommandBarButtonItem2;
-        private DevExpress.XtraSpreadsheet.UI.SpreadsheetCommandBarButtonItem spreadsheetCommandBarButtonItem8;
-        private DevExpress.XtraSpreadsheet.UI.SpreadsheetCommandBarButtonItem spreadsheetCommandBarButtonItem9;
         private DevExpress.XtraBars.BarButtonItem btnAdd;
         private DevExpress.XtraSpreadsheet.UI.FileRibbonPage fileRibbonPage1;
         private DevExpress.XtraSpreadsheet.UI.CommonRibbonPageGroup commonRibbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
-        private DevExpress.XtraSpreadsheet.UI.SpreadsheetBarController spreadsheetBarController1;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.BarButtonItem btn_excel_output;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
@@ -2241,6 +2201,7 @@
         private DevExpress.Snap.Extensions.UI.CommandBarItem commandBarItem3;
         private DevExpress.XtraCharts.ChartControl chartControl1;
         private DevExpress.XtraBars.Ribbon.RibbonPageCategory ribbonPageCategory1;
+        private DevExpress.XtraBars.BarButtonItem btn_upload;
 
     }
 }

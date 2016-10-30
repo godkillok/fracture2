@@ -46,7 +46,7 @@ namespace fracture
         int phase_num;//添加的阶段数
         Rectangle selectionRectangle = Rectangle.Empty;
         DevExpress.XtraEditors.Repository.RepositoryItemComboBox ComboBoxproperties;
-
+        DataSet result_dtset;
         public decline()
         {
 
@@ -132,7 +132,7 @@ namespace fracture
                     if (dt != null)
                     {
                         stimu_date = DateTime.Parse(clickedNode.GetValue("wellCode").ToString());
-                        stimu_code = clickedNode.GetValue("Name").ToString();
+                        stimu_code = clickedNode.GetValue("Name").ToString().Split('@')[0];
                         wellname = clickedNode.GetValue("ParentID").ToString();
                         setgridcontrol(dt);
 
@@ -1226,17 +1226,55 @@ namespace fracture
             // The following line opens a specified document in a Snap application. 
             snapControl1.LoadDocument(Application.StartupPath + "\\Stimulation_Evaluation.snx", SnapDocumentFormat.Snap);
             DataTable dt = new DataTable();
-            dt.TableName = "增油月报";
+            dt.TableName = "增油月报2";
             dt.Columns.Add("井号", Type.GetType("System.String"));
             dt.Columns.Add("措施时间", Type.GetType("System.String"));
-            dt.Columns.Add("增油年月", Type.GetType("System.String"));
-            dt.Columns.Add("增油量", Type.GetType("System.String"));
-            dt.Columns.Add("措施前预测产油量", Type.GetType("System.String"));
-            dt.Columns.Add("措施后产油量", Type.GetType("System.String"));
+            dt.Columns.Add("增油年月", Type.GetType("System.Int32"));
+            dt.Columns.Add("增油量", Type.GetType("System.Double"));
+
+            dt.Columns.Add("措施前预测产油量", Type.GetType("System.Double"));
+            dt.Columns.Add("措施后产油量", Type.GetType("System.Double"));
             for (int i = 0; i < his_result.Count(); i++)
             {
-                dt.Rows.Add(new object[] { wellname, stimu_date.ToString(), resultTime_aft[i].ToString(), 
-                    increase_result[i].ToString("0.00"), his_result[i].ToString("0.00"), result_aft[i].ToString("0.00") });
+                dt.Rows.Add(new object[] { wellname, stimu_date.ToString("yyyy/MM/dd"), Int32.Parse(resultTime_aft[i].ToString("yyyyMM")), 
+                    increase_result[i], his_result[i], result_aft[i] });
+            }
+            var result = (from x in dt.AsEnumerable()
+                          group x by x.Field<int>("增油年月") into g
+                          select new
+
+                     {
+                         wellname = g.Select(r => r.Field<string>("井号")).First(),
+                         //time = g.Select(r => r.Field<string>("措施时间")).First(),
+                         datatime = g.Key,
+                         incresese = g.Sum(r => r.Field<double>("增油量")),
+                         before = g.Sum(r => r.Field<double>("措施前预测产油量")),
+                         after = g.Sum(r => r.Field<double>("措施后产油量"))
+                     });
+            DataTable dt1 = new DataTable();
+            dt1.TableName = "增油月报";
+            dt1.Columns.Add("井ID", Type.GetType("System.String"));
+            dt1.Columns.Add("井号名称", Type.GetType("System.String"));
+            dt1.Columns.Add("措施代码", Type.GetType("System.String"));
+            dt1.Columns.Add("措施开始日期", Type.GetType("System.DateTime"));
+            dt1.Columns.Add("增油年月", Type.GetType("System.Int32"));
+            dt1.Columns.Add("月增油量", Type.GetType("System.Double"));
+            dt1.Columns.Add("措施前预测产油量", Type.GetType("System.Double"));
+            dt1.Columns.Add("措施后产油量", Type.GetType("System.Double"));
+
+            DataRow dr;
+            foreach (var re in result)
+            {
+                dr = dt1.NewRow();
+                dr["井ID"] = re.wellname;
+                dr["井号名称"] = re.wellname;
+                dr["措施代码"] = stimu_code;
+                dr["措施开始日期"] = stimu_date;
+                dr["增油年月"] = re.datatime;
+                dr["月增油量"] = re.incresese;
+                dr["措施前预测产油量"] = re.before;
+                dr["措施后产油量"] = re.after;
+                dt1.Rows.Add(dr);
             }
 
 
@@ -1247,17 +1285,17 @@ namespace fracture
             dt2.Columns.Add("失效时间", Type.GetType("System.String"));
             dt2.Columns.Add("有效期", Type.GetType("System.String"));
             dt2.Columns.Add("累增油量", Type.GetType("System.String"));
-            dt2.Rows.Add(new object[] { wellname, stimu_date.ToString(), fail_date.ToString(), 
+            dt2.Rows.Add(new object[] { wellname, stimu_date.ToString("yyyy/MM/dd"), fail_date.ToString("yyyy/MM/dd"), 
                 (fail_date - stimu_date).Days.ToString(), increase_result.Sum().ToString("0.00")});
 
 
-            DataSet dtset = new DataSet();
-            dtset.Tables.Add(dt);
-            dtset.Tables.Add(dt2);
+            result_dtset = new DataSet();
+            result_dtset.Tables.Add(dt1);
+            result_dtset.Tables.Add(dt2);
 
             //DataSet xmlDataSet = new DataSet();
             //xmlDataSet.ReadXml("C:\\Users\\Public\\Documents\\DevExpress Demos 14.1\\Components\\Data\\Cars.xml");
-            snapControl1.DataSource = dtset;
+            snapControl1.DataSource = result_dtset;
             snapControl1.Document.Fields.Update();
 
             snapControl1.Visible = true;
@@ -1501,6 +1539,50 @@ namespace fracture
         {
 
         }
+
+        private void btn_upload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            DataTable dt_TableAndField = new DataTable();
+            string sheetName = "物理表汇总";
+            string tablename = "R_OIL_STIMU_M";
+            string TableAndField = string.Format("select 库表名称 AS TABLE_ID, 表显示名称 AS 目的表名, 列显示名称 AS 目的字段 ,库字段名称 as ID, 默认单位名称 as 单位名称, 主键  as 是否必须 from [{0}$] where (库表名称='" + tablename + "')", sheetName);
+            dt_TableAndField = OleDbHelper.ExcelToDataTable(sheetName, TableAndField);
+            dt_TableAndField.Columns.Add("源表格", typeof(string));
+            dt_TableAndField.Columns.Add("源字段", typeof(string));
+            dt_TableAndField.Columns.Add("ID_字符类型", typeof(string));
+
+            int n = dt_TableAndField.Columns.IndexOf("源表格");
+
+            string varTableName = dt_TableAndField.Rows[0]["TABLE_ID"].ToString();
+            dt_TableAndField = OleDbHelper.GetTableColumn(Globalname.DabaBasePath, varTableName, dt_TableAndField);
+
+
+
+            for (int i = 0; i < dt_TableAndField.Rows.Count; i++)
+            {
+                dt_TableAndField.Rows[i]["源表格"] = result_dtset.Tables["增油月报"].TableName;
+
+                for (int j = 0; j < result_dtset.Tables["增油月报"].Columns.Count; j++)
+                {
+                    if (dt_TableAndField.Rows[i]["目的字段"].ToString() == result_dtset.Tables["增油月报"].Columns[j].ColumnName.ToString())
+                    {
+                        dt_TableAndField.Rows[i]["源字段"] = result_dtset.Tables["增油月报"].Columns[j].ColumnName.ToString();
+                        break;
+                    }
+                }
+            }
+
+            //dt_TableAndField.Rows[0]["源表格"] = result_dtset.Tables["增油汇总表"].TableName;
+
+
+
+            sheetName = dt_TableAndField.Rows[0][n].ToString();//
+            if (sheetName == "")
+                return;
+            OleDbHelper.InsertDataTable2(result_dtset.Tables["增油月报"], Globalname.DabaBasePath, dt_TableAndField);
+        }
+
+
 
 
 
