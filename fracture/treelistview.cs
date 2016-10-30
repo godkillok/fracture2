@@ -146,7 +146,7 @@ where T_WELL_INFOR.DM_UNIT_ID=T_DM_UNIT_CUR_INFOR.DM_UNIT_ID
 UNION 
 SELECT PARENT_DM_UNIT_ID AS ParentID,DM_UNIT_ID as KeyID,DM_UNIT_NAME as Name , DM_UNIT_NAME as wellCode FROM T_DM_UNIT_CUR_INFOR
 UNION
-SELECT T2.WELL_ID, T2.WELL_ID&t2.stimu_code & t2.end_date as stim,t2.stimu_code & t2.end_date as NAME, T2.end_date as wellCode FROM t_well_stimu_rec T2";
+SELECT T2.WELL_ID, T2.WELL_ID&t2.stimu_code & t2.end_date as stim,t2.stimu_code &'@' & t2.end_date as NAME, T2.end_date as wellCode FROM t_well_stimu_rec T2";
             try
             {
 
