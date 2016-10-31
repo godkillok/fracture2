@@ -742,7 +742,12 @@ namespace fracture
             int seiresi = seriesnum;
             int modelnum = 1;
             seiresi = seriesnum;
+             //ConstantLine constantLine2 = new ConstantLine("Constant Line 2");
+            XYDiagram diagram = (XYDiagram)myChart.Diagram;
 
+            while (diagram.AxisX.ConstantLines.Count() > 1)
+                diagram.AxisX.ConstantLines.RemoveAt(diagram.AxisX.ConstantLines.Count() - 1);
+            
 
             while (myChart.Series.Count >= seriesnum + modelnum)
             {
@@ -961,6 +966,18 @@ namespace fracture
             myChart.ToolTipEnabled = DevExpress.Utils.DefaultBoolean.False;
             myChart.BorderOptions.Visibility = DevExpress.Utils.DefaultBoolean.False;
 
+            //添加下拉框的内容
+            if (!ComboBoxproperties.Items.Contains("增油面积"))
+            ComboBoxproperties.Items.AddRange(new string[] { "增油面积" });
+
+            double[] plinfo = new double[6];
+            plinfo[0] = 0;
+            plinfo[1] = 0;
+            plinfo[2] = 0;
+            plinfo[3] = 0;
+            plinfo[4] = 0;
+            plinfo[5] = 0;
+            ployfitinfo.Add(plinfo);
 
             // Create a series, and add it to the chart. 
             DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series("增油面积", ViewType.RangeArea);
@@ -986,6 +1003,8 @@ namespace fracture
             DevExpress.XtraCharts.Legend legend = myChart.Legend;
 
             ((XYDiagram)myChart.Diagram).AxisX.WholeRange.MaxValue = resultTime_aft.Max().AddMonths(1);
+
+             
         }
         private void comboBoxEdit1_SelectedIndexChanged(object sender, EventArgs e)
         {
