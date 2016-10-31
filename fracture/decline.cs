@@ -458,6 +458,45 @@ namespace fracture
 
         }
 
+        #region 图形拖动
+        private void chartControl1_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            if (Diagram == null)
+                return;
+
+            if (dragging && e.Button != MouseButtons.Right)
+            {
+
+                //获取新的右下角坐标   
+                secondPoint = new Point(e.X, e.Y);
+                if (e.X > maxcoords.Point.X)
+                {
+                    secondPoint.X = maxcoords.Point.X;
+                }
+                if (e.X < mincoords.Point.X)
+                {
+                    secondPoint.X = mincoords.Point.X;
+                }
+                if (e.Y < maxcoords.Point.Y)
+                {
+                    secondPoint.Y = maxcoords.Point.Y;
+                }
+                if (e.Y > mincoords.Point.Y)
+                {
+                    secondPoint.Y = mincoords.Point.Y;
+                }
+                int minX = Math.Min(firstPoint.X, secondPoint.X);
+                int minY = maxcoords.Point.Y;
+                int maxX = Math.Max(firstPoint.X, secondPoint.X);
+                int maxY = mincoords.Point.Y;
+
+
+
+                selectionRectangle = new Rectangle(minX, minY, maxX - minX, maxY - minY);
+            }
+
+        }
         private void chartControl1_CustomPaint(object sender, CustomPaintEventArgs e)
         {
             if (Diagram == null)
@@ -545,6 +584,7 @@ namespace fracture
             polyfit_decline();
             selected_flag = false;
         }
+        #endregion 图形拖动
         private void polyfit_decline()
         {
             int[] selectinfo;//拟合段的开始时间和拟合的时间的个数
@@ -751,45 +791,7 @@ namespace fracture
             series1.LabelsVisibility = DevExpress.Utils.DefaultBoolean.False;
             comboBoxEdit1.SelectedIndex = 1;
         }
-        private void chartControl1_MouseMove(object sender, MouseEventArgs e)
-        {
-
-            if (Diagram == null)
-                return;
-
-            if (dragging && e.Button != MouseButtons.Right)
-            {
-
-                //获取新的右下角坐标   
-                secondPoint = new Point(e.X, e.Y);
-                if (e.X > maxcoords.Point.X)
-                {
-                    secondPoint.X = maxcoords.Point.X;
-                }
-                if (e.X < mincoords.Point.X)
-                {
-                    secondPoint.X = mincoords.Point.X;
-                }
-                if (e.Y < maxcoords.Point.Y)
-                {
-                    secondPoint.Y = maxcoords.Point.Y;
-                }
-                if (e.Y > mincoords.Point.Y)
-                {
-                    secondPoint.Y = mincoords.Point.Y;
-                }
-                int minX = Math.Min(firstPoint.X, secondPoint.X);
-                int minY = maxcoords.Point.Y;
-                int maxX = Math.Max(firstPoint.X, secondPoint.X);
-                int maxY = mincoords.Point.Y;
-
-
-
-                selectionRectangle = new Rectangle(minX, minY, maxX - minX, maxY - minY);
-            }
-
-        }
-
+  
         private void btnNull_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             int seiresi = seriesnum;
@@ -1302,50 +1304,7 @@ namespace fracture
             dockPanel5.Show();
         }
 
-        /// <summary>
-        /// 相关系数,或者拟合度，要求两个集合数量必须相同
-        /// </summary>
-        /// <param name="decdata">数组一</param>
-        /// <param name="decresult">数组二</param>
-        /// <returns></returns>
-        private double correl(List<double> decdata, List<double> decresult)
-        {
-            int realdatanum = decdata.Count;
 
-            //数组一
-            double avg1 = average(decdata, realdatanum);
-            //数组二
-            double avg2 = average(decresult, realdatanum);
-
-            double sumfenzi = 0;
-            double sumfenmu_x = 0;
-            double sumfenmu_y = 0;
-            for (int i = 0; i < realdatanum; i++)
-            {
-                sumfenzi = sumfenzi + ((decdata[i] - avg1)) * ((decresult[i] - avg2));
-                sumfenmu_x = sumfenmu_x + (decdata[i] - avg1) * (decdata[i] - avg1);
-                sumfenmu_y = sumfenmu_y + (decresult[i] - avg2) * (decresult[i] - avg2);
-            }
-            double sumfenmu = System.Math.Pow(sumfenmu_x, 0.5) * System.Math.Pow(sumfenmu_y, 0.5);
-            double cor = sumfenzi / sumfenmu;
-            cor = cor * cor;
-            return cor;
-        }
-        /// <summary>
-        /// 求出数据平均值,并保留三位小数
-        /// </summary>
-        /// <param name="Valist">数据集合</param>
-        /// <returns></returns>
-        private double average(List<double> Valist, int realdatanum)
-        {
-            double sum = 0;
-            for (int i = 0; i < realdatanum; i++)
-            {
-                sum = sum + Valist[i];
-            }
-            double revl = sum / realdatanum;
-            return revl;
-        }
         private void btnOutpic_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 
@@ -1582,10 +1541,53 @@ namespace fracture
             OleDbHelper.InsertDataTable2(result_dtset.Tables["增油月报"], Globalname.DabaBasePath, dt_TableAndField);
         }
 
+        #region 算法
+        /// <summary>
+        /// 相关系数,或者拟合度，要求两个集合数量必须相同
+        /// </summary>
+        /// <param name="decdata">数组一</param>
+        /// <param name="decresult">数组二</param>
+        /// <returns></returns>
+        private double correl(List<double> decdata, List<double> decresult)
+        {
+            int realdatanum = decdata.Count;
 
+            //数组一
+            double avg1 = average(decdata, realdatanum);
+            //数组二
+            double avg2 = average(decresult, realdatanum);
 
+            double sumfenzi = 0;
+            double sumfenmu_x = 0;
+            double sumfenmu_y = 0;
+            for (int i = 0; i < realdatanum; i++)
+            {
+                sumfenzi = sumfenzi + ((decdata[i] - avg1)) * ((decresult[i] - avg2));
+                sumfenmu_x = sumfenmu_x + (decdata[i] - avg1) * (decdata[i] - avg1);
+                sumfenmu_y = sumfenmu_y + (decresult[i] - avg2) * (decresult[i] - avg2);
+            }
+            double sumfenmu = System.Math.Pow(sumfenmu_x, 0.5) * System.Math.Pow(sumfenmu_y, 0.5);
+            double cor = sumfenzi / sumfenmu;
+            cor = cor * cor;
+            return cor;
+        }
+        /// <summary>
+        /// 求出数据平均值,并保留三位小数
+        /// </summary>
+        /// <param name="Valist">数据集合</param>
+        /// <returns></returns>
+        private double average(List<double> Valist, int realdatanum)
+        {
+            double sum = 0;
+            for (int i = 0; i < realdatanum; i++)
+            {
+                sum = sum + Valist[i];
+            }
+            double revl = sum / realdatanum;
+            return revl;
+        }
 
-
+        #endregion 算法
 
 
 

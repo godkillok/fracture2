@@ -335,10 +335,10 @@
             this.dockPanel1.Controls.Add(this.dockPanel1_Container);
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.dockPanel1.ID = new System.Guid("2023f5ec-2c00-4d3e-b731-a70f9e2d9fd1");
-            this.dockPanel1.Location = new System.Drawing.Point(0, 145);
+            this.dockPanel1.Location = new System.Drawing.Point(0, 144);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(233, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(233, 522);
+            this.dockPanel1.Size = new System.Drawing.Size(233, 523);
             this.dockPanel1.Text = "拟合参数";
             // 
             // dockPanel1_Container
@@ -353,9 +353,9 @@
             this.dockPanel1_Container.Controls.Add(this.labelControl7);
             this.dockPanel1_Container.Controls.Add(this.labelControl4);
             this.dockPanel1_Container.Controls.Add(this.longgest_num);
-            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
+            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 39);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(225, 495);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(225, 480);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // labelControl8
@@ -497,7 +497,7 @@
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemBorderLineStyle1,
             this.repositoryItemBorderLineWeight1});
-            this.ribbonControl1.Size = new System.Drawing.Size(1071, 145);
+            this.ribbonControl1.Size = new System.Drawing.Size(1071, 144);
             // 
             // btnNull
             // 
@@ -753,7 +753,7 @@
             this.snapControl1.Options.Fields.ShowChartInfoPanel = true;
             this.snapControl1.Options.Fields.UpdateFieldsInTextBoxes = false;
             this.snapControl1.Options.SnapMailMergeVisualOptions.DataSourceName = null;
-            this.snapControl1.Size = new System.Drawing.Size(612, 493);
+            this.snapControl1.Size = new System.Drawing.Size(612, 492);
             this.snapControl1.TabIndex = 0;
             this.snapControl1.Text = "snapControl1";
             // 
@@ -1537,7 +1537,7 @@
             this.dockPanel3_Container.Controls.Add(this.chartControl1);
             this.dockPanel3_Container.Location = new System.Drawing.Point(0, 0);
             this.dockPanel3_Container.Name = "dockPanel3_Container";
-            this.dockPanel3_Container.Size = new System.Drawing.Size(612, 493);
+            this.dockPanel3_Container.Size = new System.Drawing.Size(596, 492);
             this.dockPanel3_Container.TabIndex = 0;
             // 
             // chartControl1
@@ -1546,7 +1546,7 @@
             this.chartControl1.Location = new System.Drawing.Point(0, 0);
             this.chartControl1.Name = "chartControl1";
             this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartControl1.Size = new System.Drawing.Size(612, 493);
+            this.chartControl1.Size = new System.Drawing.Size(596, 492);
             this.chartControl1.TabIndex = 0;
             this.chartControl1.CustomPaint += new DevExpress.XtraCharts.CustomPaintEventHandler(this.chartControl1_CustomPaint);
             this.chartControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chartControl1_MouseDown);
@@ -1571,7 +1571,7 @@
             this.dockPanel4_Container.Controls.Add(this.gridControl1);
             this.dockPanel4_Container.Location = new System.Drawing.Point(0, 0);
             this.dockPanel4_Container.Name = "dockPanel4_Container";
-            this.dockPanel4_Container.Size = new System.Drawing.Size(612, 493);
+            this.dockPanel4_Container.Size = new System.Drawing.Size(612, 492);
             this.dockPanel4_Container.TabIndex = 0;
             // 
             // gridControl1
@@ -1581,7 +1581,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.MenuManager = this.ribbonControl1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(612, 493);
+            this.gridControl1.Size = new System.Drawing.Size(612, 492);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -1605,7 +1605,7 @@
             this.dockPanel5_Container.Controls.Add(this.snapControl1);
             this.dockPanel5_Container.Location = new System.Drawing.Point(0, 0);
             this.dockPanel5_Container.Name = "dockPanel5_Container";
-            this.dockPanel5_Container.Size = new System.Drawing.Size(612, 493);
+            this.dockPanel5_Container.Size = new System.Drawing.Size(612, 492);
             this.dockPanel5_Container.TabIndex = 0;
             // 
             // dockPanel2
@@ -1613,18 +1613,18 @@
             this.dockPanel2.Controls.Add(this.dockPanel2_Container);
             this.dockPanel2.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
             this.dockPanel2.ID = new System.Guid("3592ba6f-9ee0-4a5f-b3da-b82cd90a4be1");
-            this.dockPanel2.Location = new System.Drawing.Point(851, 145);
+            this.dockPanel2.Location = new System.Drawing.Point(835, 144);
             this.dockPanel2.Name = "dockPanel2";
             this.dockPanel2.OriginalSize = new System.Drawing.Size(200, 200);
-            this.dockPanel2.Size = new System.Drawing.Size(200, 522);
+            this.dockPanel2.Size = new System.Drawing.Size(200, 523);
             this.dockPanel2.Text = "井列表";
             // 
             // dockPanel2_Container
             // 
             this.dockPanel2_Container.Controls.Add(this.treeList1);
-            this.dockPanel2_Container.Location = new System.Drawing.Point(4, 23);
+            this.dockPanel2_Container.Location = new System.Drawing.Point(4, 39);
             this.dockPanel2_Container.Name = "dockPanel2_Container";
-            this.dockPanel2_Container.Size = new System.Drawing.Size(192, 495);
+            this.dockPanel2_Container.Size = new System.Drawing.Size(192, 480);
             this.dockPanel2_Container.TabIndex = 0;
             // 
             // treeList1
@@ -1634,7 +1634,7 @@
             this.treeList1.Location = new System.Drawing.Point(0, 0);
             this.treeList1.Margin = new System.Windows.Forms.Padding(2);
             this.treeList1.Name = "treeList1";
-            this.treeList1.Size = new System.Drawing.Size(192, 495);
+            this.treeList1.Size = new System.Drawing.Size(192, 480);
             this.treeList1.TabIndex = 0;
             // 
             // ribbonPage1
@@ -1699,9 +1699,9 @@
             this.hideContainerRight.BackColor = System.Drawing.SystemColors.Control;
             this.hideContainerRight.Controls.Add(this.fieldListDockPanel1);
             this.hideContainerRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hideContainerRight.Location = new System.Drawing.Point(1051, 145);
+            this.hideContainerRight.Location = new System.Drawing.Point(1035, 144);
             this.hideContainerRight.Name = "hideContainerRight";
-            this.hideContainerRight.Size = new System.Drawing.Size(20, 522);
+            this.hideContainerRight.Size = new System.Drawing.Size(36, 523);
             // 
             // fieldListDockPanel1
             // 
