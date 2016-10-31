@@ -41,14 +41,15 @@
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.btn_pics_pred = new DevExpress.XtraBars.BarButtonItem();
             this.btn_pics_train = new DevExpress.XtraBars.BarButtonItem();
-            this.popupControlContainer2 = new DevExpress.XtraBars.PopupControlContainer(this.components);
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.btn_setting = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageCategory1 = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.popupControlContainer2 = new DevExpress.XtraBars.PopupControlContainer(this.components);
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.dockPanel2 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
@@ -82,7 +83,7 @@
             this.popupControlContainer3 = new DevExpress.XtraBars.PopupControlContainer(this.components);
             this.popupControlContainer4 = new DevExpress.XtraBars.PopupControlContainer(this.components);
             this.popupControlContainer5 = new DevExpress.XtraBars.PopupControlContainer(this.components);
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.popupControlContainer6 = new DevExpress.XtraBars.PopupControlContainer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer2)).BeginInit();
@@ -119,6 +120,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer6)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonControl1
@@ -136,13 +138,13 @@
             this.btn_pics_pred,
             this.btn_pics_train,
             this.barButtonItem2,
-            this.barButtonItem1});
+            this.btn_setting});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.MaxItemId = 21;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
             this.ribbonPageCategory1});
-            this.ribbonControl1.Size = new System.Drawing.Size(784, 144);
+            this.ribbonControl1.Size = new System.Drawing.Size(784, 145);
             // 
             // btn_train
             // 
@@ -229,16 +231,6 @@
             this.btn_pics_train.Id = 10;
             this.btn_pics_train.Name = "btn_pics_train";
             // 
-            // popupControlContainer2
-            // 
-            this.popupControlContainer2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.popupControlContainer2.Location = new System.Drawing.Point(0, 0);
-            this.popupControlContainer2.Name = "popupControlContainer2";
-            this.popupControlContainer2.Ribbon = this.ribbonControl1;
-            this.popupControlContainer2.Size = new System.Drawing.Size(250, 130);
-            this.popupControlContainer2.TabIndex = 17;
-            this.popupControlContainer2.Visible = false;
-            // 
             // barButtonItem2
             // 
             this.barButtonItem2.Caption = "保存";
@@ -247,6 +239,17 @@
             this.barButtonItem2.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.LargeGlyph")));
             this.barButtonItem2.Name = "barButtonItem2";
             this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
+            // 
+            // btn_setting
+            // 
+            this.btn_setting.ActAsDropDown = true;
+            this.btn_setting.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            this.btn_setting.Caption = "设置";
+            this.btn_setting.DropDownControl = this.popupControlContainer6;
+            this.btn_setting.Glyph = ((System.Drawing.Image)(resources.GetObject("btn_setting.Glyph")));
+            this.btn_setting.Id = 20;
+            this.btn_setting.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btn_setting.LargeGlyph")));
+            this.btn_setting.Name = "btn_setting";
             // 
             // ribbonPageCategory1
             // 
@@ -267,7 +270,8 @@
             // 
             // ribbonPageGroup4
             // 
-            this.ribbonPageGroup4.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup4.AllowTextClipping = false;
+            this.ribbonPageGroup4.ItemLinks.Add(this.btn_setting);
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             this.ribbonPageGroup4.Text = "设置";
             // 
@@ -294,6 +298,16 @@
             this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem2);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.Text = "结果";
+            // 
+            // popupControlContainer2
+            // 
+            this.popupControlContainer2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.popupControlContainer2.Location = new System.Drawing.Point(0, 0);
+            this.popupControlContainer2.Name = "popupControlContainer2";
+            this.popupControlContainer2.Ribbon = this.ribbonControl1;
+            this.popupControlContainer2.Size = new System.Drawing.Size(250, 130);
+            this.popupControlContainer2.TabIndex = 17;
+            this.popupControlContainer2.Visible = false;
             // 
             // dockManager1
             // 
@@ -428,10 +442,10 @@
             // xtraTabControl1
             // 
             this.xtraTabControl1.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom;
-            this.xtraTabControl1.Location = new System.Drawing.Point(117, 186);
+            this.xtraTabControl1.Location = new System.Drawing.Point(20, 151);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(589, 284);
+            this.xtraTabControl1.Size = new System.Drawing.Size(715, 329);
             this.xtraTabControl1.TabIndex = 14;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -441,7 +455,7 @@
             // 
             this.xtraTabPage1.Controls.Add(this.splitContainerControl1);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(587, 258);
+            this.xtraTabPage1.Size = new System.Drawing.Size(709, 300);
             this.xtraTabPage1.Text = "样本库";
             // 
             // splitContainerControl1
@@ -453,8 +467,8 @@
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.xtraTabControl2);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(587, 258);
-            this.splitContainerControl1.SplitterPosition = 246;
+            this.splitContainerControl1.Size = new System.Drawing.Size(709, 300);
+            this.splitContainerControl1.SplitterPosition = 341;
             this.splitContainerControl1.TabIndex = 0;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
@@ -465,7 +479,7 @@
             this.gridControl2.MainView = this.gridView3;
             this.gridControl2.MenuManager = this.ribbonControl1;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(246, 258);
+            this.gridControl2.Size = new System.Drawing.Size(341, 300);
             this.gridControl2.TabIndex = 0;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -475,6 +489,7 @@
             this.gridView3.GridControl = this.gridControl2;
             this.gridView3.Name = "gridView3";
             this.gridView3.OptionsView.ShowGroupPanel = false;
+            this.gridView3.DoubleClick += gridView3_DoubleClick;
             // 
             // xtraTabControl2
             // 
@@ -486,7 +501,7 @@
             this.xtraTabControl2.PageImagePosition = DevExpress.XtraTab.TabPageImagePosition.Center;
             this.xtraTabControl2.SelectedTabPage = this.xtraTabPage3;
             this.xtraTabControl2.ShowTabHeader = DevExpress.Utils.DefaultBoolean.True;
-            this.xtraTabControl2.Size = new System.Drawing.Size(329, 258);
+            this.xtraTabControl2.Size = new System.Drawing.Size(363, 300);
             this.xtraTabControl2.TabIndex = 1;
             this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage3,
@@ -496,7 +511,7 @@
             // 
             this.xtraTabPage3.Controls.Add(this.gridControl4);
             this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(327, 232);
+            this.xtraTabPage3.Size = new System.Drawing.Size(357, 271);
             this.xtraTabPage3.Text = "增油量";
             // 
             // gridControl4
@@ -506,7 +521,7 @@
             this.gridControl4.MainView = this.gridView5;
             this.gridControl4.MenuManager = this.ribbonControl1;
             this.gridControl4.Name = "gridControl4";
-            this.gridControl4.Size = new System.Drawing.Size(327, 232);
+            this.gridControl4.Size = new System.Drawing.Size(357, 271);
             this.gridControl4.TabIndex = 0;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView5});
@@ -521,7 +536,7 @@
             // 
             this.xtraTabPage4.Controls.Add(this.chartControl1);
             this.xtraTabPage4.Name = "xtraTabPage4";
-            this.xtraTabPage4.Size = new System.Drawing.Size(439, 354);
+            this.xtraTabPage4.Size = new System.Drawing.Size(357, 271);
             this.xtraTabPage4.Text = "结果图";
             // 
             // chartControl1
@@ -530,14 +545,14 @@
             this.chartControl1.Location = new System.Drawing.Point(0, 0);
             this.chartControl1.Name = "chartControl1";
             this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartControl1.Size = new System.Drawing.Size(439, 354);
+            this.chartControl1.Size = new System.Drawing.Size(357, 271);
             this.chartControl1.TabIndex = 1;
             // 
             // xtraTabPage2
             // 
             this.xtraTabPage2.Controls.Add(this.splitContainerControl2);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(587, 258);
+            this.xtraTabPage2.Size = new System.Drawing.Size(709, 300);
             this.xtraTabPage2.Text = "潜力井";
             // 
             // splitContainerControl2
@@ -549,7 +564,7 @@
             this.splitContainerControl2.Panel1.Text = "Panel1";
             this.splitContainerControl2.Panel2.Controls.Add(this.chartControl2);
             this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(587, 258);
+            this.splitContainerControl2.Size = new System.Drawing.Size(709, 300);
             this.splitContainerControl2.SplitterPosition = 193;
             this.splitContainerControl2.TabIndex = 0;
             this.splitContainerControl2.Text = "splitContainerControl2";
@@ -561,7 +576,7 @@
             this.gridControl3.MainView = this.gridView4;
             this.gridControl3.MenuManager = this.ribbonControl1;
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(193, 258);
+            this.gridControl3.Size = new System.Drawing.Size(193, 300);
             this.gridControl3.TabIndex = 0;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -571,6 +586,7 @@
             this.gridView4.GridControl = this.gridControl3;
             this.gridView4.Name = "gridView4";
             this.gridView4.OptionsView.ShowGroupPanel = false;
+            this.gridView4.DoubleClick += gridView4_DoubleClick;
             // 
             // chartControl2
             // 
@@ -578,7 +594,7 @@
             this.chartControl2.Location = new System.Drawing.Point(0, 0);
             this.chartControl2.Name = "chartControl2";
             this.chartControl2.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartControl2.Size = new System.Drawing.Size(382, 258);
+            this.chartControl2.Size = new System.Drawing.Size(511, 300);
             this.chartControl2.TabIndex = 0;
             // 
             // popupControlContainer1
@@ -621,13 +637,15 @@
             this.popupControlContainer5.TabIndex = 20;
             this.popupControlContainer5.Visible = false;
             // 
-            // barButtonItem1
+            // popupControlContainer6
             // 
-            this.barButtonItem1.Caption = "barButtonItem1";
-            this.barButtonItem1.Glyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.Glyph")));
-            this.barButtonItem1.Id = 20;
-            this.barButtonItem1.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.LargeGlyph")));
-            this.barButtonItem1.Name = "barButtonItem1";
+            this.popupControlContainer6.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.popupControlContainer6.Location = new System.Drawing.Point(0, 0);
+            this.popupControlContainer6.Name = "popupControlContainer6";
+            this.popupControlContainer6.Ribbon = this.ribbonControl1;
+            this.popupControlContainer6.Size = new System.Drawing.Size(250, 130);
+            this.popupControlContainer6.TabIndex = 21;
+            this.popupControlContainer6.Visible = false;
             // 
             // Pred
             // 
@@ -641,6 +659,7 @@
             this.Controls.Add(this.popupControlContainer3);
             this.Controls.Add(this.popupControlContainer4);
             this.Controls.Add(this.popupControlContainer5);
+            this.Controls.Add(this.popupControlContainer6);
             this.Name = "Pred";
             this.Text = "措施效果预测";
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
@@ -679,10 +698,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+
+     
+   
 
         #endregion
 
@@ -737,7 +760,8 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraBars.PopupControlContainer popupControlContainer4;
         private DevExpress.XtraBars.PopupControlContainer popupControlContainer3;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem btn_setting;
         private DevExpress.XtraBars.PopupControlContainer popupControlContainer5;
+        private DevExpress.XtraBars.PopupControlContainer popupControlContainer6;
     }
 }

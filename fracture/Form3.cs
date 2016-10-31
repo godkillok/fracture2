@@ -36,9 +36,30 @@ namespace fracture
         private ActivationNetwork network;
         private List<double[]> sclarer;
 
-        private DataTable sample_factor;
-        private DataTable sample_production;
-        private DataTable candidy_factor;
+        private DataTable sample_factor=new DataTable();
+        private DataTable sample_production=new DataTable();
+        private DataTable candidy_factor = new DataTable();
+        private DataSet ds = new DataSet();
+
+
+        public class xy
+        {
+            DateTime xaxis;
+
+            public DateTime Xaxis
+            {
+                get { return xaxis; }
+                set { xaxis = value; }
+            }
+            double yaxis;
+
+            public double Yaxis
+            {
+                get { return yaxis; }
+                set { yaxis = value; }
+            }
+        
+        }
 
         [Serializable()]
         private class network_scaler
@@ -48,34 +69,53 @@ namespace fracture
         }
         network_scaler net_scaler = new network_scaler();
         // Constructor
+
+        DataTable sample_data;
+        DataTable pred_data;
         public Pred()
         {
             InitializeComponent();
+           
+            string strDestination = Application.StartupPath + "\\case\\demoproject\\project\\sample.xml";
+            if (Globalname.localFilePath != "")
+                strDestination = Globalname.localFilePath + "\\project\\sample.xml";
+            if (File.Exists(strDestination))
+            {
+                ds.ReadXml(strDestination);
+                sample_factor = ds.Tables["sample_factor"];
+                sample_production = ds.Tables["sample_production"];
+                candidy_factor = ds.Tables["candidy_factor"];
 
-            sample_factor = new DataTable();
+                gridControl2.DataSource = sample_factor;
+                gridControl4.DataSource = sample_production;
+                gridControl3.DataSource = candidy_factor;
+            }
+            else
+            { 
             sample_factor.TableName = "sample_factor";
             sample_factor.Columns.Add(new DataColumn("井号", typeof(string)));
             sample_factor.Columns.Add(new DataColumn("措施类型", typeof(string)));
             sample_factor.Columns.Add(new DataColumn("措施时间", typeof(DateTime)));
             gridControl2.DataSource = sample_factor;
-            sample_production = new DataTable();
+           
 
-            gridControl4.DataSource = sample_production;
+     
             sample_production.TableName = "sample_production";
             sample_production.Columns.Add(new DataColumn("井号", typeof(string)));
             sample_production.Columns.Add(new DataColumn("措施类型", typeof(string)));
             sample_production.Columns.Add(new DataColumn("措施时间", typeof(DateTime)));
             sample_production.Columns.Add(new DataColumn("增油年月", typeof(DateTime)));
             sample_production.Columns.Add(new DataColumn("增油量", typeof(double)));
-            gridControl4.DataSource = null;
             gridControl4.DataSource = sample_production;
 
 
-            candidy_factor = new DataTable();
+       
             candidy_factor.TableName = "candidy_factor";
             candidy_factor.Columns.Add(new DataColumn("井号", typeof(string)));
-            gridControl4.DataSource = candidy_factor;
+            gridControl3.DataSource = candidy_factor;
 
+            ds.DataSetName = "数据表";
+            }
             treelistview.InitTreeView(treeList1, true);
             // Handling the QueryControl event that will populate all automatically generated Documents
             string sql = "";
@@ -84,10 +124,9 @@ namespace fracture
 
             treeList1.AfterCheckNode += treeList1_AfterCheckNode;
             treeList1.BeforeCheckNode += treeList1_BeforeCheckNode;
-
-
+           
         }
-
+     
         private void btn_setting_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 
@@ -95,7 +134,8 @@ namespace fracture
 
         private void btn_train_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+             sample_data = gridControl2.DataSource as DataTable;
+             sample_production = gridControl2.DataSource as DataTable;
             SearchSolution(sample_factor);
         }
         /// <summary>
@@ -376,11 +416,21 @@ namespace fracture
         }
         private void btn_pred_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+             pred_data = gridControl3.DataSource as DataTable;
+           
             pred(candidy_factor);
 
         }
 
+        private void gridView4_DoubleClick(object sender, System.EventArgs e)
+        {
 
+
+        }
+        private void gridView3_DoubleClick(object sender, System.EventArgs e)
+        {
+            
+        }
         private void btn_pic_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 
@@ -494,21 +544,25 @@ namespace fracture
         private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             OleDbHelper olg = new OleDbHelper();
-         
+            ds.Tables.Add(sample_factor);
+            ds.Tables.Add(sample_production);
+            ds.Tables.Add(candidy_factor);
+
+
             string localFilePath1 = "";
             string localFilePath2 = "";
             string localFilePath3 = "";
             if (Globalname.localFilePath == "")
             {
-                localFilePath1 = Application.StartupPath + "\\test\\project\\sample_factor.xml";
-                localFilePath2 = Application.StartupPath + "\\test\\project\\sample_production.xml";
-                localFilePath3 = Application.StartupPath + "\\test\\project\\candidy_factor.xml";
+                localFilePath1 = Application.StartupPath + "\\case\\demoproject\\project\\sample.xml";
+                //localFilePath2 = Application.StartupPath + "\\test\\project\\sample_production.xml";
+                //localFilePath3 = Application.StartupPath + "\\test\\project\\candidy_factor.xml";
             }
             else
             {
-                localFilePath1 = Globalname.localFilePath + "\\project\\sample_factor.xml";
-                localFilePath2 = Globalname.localFilePath + "\\project\\sample_production.xml";
-                localFilePath3 = Globalname.localFilePath + "\\project\\candidy_factor.xml";
+                localFilePath1 = Globalname.localFilePath + "\\project\\sample.xml";
+                //localFilePath2 = Globalname.localFilePath + "\\project\\sample_production.xml";
+                //localFilePath3 = Globalname.localFilePath + "\\project\\candidy_factor.xml";
 
             }
             string strPath = Path.GetDirectoryName(localFilePath1);
@@ -516,10 +570,10 @@ namespace fracture
             {
                 Directory.CreateDirectory(strPath);
             }
-            olg.ConvertDataTableToXML(sample_factor, localFilePath1);
-            olg.ConvertDataTableToXML(sample_production, localFilePath2);
-            olg.ConvertDataTableToXML(candidy_factor, localFilePath3);
-
+            //olg.ConvertDataTableToXML(sample_factor, localFilePath1);
+            //olg.ConvertDataTableToXML(sample_production, localFilePath2);
+            //olg.ConvertDataTableToXML(candidy_factor, localFilePath3);
+            ds.WriteXml(localFilePath1);
         }
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
