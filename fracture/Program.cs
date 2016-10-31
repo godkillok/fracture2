@@ -35,7 +35,7 @@ namespace fracture
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-         Application.Run(new RibbonForm1());
+           Application.Run(new RibbonForm1());
             //   Application.Run(new Predicttion());
        //    Application.Run(new frmreservoir());
             // Application.Run(new Plotting_Form2());
@@ -44,7 +44,8 @@ namespace fracture
            //  Application.Run(new fractureparameter());
             // Application.Run(new wellmap());
           //   Application.Run(new WellHeadTemp());
-             //   Application.Run(new decline());
+            // Application.Run(new decline());
+           //  Application.Run(new Pred());
         }
     }
 }
