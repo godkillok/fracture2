@@ -117,5 +117,34 @@ namespace Global
 
         }
     }
+
+    public class Log
+    {
+        public static void writelog(Exception ex)
+        {
+            string log_folder = Application.StartupPath + "\\log";
+            string filepath = log_folder + "\\" + DateTime.Now.ToShortDateString() + ".log";
+            string strPath = Path.GetDirectoryName(filepath);
+            if (!Directory.Exists(strPath))
+            {
+                Directory.CreateDirectory(strPath);
+            }
+
+            if (!Directory.Exists(strPath))
+            {
+                 Directory.CreateDirectory(strPath);
+            }
+            if (!System.IO.File.Exists(filepath))
+            {
+                System.IO.File.Create(filepath).Close();
+            }
+            System.IO.StreamWriter sw = System.IO.File.AppendText(filepath);
+
+            sw.WriteLine("date:" + DateTime.Now.ToShortDateString() + " time" + DateTime.Now.ToShortTimeString());
+            sw.WriteLine("异常信息:" + ex.Message);
+            sw.WriteLine("异常堆栈:" + ex.StackTrace);
+            sw.Close();
+        }
+    }
 }
 
