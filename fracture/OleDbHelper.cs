@@ -11,6 +11,7 @@ using System.Xml;
 using Aspose;
 using Aspose.Cells;
 using fracture.Properties;
+using Global;
 namespace fracture
 {
     public class datatypedic
@@ -29,6 +30,60 @@ namespace fracture
             set { datatypestring = value; }
         }
 
+
+    }
+
+    public class production_curve_table
+    {
+        private string tablenameCN;
+
+        public string TablenameCN
+        {
+            get { return tablenameCN; }
+            set { tablenameCN = value; }
+        }
+        /// <summary>
+        /// 表名称
+        /// </summary>
+        private string tablename;
+
+        public string Tablename
+        {
+            get { return tablename; }
+            set { tablename = value; }
+        }
+
+        /// <summary>
+        /// 对象所在列名称
+        /// </summary>
+        private string curve_object;
+
+        public string Curve_object
+        {
+            get { return curve_object; }
+            set { curve_object = value; }
+        }
+        /// <summary>
+        /// 时间所在列名称
+        /// </summary>
+        private string curve_date;
+
+        public string Curve_date
+        {
+            get { return curve_date; }
+            set { curve_date = value; }
+        }
+
+        /// <summary>
+        /// 时间类型,包括年，年月，年月日
+        /// </summary>
+        private string curve_date_type;
+
+        public string Curve_date_type
+        {
+            get { return curve_date_type; }
+            set { curve_date_type = value; }
+        }
 
     }
     /// <summary>
@@ -116,9 +171,9 @@ namespace fracture
                 comm.CommandText = sqlstr.ToString();
                 comm.ExecuteNonQuery();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception(e.Message);
+                Global.Log.writelog(ex);
             }
             finally
             { closeConnection(); }
@@ -234,6 +289,34 @@ namespace fracture
 
                 dataTypedic.DataTypestring = xe.GetAttribute("name").ToString();
 
+                bookModeList.Add(dataTypedic);
+            }
+            return bookModeList;
+        }
+        public static List<production_curve_table> read_production_curve_table_xml(string tab)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(tab);
+            XmlNode xn = doc.SelectSingleNode("production_curve_table");
+            XmlNodeList xnl = doc.GetElementsByTagName("DataType");
+            //XmlNodeList xnl2 = xn.ChildNodes;
+            List<production_curve_table> bookModeList = new List<production_curve_table>();
+            foreach (XmlNode xn1 in xnl)
+            {
+
+                production_curve_table dataTypedic = new production_curve_table();
+
+                // 将节点转换为元素，便于得到节点的属性值
+
+                XmlElement xe = (XmlElement)xn1;
+
+                // 得到Type和ISBN两个属性的属性值
+                XmlNodeList xnl0 = xe.ChildNodes;
+                dataTypedic.TablenameCN = xe.GetElementsByTagName("tablenameCN").Item(0).InnerText.ToString();
+                dataTypedic.Tablename = xe.GetElementsByTagName("tablename").Item(0).InnerText.ToString();
+                dataTypedic.Curve_object = xe.GetElementsByTagName("curve_object").Item(0).InnerText.ToString();
+                dataTypedic.Curve_date = xe.GetElementsByTagName("Curve_date").Item(0).InnerText.ToString();
+                dataTypedic.Curve_date_type = xe.GetElementsByTagName("curve_date_type").Item(0).InnerText.ToString();
                 bookModeList.Add(dataTypedic);
             }
             return bookModeList;
@@ -406,8 +489,9 @@ namespace fracture
                 //UTF8Encoding utf = new UTF8Encoding();
                 //return utf.GetString(arr).Trim();
             }
-            catch
+            catch (Exception ex)
             {
+                Global.Log.writelog(ex);
                 //return String.Empty;
             }
             finally
@@ -429,7 +513,7 @@ namespace fracture
             }
             catch (Exception ex)
             {
-                string strTest = ex.Message;
+                Global.Log.writelog(ex);
                 return null;
             }
             finally
@@ -565,12 +649,13 @@ namespace fracture
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Global.Log.writelog(ex);
+                MessageBox.Show("导入失败");
             }
         }
 
         /// <summary>
-        /// 有个潜在问题：excel的表头有些限制，不能包括（）、空格
+        /// 有个潜在问题：excel的表头有些限制，不能包括（）、空格、%
         /// </summary>
         /// <param name="ExcelpathName"></param>
         /// <param name="sheetName"></param>
@@ -590,7 +675,9 @@ namespace fracture
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Global.Log.writelog(ex);
+                MessageBox.Show("导入失败");
+
             }
         }
 
