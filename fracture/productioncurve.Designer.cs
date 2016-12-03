@@ -136,9 +136,10 @@
             DevExpress.Skins.SkinPaddingEdges skinPaddingEdges1 = new DevExpress.Skins.SkinPaddingEdges();
             DevExpress.Skins.SkinPaddingEdges skinPaddingEdges2 = new DevExpress.Skins.SkinPaddingEdges();
             DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
+            DevExpress.Utils.Animation.PushTransition pushTransition1 = new DevExpress.Utils.Animation.PushTransition();
             this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
-            this.document2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.document1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
+            this.document2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btn_outpic = new DevExpress.XtraBars.BarButtonItem();
             this.btn_excel = new DevExpress.XtraBars.BarButtonItem();
@@ -176,9 +177,13 @@
             this.exportToPNGChartItem1 = new DevExpress.XtraCharts.UI.ExportToPNGChartItem();
             this.exportToTIFFChartItem1 = new DevExpress.XtraCharts.UI.ExportToTIFFChartItem();
             this.createExportToImageBaseItem1 = new DevExpress.XtraCharts.UI.CreateExportToImageBaseItem();
+            this.tableselect = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.ribbonPageCategory1 = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.repositoryItemOfficeColorPickEdit1 = new DevExpress.Office.UI.RepositoryItemOfficeColorPickEdit();
+            this.repositoryItemColorEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemColorEdit();
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
@@ -196,9 +201,10 @@
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
+            this.workspaceManager1 = new DevExpress.Utils.WorkspaceManager();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.document2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.document1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.document2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown2)).BeginInit();
@@ -207,6 +213,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemOfficeColorPickEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.dockPanel1.SuspendLayout();
             this.dockPanel1_Container.SuspendLayout();
@@ -232,16 +241,6 @@
             this.document1,
             this.document2});
             // 
-            // document2
-            // 
-            this.document2.Caption = "生产曲线";
-            this.document2.ControlName = "dockPanel2";
-            this.document2.FloatLocation = new System.Drawing.Point(132, 299);
-            this.document2.FloatSize = new System.Drawing.Size(461, 312);
-            this.document2.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.True;
-            this.document2.Properties.AllowFloat = DevExpress.Utils.DefaultBoolean.True;
-            this.document2.Properties.AllowFloatOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
-            // 
             // document1
             // 
             this.document1.Caption = "生产月报";
@@ -251,6 +250,16 @@
             this.document1.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.True;
             this.document1.Properties.AllowFloat = DevExpress.Utils.DefaultBoolean.True;
             this.document1.Properties.AllowFloatOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
+            // 
+            // document2
+            // 
+            this.document2.Caption = "生产曲线";
+            this.document2.ControlName = "dockPanel2";
+            this.document2.FloatLocation = new System.Drawing.Point(132, 299);
+            this.document2.FloatSize = new System.Drawing.Size(461, 312);
+            this.document2.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.True;
+            this.document2.Properties.AllowFloat = DevExpress.Utils.DefaultBoolean.True;
+            this.document2.Properties.AllowFloatOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
             // 
             // ribbonControl1
             // 
@@ -285,13 +294,18 @@
             this.exportToJPEGChartItem1,
             this.exportToPNGChartItem1,
             this.exportToTIFFChartItem1,
-            this.createExportToImageBaseItem1});
+            this.createExportToImageBaseItem1,
+            this.tableselect});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.ribbonControl1.MaxItemId = 45;
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.ribbonControl1.MaxItemId = 50;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
             this.ribbonPageCategory1});
+            this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemOfficeColorPickEdit1,
+            this.repositoryItemColorEdit1,
+            this.repositoryItemComboBox1});
             this.ribbonControl1.Size = new System.Drawing.Size(609, 145);
             // 
             // btn_outpic
@@ -717,6 +731,24 @@
             this.createExportToImageBaseItem1.MenuDrawMode = DevExpress.XtraBars.MenuDrawMode.SmallImagesText;
             this.createExportToImageBaseItem1.Name = "createExportToImageBaseItem1";
             // 
+            // tableselect
+            // 
+            this.tableselect.Caption = "表名";
+            this.tableselect.Edit = this.repositoryItemComboBox1;
+            this.tableselect.EditWidth = 120;
+            this.tableselect.Glyph = ((System.Drawing.Image)(resources.GetObject("tableselect.Glyph")));
+            this.tableselect.Id = 49;
+            this.tableselect.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("tableselect.LargeGlyph")));
+            this.tableselect.Name = "tableselect";
+            // 
+            // repositoryItemComboBox1
+            // 
+            this.repositoryItemComboBox1.AutoHeight = false;
+            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
+            this.repositoryItemComboBox1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            // 
             // ribbonPageCategory1
             // 
             this.ribbonPageCategory1.Name = "ribbonPageCategory1";
@@ -739,9 +771,24 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.btn_design);
             this.ribbonPageGroup1.ItemLinks.Add(this.saveAsTemplateChartItem1);
             this.ribbonPageGroup1.ItemLinks.Add(this.loadTemplateChartItem1);
+            this.ribbonPageGroup1.ItemLinks.Add(this.tableselect);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.ShowCaptionButton = false;
             this.ribbonPageGroup1.Text = "操作";
+            // 
+            // repositoryItemOfficeColorPickEdit1
+            // 
+            this.repositoryItemOfficeColorPickEdit1.AutoHeight = false;
+            this.repositoryItemOfficeColorPickEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemOfficeColorPickEdit1.Name = "repositoryItemOfficeColorPickEdit1";
+            // 
+            // repositoryItemColorEdit1
+            // 
+            this.repositoryItemColorEdit1.AutoHeight = false;
+            this.repositoryItemColorEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemColorEdit1.Name = "repositoryItemColorEdit1";
             // 
             // dockManager1
             // 
@@ -767,7 +814,7 @@
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
             this.dockPanel1.ID = new System.Guid("60a2b60d-9c7d-464d-883e-99522b915cbb");
             this.dockPanel1.Location = new System.Drawing.Point(397, 145);
-            this.dockPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dockPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(212, 200);
             this.dockPanel1.Size = new System.Drawing.Size(212, 298);
@@ -777,7 +824,7 @@
             // 
             this.dockPanel1_Container.Controls.Add(this.treeList1);
             this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
-            this.dockPanel1_Container.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dockPanel1_Container.Margin = new System.Windows.Forms.Padding(2);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
             this.dockPanel1_Container.Size = new System.Drawing.Size(204, 271);
             this.dockPanel1_Container.TabIndex = 0;
@@ -787,7 +834,7 @@
             this.treeList1.Cursor = System.Windows.Forms.Cursors.Default;
             this.treeList1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeList1.Location = new System.Drawing.Point(0, 0);
-            this.treeList1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.treeList1.Margin = new System.Windows.Forms.Padding(2);
             this.treeList1.Name = "treeList1";
             this.treeList1.Size = new System.Drawing.Size(204, 271);
             this.treeList1.TabIndex = 0;
@@ -928,6 +975,11 @@
             this.imageCollection1.Images.SetKeyName(0, "BLOCK.png");
             this.imageCollection1.Images.SetKeyName(1, "oil.png");
             // 
+            // workspaceManager1
+            // 
+            this.workspaceManager1.TargetControl = this;
+            this.workspaceManager1.TransitionType = pushTransition1;
+            // 
             // productioncurve
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -935,12 +987,12 @@
             this.ClientSize = new System.Drawing.Size(609, 443);
             this.Controls.Add(this.dockPanel1);
             this.Controls.Add(this.ribbonControl1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "productioncurve";
             this.Text = "productioncurve";
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.document2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.document1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.document2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown2)).EndInit();
@@ -949,6 +1001,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemOfficeColorPickEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
             this.dockPanel1.ResumeLayout(false);
             this.dockPanel1_Container.ResumeLayout(false);
@@ -1038,5 +1093,10 @@
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.Document document1;
         private DevExpress.XtraTreeList.TreeList treeList1;
         private DevExpress.Utils.ImageCollection imageCollection1;
+        private DevExpress.Utils.WorkspaceManager workspaceManager1;
+        private DevExpress.Office.UI.RepositoryItemOfficeColorPickEdit repositoryItemOfficeColorPickEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemColorEdit repositoryItemColorEdit1;
+        private DevExpress.XtraBars.BarEditItem tableselect;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
     }
 }

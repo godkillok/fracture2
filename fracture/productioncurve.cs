@@ -15,11 +15,19 @@ using DevExpress.XtraCharts;
 using System.Drawing.Imaging;
 using DevExpress.XtraCharts.Designer;
 using Global;
+using DevExpress.XtraEditors.Repository;
 namespace fracture
 {
     public partial class productioncurve : Form
     {
-        DataTable dt_TableAndField;
+        private DataTable dt_TableAndField;
+
+        private string wellid;//筛选器上的wellid
+        /// <summary>
+        /// 
+        /// </summary>
+        List<production_curve_table> pct = new List<production_curve_table>();
+
         public productioncurve()
         {
             InitializeComponent();
@@ -29,7 +37,15 @@ namespace fracture
             treelistview.AddWellNodes(treeList1);
             SetImageIndex(imageCollection1, treeList1, null, 1, 0);
             //treeList1.CustomDrawNodeCell += treeList1_CustomDrawNodeCell;
+            string tab = Application.StartupPath + "\\Config\\生产曲线\\production_curve_table.xml";
+            pct = OleDbHelper.read_production_curve_table_xml(tab);
+            List<string> tablename = new List<string>();
+            tablename = pct.Select(P => P.TablenameCN).ToList();
+
+            (tableselect.Edit as RepositoryItemComboBox).Items.AddRange(tablename);
+            tableselect.EditValue = (tableselect.Edit as RepositoryItemComboBox).Items[0];
         }
+
         void treeList1_CustomDrawNodeCell(object sender, CustomDrawNodeCellEventArgs e)
         {
             if (e.Node.Id == 0)
@@ -41,9 +57,11 @@ namespace fracture
             if (clickedNode.ParentNode != null)
             {
                 //object item = treeList1.FocusedNode;
-                string wellid = clickedNode.GetValue("WELLID").ToString();
+                 wellid = clickedNode.GetValue("WELLID").ToString();
                 DataTable dt;
-                dt = GetProductData(wellid);
+                string tablenameCN = tableselect.EditValue.ToString();
+                string tablename = pct.Where(P => P.TablenameCN.Contains(tablenameCN)).Select(P => P.Tablename).ToList()[0];
+                dt = GetProductData(wellid, tablename);
                 if (dt != null)
                 {
                     setgridcontrol(dt);
@@ -51,35 +69,64 @@ namespace fracture
                     loadTemp(dt);
                     dockPanel2.Show();
                 }
-                
+
             }
         }
-
+        private void tableselect_EditValueChanged(object sender, EventArgs e)
+        {
+            if (wellid != null)
+            {
+                DataTable dt;
+                string tablenameCN = tableselect.EditValue.ToString();
+                string tablename = pct.Where(P => P.TablenameCN.Contains(tablenameCN)).Select(P => P.Tablename).ToList()[0];
+                dt = GetProductData(wellid, tablename);
+                if (dt != null)
+                {
+                    setgridcontrol(dt);
+                    //drawcandy(dt);
+                    loadTemp(dt);
+                    dockPanel2.Show();
+                }
+            }
+        }
         private void loadTemp(DataTable dt)
-        { 	
-            ChartControl chart = chartControl1 ;//= chart;//= new ChartControl(); 
-                 chart.Series.Clear();
-                 string excelpath = Application.StartupPath + "\\Config\\生产月报.xml";
-                 chart.LoadFromFile(excelpath);
-                 dt.Columns.Add("生产年月YYYYMM", Type.GetType("System.DateTime"));
-                 for (int i = 0; i < dt.Rows.Count; i++)
-                 {
-                     dt.Rows[i]["生产年月YYYYMM"] = DateTime.ParseExact(dt.Rows[i]["生产年月"].ToString(), "yyyyMM", null); //string.Format("{0:yyyy-MM}", "]);//((DateTime)().ToString();
-                 };
-                 dt.Columns.Remove("生产年月");
-                 chart.DataSource = dt;
+        {
+            try
+            {
+                ChartControl chart = chartControl1;//= chart;//= new ChartControl(); 
+                chart.Series.Clear();
+                string tablenameCN = tableselect.EditValue.ToString();
+                string curve_date_type = pct.Where(P => P.TablenameCN.Contains(tablenameCN)).Select(P => P.Curve_date_type).ToList()[0];
+                if (curve_date_type == "YYYYMM")
+                {
+                    string excelpath = Application.StartupPath + "\\Config\\生产曲线\\" + tablenameCN + ".xml";
+                    chart.LoadFromFile(excelpath);
+                    dt.Columns.Add("生产年月YYYYMM", Type.GetType("System.DateTime"));
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        dt.Rows[i]["生产年月YYYYMM"] = DateTime.ParseExact(dt.Rows[i]["生产年月"].ToString(), "yyyyMM", null); //string.Format("{0:yyyy-MM}", "]);//((DateTime)().ToString();
+                    };
+                    dt.Columns.Remove("生产年月");
+                }
+
+                chart.DataSource = dt;
+            }
+            catch (Exception ex)
+            { 
+            
+            }
         }
 
         private void drawcandy(DataTable dt)
         {
             // Create a chart.
-           //
+            //
 
-          
 
-            ChartControl chart = chartControl1 ;//= chart;//= new ChartControl(); 
+
+            ChartControl chart = chartControl1;//= chart;//= new ChartControl(); 
             chart.Series.Clear();
-         
+
             chart.DataSource = dt;
             // Create an empty Bar series and add it to the chart.
             Series series = new Series("月产水量", ViewType.Line);
@@ -123,21 +170,21 @@ namespace fracture
             //((SideBySideBarSeriesView)series.View).ColorEach = true;
             ((XYDiagram)chart.Diagram).AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
             chart.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
-       
+
 
             //SecondaryAxisX myAxisX = new SecondaryAxisX("watercutx");
             SecondaryAxisY myAxisY = new SecondaryAxisY("含水率");
 
-           // ((XYDiagram)chartControl1.Diagram).SecondaryAxesX.Add(myAxisX);
+            // ((XYDiagram)chartControl1.Diagram).SecondaryAxesX.Add(myAxisX);
 
             ((XYDiagram)chartControl1.Diagram).SecondaryAxesY.Add(myAxisY);
 
             // Assign the series2 to the created axes.
-          //  ((LineSeriesView)series2.View).AxisX = myAxisX;
+            //  ((LineSeriesView)series2.View).AxisX = myAxisX;
             ((LineSeriesView)series2.View).AxisY = myAxisY;
 
             // Customize the appearance of the secondary axes (optional).
-   
+
 
             myAxisY.Title.Text = "含水率（%）";
             myAxisY.Title.Font = new Font("Microsoft YaHei", 10);
@@ -150,19 +197,19 @@ namespace fracture
             myAxisY.VisualRange.Auto = false;
             myAxisY.VisualRange.SetMinMaxValues(0, 100);
             myAxisY.WholeRange.SideMarginsValue = 0;
-    
+
             chart.CrosshairOptions.ShowArgumentLabels = true;
             chart.CrosshairOptions.ShowArgumentLine = true;
             chart.CrosshairOptions.ShowValueLabels = true;
             chart.CrosshairOptions.ShowValueLine = true;
-            chart.CrosshairOptions.ValueLineColor =Color.DarkBlue;
-            
+            chart.CrosshairOptions.ValueLineColor = Color.DarkBlue;
+
             chart.CrosshairOptions.ArgumentLineColor = Color.DarkBlue;
             chart.CrosshairOptions.ShowCrosshairLabels = false;
             //series1.CrosshairLabelPattern = series1.Name + ":{V:F0}";
             //series2.CrosshairLabelPattern = series1.Name + ":{V:F0}";
-           // chart.CrosshairOptions.sh = true;
-           
+            // chart.CrosshairOptions.sh = true;
+
             //series2.CrosshairOptions.ShowArgumentLabels  rosshairOptions.ShowValueLabels
             //  series2.CrosshairOptions.sho  CrosshairOptions.ShowValueLine, 
             //this.Controls.Add();
@@ -172,8 +219,8 @@ namespace fracture
             // Display the chart control's legend.
             legend.Visibility = DevExpress.Utils.DefaultBoolean.True;
 
-               // Define its margins and alignment relative to the diagram.
-               legend.Margins.All = 8;
+            // Define its margins and alignment relative to the diagram.
+            legend.Margins.All = 8;
 
 
             // Define the layout of items within the legend.
@@ -230,7 +277,7 @@ namespace fracture
             diagram.AxisY.Title.TextColor = Color.Black;
             diagram.AxisY.Title.Antialiasing = true;
             diagram.AxisY.Title.Font = new Font("Microsoft YaHei", 10);
-          
+
         }
 
         private void setgridcontrol(DataTable dt)
@@ -284,29 +331,28 @@ namespace fracture
 
             gridView1.OptionsSelection.MultiSelect = true;
             gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
-     
+
         }
-        private DataTable GetProductData(string wellid)
+        private DataTable GetProductData(string wellid, string tablename = "T_OW_M")
         {
             DataTable dt = null;
-           
-           
+
+
             try
             {
-                string tablename = "T_OW_M";//采油井生产月报
+                //采油井生产月报
 
                 //string DabaBasePath = "provider=microsoft.jet.oledb.4.0; Data Source=" + Application.StartupPath + "\\Database.mdb";
                 //string excelpath = Application.StartupPath + "\\ACCESS.xlsx";
                 string[] dataname;
-                if (dt_TableAndField==null)
-                { 
-                dt_TableAndField = new DataTable();
-                string sheetName = "物理表汇总";
+               
+                    dt_TableAndField = new DataTable();
+                    string sheetName = "物理表汇总";
 
-                string TableAndField = string.Format("select 列显示名称 AS name ,库字段名称 as ID, 默认单位名称 as UNIT from [{0}$] where (库表名称='" + tablename + "')", sheetName);
-                dt_TableAndField = OleDbHelper.ExcelToDataTable(sheetName, TableAndField);
-             
-                }
+                    string TableAndField = string.Format("select 列显示名称 AS name ,库字段名称 as ID, 默认单位名称 as UNIT from [{0}$] where (库表名称='" + tablename + "')", sheetName);
+                    dt_TableAndField = OleDbHelper.ExcelToDataTable(sheetName, TableAndField);
+
+              
                 //          string sSql = "SELECT T_DM_UNIT_CUR_INFOR.DM_UNIT_ID AS ParentID, T_WELL_INFOR.WELL_ID as KeyID,T_WELL_INFOR.WELL_NAME as Name FROM T_WELL_INFOR ,T_DM_UNIT_CUR_INFOR where T_WELL_INFOR.DM_UNIT_ID=T_DM_UNIT_CUR_INFOR.DM_UNIT_ID " +
                 //"UNION SELECT PARENT_DM_UNIT_ID AS ParentID,DM_UNIT_ID as KeyID,DM_UNIT_NAME as Name FROM T_DM_UNIT_CUR_INFOR";where [{0}$].库表名称 + tablename
                 string sSql = "select ";
@@ -316,8 +362,8 @@ namespace fracture
                 {
                     sSql = sSql + string.Format("{0} AS {1}, ", dt_TableAndField.Rows[i][1], dt_TableAndField.Rows[i][0]);
                 }
-                sSql = sSql + string.Format("{0} AS {1} From {2} where WELL_ID='{3}'", dt_TableAndField.Rows[dt_TableAndField.Rows.Count - 1][1], dt_TableAndField.Rows[dt_TableAndField.Rows.Count - 1][0], tablename,wellid);
-                dt = OleDbHelper.getTable(sSql,  Globalname.DabaBasePath);
+                sSql = sSql + string.Format("{0} AS {1} From {2} where WELL_ID='{3}'", dt_TableAndField.Rows[dt_TableAndField.Rows.Count - 1][1], dt_TableAndField.Rows[dt_TableAndField.Rows.Count - 1][0], tablename, wellid);
+                dt = OleDbHelper.getTable(sSql, Globalname.DabaBasePath);
 
                 return dt;
             }
@@ -370,7 +416,7 @@ namespace fracture
             FileOperate.savechart(chartControl1);
         }
 
-     
+
 
         private void btn_excel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -387,9 +433,9 @@ namespace fracture
             designer.ShowDialog();
         }
 
-      
 
-     
+
+
 
     }
 }
