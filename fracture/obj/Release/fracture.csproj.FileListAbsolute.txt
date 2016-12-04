@@ -148,3 +148,4 @@ F:\A云盘\课外\水平井裂缝堵水\fracture2\fracture\obj\Release\fracture.
 F:\A云盘\课外\水平井裂缝堵水\fracture2\fracture\obj\Release\fracture.exe.licenses
 F:\A云盘\课外\水平井裂缝堵水\fracture2\fracture\obj\Release\fracture.exe
 F:\A云盘\课外\水平井裂缝堵水\fracture2\fracture\obj\Release\fracture.pdb
+E:\水平井裂缝堵水\fracture\fracture\bin\Release\fracture.exe.config

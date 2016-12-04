@@ -80,6 +80,7 @@
     <Reference Include="DevExpress.Utils.v15.2" />
     <Reference Include="DevExpress.Utils.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v15.2.UI, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraBars.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraCharts.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraCharts.v15.2.UI, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -415,6 +416,7 @@
     <EmbeddedResource Include="waterflooding.resx">
       <DependentUpon>waterflooding.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="ILNumerics_deploy\ILNImports1.targets" />
     <None Include="ILNumerics_deploy\ILNImports2.targets" />
     <None Include="Properties\Settings.settings">
@@ -448,6 +450,7 @@
     <None Include="Resources\License.lic" />
     <None Include="Resources\播放-01.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="ILNumerics_deploy\ILNImports1.targets" Condition="$(ILNLicCompile) != 'true'" />
   <Import Project="ILNumerics_deploy\ILNImports2.targets" Condition="$(ILNLicCompile) == 'true'" />

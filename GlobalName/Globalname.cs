@@ -70,7 +70,7 @@ namespace Global
             //k2.Close();
             //RegFile("CssmFile", "CSSM", "Green-Co2.ico");
 
-        }
+        }             
         private void createxml(string path)
         {
             XmlDocument doc = new XmlDocument();

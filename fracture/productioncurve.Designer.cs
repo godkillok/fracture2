@@ -136,7 +136,6 @@
             DevExpress.Skins.SkinPaddingEdges skinPaddingEdges1 = new DevExpress.Skins.SkinPaddingEdges();
             DevExpress.Skins.SkinPaddingEdges skinPaddingEdges2 = new DevExpress.Skins.SkinPaddingEdges();
             DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
-            DevExpress.Utils.Animation.PushTransition pushTransition1 = new DevExpress.Utils.Animation.PushTransition();
             this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
             this.document1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.document2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
@@ -201,7 +200,6 @@
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
-            this.workspaceManager1 = new DevExpress.Utils.WorkspaceManager();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.document1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.document2)).BeginInit();
@@ -975,11 +973,6 @@
             this.imageCollection1.Images.SetKeyName(0, "BLOCK.png");
             this.imageCollection1.Images.SetKeyName(1, "oil.png");
             // 
-            // workspaceManager1
-            // 
-            this.workspaceManager1.TargetControl = this;
-            this.workspaceManager1.TransitionType = pushTransition1;
-            // 
             // productioncurve
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1093,7 +1086,6 @@
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.Document document1;
         private DevExpress.XtraTreeList.TreeList treeList1;
         private DevExpress.Utils.ImageCollection imageCollection1;
-        private DevExpress.Utils.WorkspaceManager workspaceManager1;
         private DevExpress.Office.UI.RepositoryItemOfficeColorPickEdit repositoryItemOfficeColorPickEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemColorEdit repositoryItemColorEdit1;
         private DevExpress.XtraBars.BarEditItem tableselect;

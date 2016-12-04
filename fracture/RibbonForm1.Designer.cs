@@ -309,7 +309,6 @@
             this.btn_Predict.Id = 13;
             this.btn_Predict.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btn_Predict.LargeGlyph")));
             this.btn_Predict.Name = "btn_Predict";
-            this.btn_Predict.Visibility = DevExpress.XtraBars.BarItemVisibility.OnlyInCustomizing;
             this.btn_Predict.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonPredict_ItemClick);
             // 
             // btnnewcase
@@ -360,7 +359,6 @@
             this.btn_evaluate.Id = 22;
             this.btn_evaluate.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btn_evaluate.LargeGlyph")));
             this.btn_evaluate.Name = "btn_evaluate";
-            this.btn_evaluate.Visibility = DevExpress.XtraBars.BarItemVisibility.OnlyInCustomizing;
             this.btn_evaluate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnfront_ItemClick);
             // 
             // btncase
