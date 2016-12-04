@@ -145,6 +145,29 @@ namespace fracture
             return dt;
         }
 
+        public static DataTable EXSQL(string sqlstr, string DabaBasePath = "")
+        {
+            if (DabaBasePath == "")
+                DabaBasePath = "provider=microsoft.jet.oledb.4.0; Data Source=" + Application.StartupPath + "\\case\\demoproject\\project\\Database.mdb";
+            DataTable dt = new DataTable();
+            OleDbDataAdapter da = new OleDbDataAdapter();
+            try
+            {
+                openConnection(DabaBasePath);
+                comm.CommandType = CommandType.Text;
+                comm.CommandText = sqlstr;
+                comm.ExecuteNonQuery();  
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                closeConnection();
+            }
+            return dt;
+        }
         /// <summary>
         /// 关闭数据库
         /// </summary>
@@ -364,6 +387,7 @@ namespace fracture
             oda.Fill(tbContainer);
             return tbContainer;
         }
+
 
         public static DataTable ExcelSheetName(string pathName)
         {
