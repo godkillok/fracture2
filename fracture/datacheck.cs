@@ -289,9 +289,7 @@ namespace fracture
 
                 }
 
-                //view.Bands[i].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;//这是合并表头居中显示
-                //view.Bands[i].View.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            }
+ }
 
 
 
