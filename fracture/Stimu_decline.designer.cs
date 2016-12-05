@@ -153,7 +153,6 @@
             this.toggleParagraphSuppressLineNumbersItem1 = new DevExpress.XtraRichEdit.UI.ToggleParagraphSuppressLineNumbersItem();
             this.showLineNumberingFormItem1 = new DevExpress.XtraRichEdit.UI.ShowLineNumberingFormItem();
             this.changePageColorItem1 = new DevExpress.XtraRichEdit.UI.ChangePageColorItem();
-            this.commandBarItem1 = new DevExpress.Snap.Extensions.UI.CommandBarItem();
             this.btn_upload = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageCategory1 = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
             this.fileRibbonPage1 = new DevExpress.XtraSpreadsheet.UI.FileRibbonPage();
@@ -214,17 +213,6 @@
             this.noDocumentsView1 = new DevExpress.XtraBars.Docking2010.Views.NoDocuments.NoDocumentsView(this.components);
             this.tabbedView2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.snapBarController1 = new DevExpress.Snap.Extensions.SnapBarController();
-            this.snapBarController2 = new DevExpress.Snap.Extensions.SnapBarController();
-            this.undoItem2 = new DevExpress.XtraRichEdit.UI.UndoItem();
-            this.redoItem2 = new DevExpress.XtraRichEdit.UI.RedoItem();
-            this.fileNewItem2 = new DevExpress.XtraRichEdit.UI.FileNewItem();
-            this.fileOpenItem2 = new DevExpress.XtraRichEdit.UI.FileOpenItem();
-            this.fileSaveItem2 = new DevExpress.XtraRichEdit.UI.FileSaveItem();
-            this.fileSaveAsItem2 = new DevExpress.XtraRichEdit.UI.FileSaveAsItem();
-            this.quickPrintItem2 = new DevExpress.XtraRichEdit.UI.QuickPrintItem();
-            this.printItem2 = new DevExpress.XtraRichEdit.UI.PrintItem();
-            this.printPreviewItem2 = new DevExpress.XtraRichEdit.UI.PrintPreviewItem();
-            this.commandBarItem3 = new DevExpress.Snap.Extensions.UI.CommandBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.document1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.document2)).BeginInit();
@@ -269,7 +257,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.noDocumentsView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.snapBarController1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.snapBarController2)).BeginInit();
             this.SuspendLayout();
             // 
             // documentGroup1
@@ -485,7 +472,6 @@
             this.toggleParagraphSuppressLineNumbersItem1,
             this.showLineNumberingFormItem1,
             this.changePageColorItem1,
-            this.commandBarItem1,
             this.btn_upload});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.MaxItemId = 123;
@@ -560,7 +546,6 @@
             this.btn_excel_output.Id = 19;
             this.btn_excel_output.LargeGlyph = global::fracture.Properties.Resources.Excel_2010;
             this.btn_excel_output.Name = "btn_excel_output";
-          //  this.btn_excel_output.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_excel_output_ItemClick);
             // 
             // barCheckItem2
             // 
@@ -577,7 +562,6 @@
             this.barButtonItem1.Id = 23;
             this.barButtonItem1.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.LargeGlyph")));
             this.barButtonItem1.Name = "barButtonItem1";
-          //  this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // btnhelp
             // 
@@ -610,7 +594,6 @@
             this.fileOpenItem1.Id = 28;
             this.fileOpenItem1.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("fileOpenItem1.LargeGlyph")));
             this.fileOpenItem1.Name = "fileOpenItem1";
-           // this.fileOpenItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.fileOpenItem1_ItemClick);
             // 
             // fileSaveItem1
             // 
@@ -1199,14 +1182,6 @@
             // 
             this.changePageColorItem1.Id = 120;
             this.changePageColorItem1.Name = "changePageColorItem1";
-            // 
-            // commandBarItem1
-            // 
-            this.commandBarItem1.Caption = "Export...";
-            this.commandBarItem1.Enabled = false;
-            this.commandBarItem1.Id = 121;
-            this.commandBarItem1.Name = "commandBarItem1";
-            this.commandBarItem1.SnapCommand = DevExpress.Snap.Extensions.UI.SnapCommand.ExportDocument;
             // 
             // btn_upload
             // 
@@ -1850,94 +1825,7 @@
             this.snapBarController1.RibbonControl = this.ribbonControl1;
             this.snapBarController1.SnapDockManager = this.snapDockManager1;
             // 
-            // snapBarController2
-            // 
-            this.snapBarController2.BarItems.Add(this.undoItem2);
-            this.snapBarController2.BarItems.Add(this.redoItem2);
-            this.snapBarController2.BarItems.Add(this.fileNewItem2);
-            this.snapBarController2.BarItems.Add(this.fileOpenItem2);
-            this.snapBarController2.BarItems.Add(this.fileSaveItem2);
-            this.snapBarController2.BarItems.Add(this.fileSaveAsItem2);
-            this.snapBarController2.BarItems.Add(this.commandBarItem1);
-            this.snapBarController2.BarItems.Add(this.quickPrintItem2);
-            this.snapBarController2.BarItems.Add(this.printItem2);
-            this.snapBarController2.BarItems.Add(this.printPreviewItem2);
-            this.snapBarController2.BarItems.Add(this.commandBarItem3);
-            this.snapBarController2.RibbonControl = this.ribbonControl1;
-            this.snapBarController2.SnapDockManager = this.snapDockManager1;
-            // 
-            // undoItem2
-            // 
-            this.undoItem2.Caption = "Undo";
-            this.undoItem2.Enabled = false;
-            this.undoItem2.Id = -1;
-            this.undoItem2.Name = "undoItem2";
-            // 
-            // redoItem2
-            // 
-            this.redoItem2.Caption = "Redo";
-            this.redoItem2.Enabled = false;
-            this.redoItem2.Id = -1;
-            this.redoItem2.Name = "redoItem2";
-            // 
-            // fileNewItem2
-            // 
-            this.fileNewItem2.Caption = "New";
-            this.fileNewItem2.Enabled = false;
-            this.fileNewItem2.Id = -1;
-            this.fileNewItem2.Name = "fileNewItem2";
-            // 
-            // fileOpenItem2
-            // 
-            this.fileOpenItem2.Caption = "Open";
-            this.fileOpenItem2.Enabled = false;
-            this.fileOpenItem2.Id = -1;
-            this.fileOpenItem2.Name = "fileOpenItem2";
-            // 
-            // fileSaveItem2
-            // 
-            this.fileSaveItem2.Caption = "Save";
-            this.fileSaveItem2.Enabled = false;
-            this.fileSaveItem2.Id = -1;
-            this.fileSaveItem2.Name = "fileSaveItem2";
-            // 
-            // fileSaveAsItem2
-            // 
-            this.fileSaveAsItem2.Caption = "Save As";
-            this.fileSaveAsItem2.Enabled = false;
-            this.fileSaveAsItem2.Id = -1;
-            this.fileSaveAsItem2.Name = "fileSaveAsItem2";
-            // 
-            // quickPrintItem2
-            // 
-            this.quickPrintItem2.Caption = "&Quick Print";
-            this.quickPrintItem2.Enabled = false;
-            this.quickPrintItem2.Id = -1;
-            this.quickPrintItem2.Name = "quickPrintItem2";
-            // 
-            // printItem2
-            // 
-            this.printItem2.Caption = "&Print";
-            this.printItem2.Enabled = false;
-            this.printItem2.Id = -1;
-            this.printItem2.Name = "printItem2";
-            // 
-            // printPreviewItem2
-            // 
-            this.printPreviewItem2.Caption = "Print Pre&view";
-            this.printPreviewItem2.Enabled = false;
-            this.printPreviewItem2.Id = -1;
-            this.printPreviewItem2.Name = "printPreviewItem2";
-            // 
-            // commandBarItem3
-            // 
-            this.commandBarItem3.Caption = "Add New Data Source";
-            this.commandBarItem3.Enabled = false;
-            this.commandBarItem3.Id = -1;
-            this.commandBarItem3.Name = "commandBarItem3";
-            this.commandBarItem3.SnapCommand = DevExpress.Snap.Extensions.UI.SnapCommand.NewDataSource;
-            // 
-            // decline
+            // Stimu_decline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1946,7 +1834,7 @@
             this.Controls.Add(this.dockPanel2);
             this.Controls.Add(this.hideContainerRight);
             this.Controls.Add(this.ribbonControl1);
-            this.Name = "decline";
+            this.Name = "Stimu_decline";
             this.Text = "Form6";
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.document1)).EndInit();
@@ -1994,7 +1882,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.noDocumentsView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.snapBarController1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.snapBarController2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2178,18 +2065,6 @@
         private DevExpress.XtraRichEdit.UI.TableAlignmentRibbonPageGroup tableAlignmentRibbonPageGroup1;
         private DevExpress.Snap.Extensions.SnapBarController snapBarController1;
         private DevExpress.XtraBars.Docking.AutoHideContainer hideContainerRight;
-        private DevExpress.Snap.Extensions.UI.CommandBarItem commandBarItem1;
-        private DevExpress.Snap.Extensions.SnapBarController snapBarController2;
-        private DevExpress.XtraRichEdit.UI.UndoItem undoItem2;
-        private DevExpress.XtraRichEdit.UI.RedoItem redoItem2;
-        private DevExpress.XtraRichEdit.UI.FileNewItem fileNewItem2;
-        private DevExpress.XtraRichEdit.UI.FileOpenItem fileOpenItem2;
-        private DevExpress.XtraRichEdit.UI.FileSaveItem fileSaveItem2;
-        private DevExpress.XtraRichEdit.UI.FileSaveAsItem fileSaveAsItem2;
-        private DevExpress.XtraRichEdit.UI.QuickPrintItem quickPrintItem2;
-        private DevExpress.XtraRichEdit.UI.PrintItem printItem2;
-        private DevExpress.XtraRichEdit.UI.PrintPreviewItem printPreviewItem2;
-        private DevExpress.Snap.Extensions.UI.CommandBarItem commandBarItem3;
         private DevExpress.XtraCharts.ChartControl chartControl1;
         private DevExpress.XtraBars.Ribbon.RibbonPageCategory ribbonPageCategory1;
         private DevExpress.XtraBars.BarButtonItem btn_upload;
