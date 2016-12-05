@@ -20,7 +20,7 @@ using DevExpress.Snap.Core.API;
 using Global;
 namespace fracture
 {
-    public partial class decline : Form
+    public partial class Stimu_decline : Form
     {
         XYDiagram Diagram;
         ChartControl myChart;
@@ -47,7 +47,108 @@ namespace fracture
         Rectangle selectionRectangle = Rectangle.Empty;
         DevExpress.XtraEditors.Repository.RepositoryItemComboBox ComboBoxproperties;
         DataSet result_dtset;
-        public decline()
+        List<arps> pfitinfo;
+        public class Record
+        {
+            DateTime xaxis; double yaxis;
+            public Record(DateTime xaxis, double yaxis)
+            {
+                this.xaxis = xaxis;
+                this.yaxis = yaxis;
+            }
+            public DateTime Xaxis
+            {
+                get { return xaxis; }
+                set { xaxis = value; }
+            }
+
+            public double Yaxis
+            {
+                get { return yaxis; }
+                set { yaxis = value; }
+            }
+        }
+        public class arps
+        {
+            private string name;
+
+            public string Name
+            {
+                get { return name; }
+                set { name = value; }
+            }
+
+            private ArrayList xy;
+
+            public ArrayList Xy
+            {
+                get { return xy; }
+                set { xy = value; }
+            }
+
+            private int endpoint;
+
+            public int Endpoint
+            {
+                get { return endpoint; }
+                set { endpoint = value; }
+            }
+            private int beginpoint;
+
+            public int Beginpoint
+            {
+                get { return beginpoint; }
+                set { beginpoint = value; }
+            }
+
+
+
+            private DateTime enddate;
+
+
+            public DateTime Enddate
+            {
+                get { return enddate; }
+                set { enddate = value; }
+            }
+
+            private DateTime begindate;
+
+            public DateTime Begindate
+            {
+                get { return begindate; }
+                set { begindate = value; }
+            }
+
+            private double qi;
+
+            public double Qi
+            {
+                get { return qi; }
+                set { qi = value; }
+            }
+
+
+
+            private double ni;
+
+            public double Ni
+            {
+                get { return ni; }
+                set { ni = value; }
+            }
+
+            private double di;
+
+            public double Di
+            {
+                get { return di; }
+                set { di = value; }
+            }
+
+
+        }
+        public Stimu_decline()
         {
 
             Stopwatch myWatch = Stopwatch.StartNew();
@@ -183,20 +284,7 @@ namespace fracture
             }
         }
 
-        //private void loadTemp(DataTable dt)
-        //{
-        //    //ChartControl chart = chartControl1;//= chart;//= new ChartControl(); 
-        //    //chart.Series.Clear();
-        //    //string excelpath = Application.StartupPath + "\\生产月报.xml";
-        //    //chart.LoadFromFile(excelpath);
-        //    //dt.Columns.Add("生产年月YYYYMM", Type.GetType("System.DateTime"));
-        //    //for (int i = 0; i < dt.Rows.Count; i++)
-        //    //{
-        //    //    dt.Rows[i]["生产年月YYYYMM"] = DateTime.ParseExact(dt.Rows[i]["生产年月"].ToString(), "yyyyMM", null); //string.Format("{0:yyyy-MM}", "]);//((DateTime)().ToString();
-        //    //};
-        //    //dt.Columns.Remove("生产年月");
-        //    //chart.DataSource = dt;
-        //}
+
         private void ge(List<DateTime> DataTime, List<double> getData, DataTable dt)
         {
             foreach (DataRow dr in dt.Rows)
@@ -209,16 +297,14 @@ namespace fracture
         private void loadTemp(DataTable dt)
         {
 
-            //List<double> getData = new List<double>();
-            //List<DateTime> DataTime = new List<DateTime>();
             getData = new List<double>();
             DataTime = new List<DateTime>();
-            ployfitinfo = new List<double[]>();
+            pfitinfo = new List<arps>();
             ComboBoxproperties.Items.Clear();
             ComboBoxproperties.Items.AddRange(new string[] { "下拉选择递减段" });
             //Select the first item 
             comboBoxEdit1.SelectedIndex = 0;
-            importdata(getData, DataTime);//输入数据
+
 
             ge(DataTime, getData, dt);
             //getData = dt.Columns["日产油量"];
@@ -343,9 +429,6 @@ namespace fracture
             constantLine1.Title.Text = "措施开始时间";
             constantLine1.Title.Alignment = ConstantLineTitleAlignment.Far;
 
-            //diagram.AxisY.VisualRange.SetMinMaxValues(500, 1500);
-            //diagram.AxisY.WholeRange.SetMinMaxValues(500, 1500);
-
 
         }
 
@@ -387,31 +470,6 @@ namespace fracture
 
         }
 
-        private void importdata(List<double> getData, List<DateTime> DataTime)
-        {
-
-
-        }
-        public class Record
-        {
-            DateTime xaxis; double yaxis;
-            public Record(DateTime xaxis, double yaxis)
-            {
-                this.xaxis = xaxis;
-                this.yaxis = yaxis;
-            }
-            public DateTime Xaxis
-            {
-                get { return xaxis; }
-                set { xaxis = value; }
-            }
-
-            public double Yaxis
-            {
-                get { return yaxis; }
-                set { yaxis = value; }
-            }
-        }
         public class Record3
         {
             DateTime xaxis; double yaxis1; double yaxis2;
@@ -452,11 +510,7 @@ namespace fracture
             }
             return list;
         }
-        private void btnrefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
 
-
-        }
 
         #region 图形拖动
         private void chartControl1_MouseMove(object sender, MouseEventArgs e)
@@ -742,40 +796,81 @@ namespace fracture
             int seiresi = seriesnum;
             int modelnum = 1;
             seiresi = seriesnum;
-             //ConstantLine constantLine2 = new ConstantLine("Constant Line 2");
+            //ConstantLine constantLine2 = new ConstantLine("Constant Line 2");
             XYDiagram diagram = (XYDiagram)myChart.Diagram;
 
             while (diagram.AxisX.ConstantLines.Count() > 1)
                 diagram.AxisX.ConstantLines.RemoveAt(diagram.AxisX.ConstantLines.Count() - 1);
-            
+
+            int ik = 0;
 
             while (myChart.Series.Count >= seriesnum + modelnum)
             {
-                if (myChart.Series.Count > seiresi)
-                {
-                    myChart.Series.RemoveAt(seiresi);
-                    ComboBoxproperties.Items.RemoveAt(seiresi);
-                    ployfitinfo.RemoveAt(seiresi - 1);
-                }
-                else
+                if (comboBoxEdit1.SelectedIndex == 0)
+                    return;
+                if (ik > myChart.Series.Count - 1)
                     break;
+                if (myChart.Series[ik].Name.ToString() == comboBoxEdit1.SelectedItem.ToString())
+                {
+                    myChart.Series.RemoveAt(ik);
+                    ComboBoxproperties.Items.RemoveAt(comboBoxEdit1.SelectedIndex);
+                    break;
+                }
+                ik++;
             }
             // Create a series, and add it to the chart. 
             DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series(seriname, ViewType.Line);
-
-            //添加下拉框的内容
-            ComboBoxproperties.Items.AddRange(new string[] { seriname });
-
             //添加拟合段信息
-            double[] plinfo = new double[6];
-            plinfo[0] = selectinfo[0];
-            plinfo[1] = selectinfo[1];
-            plinfo[2] = parameter_result[0];
-            plinfo[3] = parameter_result[1];
-            plinfo[4] = parameter_result[2];
-            plinfo[5] = correlative;
-            ployfitinfo.Add(plinfo);
+            if (pfitinfo == null)
+            {
+                arps pfitinfo_temp = new arps();
+                pfitinfo_temp.Name = seriname;
+                pfitinfo_temp.Beginpoint = (int)selectinfo[0];
+                pfitinfo_temp.Endpoint = (int)selectinfo[1];
+                pfitinfo_temp.Ni = parameter_result[0];
+                pfitinfo_temp.Qi = parameter_result[1];
+                pfitinfo_temp.Di = parameter_result[2];
+                pfitinfo.Add(pfitinfo_temp);
+            }
+            else
+            {
+                bool flag_find = false;
+                for (int i = 0; i < pfitinfo.Count; i++)
+                {
+                    if (pfitinfo[i].Name == seriname)
+                    {
+                        pfitinfo[i].Beginpoint = (int)selectinfo[0];
+                        pfitinfo[i].Endpoint = (int)selectinfo[1];
+                        pfitinfo[i].Ni = parameter_result[0];
+                        pfitinfo[i].Qi = parameter_result[1];
+                        pfitinfo[i].Di = parameter_result[2];
+                        flag_find = true;
+                    }
+                }
+                if (flag_find == false)
+                {
+                    arps pfitinfo_temp = new arps();
+                    pfitinfo_temp.Name = seriname;
+                    pfitinfo_temp.Beginpoint = (int)selectinfo[0];
+                    pfitinfo_temp.Endpoint = (int)selectinfo[1];
+                    pfitinfo_temp.Ni = parameter_result[0];
+                    pfitinfo_temp.Qi = parameter_result[1];
+                    pfitinfo_temp.Di = parameter_result[2];
+                    pfitinfo.Add(pfitinfo_temp);
+                }
 
+            }
+
+
+
+
+            {
+                //添加下拉框的内容
+                ComboBoxproperties.Items.AddRange(new string[] { seriname });
+                textQi.Text = pfitinfo[pfitinfo.Count - 1].Qi.ToString("f2");
+                textDi.Text = pfitinfo[pfitinfo.Count - 1].Di.ToString("f5");
+                textn.Text = pfitinfo[pfitinfo.Count - 1].Ni.ToString("f5");
+            }
             myChart.Series.Add(series1);
             series1.DataSource = listDataSource;
 
@@ -794,9 +889,9 @@ namespace fracture
 
             //series1.LegendTextPattern = "{A}";
             series1.LabelsVisibility = DevExpress.Utils.DefaultBoolean.False;
-            comboBoxEdit1.SelectedIndex = 1;
+            comboBoxEdit1.SelectedIndex = ComboBoxproperties.Items.Count - 1;
         }
-  
+
         private void btnNull_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             int seiresi = seriesnum;
@@ -823,91 +918,91 @@ namespace fracture
 
         private void btnmanul_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (ployfitinfo == null)
-                return;
-            if (ployfitinfo.Count == 0)
-                return;
-            if (comboBoxEdit1.SelectedIndex == 0)
-                return;
-            List<double> result = new List<double>();
-            List<DateTime> resultTime = new List<DateTime>();
-            int math_predic_num = int.Parse(longgest_num.Text);
-            int i = 1;
-            while (i < ployfitinfo.Count + 1)
-            {
-                if (comboBoxEdit1.SelectedIndex == i)
-                {
-                    int countnum = (int)(ployfitinfo[i - 1][1] - ployfitinfo[i - 1][0]) + 1;
-                    ployfitinfo[i - 1][3] = double.Parse(textQi.Text);
-                    ployfitinfo[i - 1][4] = double.Parse(textDi.Text);
-                    ployfitinfo[i - 1][2] = double.Parse(textn.Text);
+            //if (pfitinfo == null)
+            //    return;
+            //if (pfitinfo.Count == 0)
+            //    return;
+            //if (comboBoxEdit1.SelectedIndex == 0)
+            //    return;
+            //List<double> result = new List<double>();
+            //List<DateTime> resultTime = new List<DateTime>();
+            //int math_predic_num = int.Parse(longgest_num.Text);
+            //int i = 0;
+            //while (i < pfitinfo.Count)
+            //{
+            //    if (comboBoxEdit1.SelectedItem == pfitinfo[i].Name)
+            //    {
+            //        int countnum = (int)(ployfitinfo[i - 1][1] - ployfitinfo[i - 1][0]) + 1;
+            //        pfitinfo[i].Qi = double.Parse(textQi.Text);
+            //        pfitinfo[i].Di = double.Parse(textDi.Text);
+            //        pfitinfo[i].Ni= double.Parse(textn.Text);
 
-                    //重新计算拟合线
-                    double n = double.Parse(textn.Text); ;
-                    double Qi = double.Parse(textQi.Text); ;
-                    double Di = double.Parse(textDi.Text); ;
-                    //获得预测产油量
-                    if (ComboBoxproperties.Items[i].ToString().Contains("指数"))
-                    {
-                        for (int j = 0; j < countnum + math_predic_num; j++)
-                        {
-                            result.Add(Qi * System.Math.Exp((-Di) * j));
-                        }
+            //        //重新计算拟合线
+            //        double n = double.Parse(textn.Text); ;
+            //        double Qi = double.Parse(textQi.Text); ;
+            //        double Di = double.Parse(textDi.Text); ;
+            //        //获得预测产油量
+            //        if (comboBoxEdit1.SelectedItem.Contains("指数"))
+            //        {
+            //            for (int j = 0; j < countnum + math_predic_num; j++)
+            //            {
+            //                result.Add(Qi * System.Math.Exp((-Di) * j));
+            //            }
 
-                    }
+            //        }
 
-                    else if (ComboBoxproperties.Items[i].ToString().Contains("双曲"))
-                    {
-                        for (int j = 0; j < countnum + math_predic_num; j++)
-                        {
-                            result.Add(Qi / (System.Math.Pow((1 + n * Di * (j)), 1 / n)));
-                        }
+            //        else if (comboBoxEdit1.SelectedItem.Contains("双曲"))
+            //        {
+            //            for (int j = 0; j < countnum + math_predic_num; j++)
+            //            {
+            //                result.Add(Qi / (System.Math.Pow((1 + n * Di * (j)), 1 / n)));
+            //            }
 
-                    }
-                    else if (ComboBoxproperties.Items[i].ToString().Contains("调和"))
-                    {
-                        for (int j = 0; j < countnum + math_predic_num; j++)
-                        {
-                            result.Add(Qi / ((Di) * j + 1));
-                        }
+            //        }
+            //        else if (comboBoxEdit1.SelectedItem.Contains("调和"))
+            //        {
+            //            for (int j = 0; j < countnum + math_predic_num; j++)
+            //            {
+            //                result.Add(Qi / ((Di) * j + 1));
+            //            }
 
-                    }
+            //        }
 
-                    //获得时间
-                    for (int j = (int)ployfitinfo[i - 1][0]; j <= (int)ployfitinfo[i - 1][1]; j++)
-                        resultTime.Add(DataTime[j]);
-                    DateTime lastone = resultTime[resultTime.Count - 1];
-                    for (int iii = 1; iii <= int.Parse(longgest_num.Text); iii++)
-                    {
-                        if (DataTime[1].Year - DataTime[0].Year == 0)
-                        {
-                            if (DataTime[1].Month - DataTime[0].Month == 0)
-                            {
-                                int span = DataTime[1].Day - DataTime[0].Day;
-                                resultTime.Add(lastone.AddDays(iii * span));
-                            }
-                            else
-                            {
-                                int span = DataTime[1].Month - DataTime[0].Month;
-                                resultTime.Add(lastone.AddMonths(iii * span));
-                            }
-                        }
-                        else
-                        {
-                            int span = DataTime[1].Year - DataTime[0].Year;
-                            resultTime.Add(lastone.AddYears(iii * span));
-                        }
+            //        //获得时间
+            //        for (int j = (int)ployfitinfo[i - 1][0]; j <= (int)ployfitinfo[i - 1][1]; j++)
+            //            resultTime.Add(DataTime[j]);
+            //        DateTime lastone = resultTime[resultTime.Count - 1];
+            //        for (int iii = 1; iii <= int.Parse(longgest_num.Text); iii++)
+            //        {
+            //            if (DataTime[1].Year - DataTime[0].Year == 0)
+            //            {
+            //                if (DataTime[1].Month - DataTime[0].Month == 0)
+            //                {
+            //                    int span = DataTime[1].Day - DataTime[0].Day;
+            //                    resultTime.Add(lastone.AddDays(iii * span));
+            //                }
+            //                else
+            //                {
+            //                    int span = DataTime[1].Month - DataTime[0].Month;
+            //                    resultTime.Add(lastone.AddMonths(iii * span));
+            //                }
+            //            }
+            //            else
+            //            {
+            //                int span = DataTime[1].Year - DataTime[0].Year;
+            //                resultTime.Add(lastone.AddYears(iii * span));
+            //            }
 
-                    }
+            //        }
 
-                    //重画图
-                    redrawseries(i, result, resultTime);
-                    break;
+            //        //重画图
+            //        redrawseries(i, result, resultTime);
+            //        break;
 
-                }
-                else
-                    i++;
-            }
+            //    }
+            //    else
+            //        i++;
+            //}
 
         }
         private void redrawseries(int seiresi, List<double> Result, List<DateTime> resultTime)
@@ -923,7 +1018,6 @@ namespace fracture
             //MessageBox.Show(myChart.Series.Count.ToString());
 
             DevExpress.XtraCharts.Series series1 = myChart.Series[seiresi];
-
             //myChart.Series.Add(series1);
             series1.DataSource = listDataSource;
 
@@ -968,16 +1062,9 @@ namespace fracture
 
             //添加下拉框的内容
             if (!ComboBoxproperties.Items.Contains("增油面积"))
-            ComboBoxproperties.Items.AddRange(new string[] { "增油面积" });
+                ComboBoxproperties.Items.AddRange(new string[] { "增油面积" });
 
-            double[] plinfo = new double[6];
-            plinfo[0] = 0;
-            plinfo[1] = 0;
-            plinfo[2] = 0;
-            plinfo[3] = 0;
-            plinfo[4] = 0;
-            plinfo[5] = 0;
-            ployfitinfo.Add(plinfo);
+
 
             // Create a series, and add it to the chart. 
             DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series("增油面积", ViewType.RangeArea);
@@ -1004,20 +1091,30 @@ namespace fracture
 
             ((XYDiagram)myChart.Diagram).AxisX.WholeRange.MaxValue = resultTime_aft.Max().AddMonths(1);
 
-             
+
         }
         private void comboBoxEdit1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ployfitinfo == null)
+            
+            if (pfitinfo == null)
                 return;
             int i = 1;
-            while (i < ployfitinfo.Count + 1)
+            if (comboBoxEdit1.SelectedItem.ToString().Contains("措施后"))
             {
-                if (comboBoxEdit1.SelectedIndex == i)
+                phase_num = 2;
+            }
+            else
+            {
+                phase_num = 1;
+            }
+            while (i < pfitinfo.Count)
+            {
+              
+                if (comboBoxEdit1.SelectedItem.ToString() == pfitinfo[i].Name)
                 {
-                    textQi.Text = ployfitinfo[i - 1][3].ToString("f2");
-                    textDi.Text = ployfitinfo[i - 1][4].ToString("f2");
-                    textn.Text = ployfitinfo[i - 1][2].ToString("f2");
+                    textQi.Text = pfitinfo[i].Qi.ToString("f2");
+                    textDi.Text = pfitinfo[i].Di.ToString("f5");
+                    textn.Text = pfitinfo[i].Ni.ToString("f5");
                     break;
                 }
                 else
@@ -1028,12 +1125,19 @@ namespace fracture
 
         private void btncal_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (ployfitinfo == null)
+            if (pfitinfo == null)
                 return;
-            if (ployfitinfo.Count == 0)
+            if (pfitinfo.Count == 0)
                 return;
             if (comboBoxEdit1.SelectedIndex == 0)
                 return;
+            myChart = chartControl1;
+            for (int ik = 0; ik < myChart.Series.Count; ik++)
+            {
+                if (myChart.Series[ik].Name == "增油面积")
+                    myChart.Series.RemoveAt(ik);
+
+            }
 
             List<double> result_bef = new List<double>();
             List<double> result_aft = new List<double>();
@@ -1042,51 +1146,79 @@ namespace fracture
             List<DateTime> resultTime = new List<DateTime>();
             List<DateTime> resultTime_aft = new List<DateTime>();
             int math_predic_num = int.Parse(longgest_num.Text);
-            int i = 1;
+
             //i-1表示措施前拟合线 i表示措施后拟合线 
-            int countnum = (int)(ployfitinfo[i - 1][1] - ployfitinfo[i - 1][0]) + 1;
-
-            ployfitinfo[i - 1][3] = double.Parse(textQi.Text);
-            ployfitinfo[i - 1][4] = double.Parse(textDi.Text);
-            ployfitinfo[i - 1][2] = double.Parse(textn.Text);
-
+            for (int i = 0; i < pfitinfo.Count; i++)
+                if (comboBoxEdit1.SelectedItem.ToString() == pfitinfo[i].Name.ToString())
+                {
+                    pfitinfo[i].Qi = double.Parse(textQi.Text);
+                    pfitinfo[i].Di = double.Parse(textDi.Text);
+                    pfitinfo[i].Ni = double.Parse(textn.Text);
+                    break;
+                }
+            double n_bef = 0;
+            double Qi_bef = 0;
+            double Di_bef = 0;
+            int lastindex_bef = 0;
+            int firstindex_bef = 0;
             //重新计算拟合线,措施前的线
-            double n = ployfitinfo[i - 1][2];
-            double Qi = ployfitinfo[i - 1][3];
-            double Di = ployfitinfo[i - 1][4];
-            double correlative = ployfitinfo[i - 1][5];
+            for (int i = 0; i < pfitinfo.Count; i++)
+                if (pfitinfo[i].Name.Contains("措施前"))
+                {
+                    Qi_bef = pfitinfo[i].Qi;
+                    Di_bef = pfitinfo[i].Di;
+                    n_bef = pfitinfo[i].Ni;
+                    lastindex_bef = pfitinfo[i].Endpoint;
+                    firstindex_bef = pfitinfo[i].Beginpoint;
+                    break;
+                }
+            if (lastindex_bef > getData.Count())
+                return;
+
             //获得时间
             double n_pred = 0;
             double Qi_pred = 0;
             double Di_pred = 0;
-            double correlative_pred = 0;
+
             int countnum_pred = 0;
             //重新计算拟合线,措施后的线
-            if (ployfitinfo.Count == 2)
-            {
-                n_pred = ployfitinfo[i][2];
-                Qi_pred = ployfitinfo[i][3];
-                Di_pred = ployfitinfo[i][4];
-                correlative_pred = ployfitinfo[i][5];
-                countnum_pred = (int)(ployfitinfo[i - 1][1] - ployfitinfo[i - 1][0]) + 1;
-            }
+            for (int i = 0; i < pfitinfo.Count; i++)
+                if (pfitinfo[i].Name.Contains("措施后"))
+                {
+                    n_pred = pfitinfo[i].Ni;
+                    Qi_pred = pfitinfo[i].Qi;
+                    Di_pred = pfitinfo[i].Di;
+
+                    countnum_pred = (int)(pfitinfo[i].Endpoint - pfitinfo[i].Beginpoint) + 1;
+                    break;
+                }
 
 
-            DateTime fristone = DataTime[(int)ployfitinfo[i - 1][0]];//措施前拟合最开始的时间
+
             DateTime fail_date = new DateTime(2001, 3, 23);
             int fail_last_time = int.Parse(lasttime.Text);
-            int lastindex = (int)ployfitinfo[i - 1][1];
-            if (lastindex > getData.Count())
-                return;
+
 
 
             {
-                int j = (int)ployfitinfo[i - 1][0];
+                # region
+                int j = firstindex_bef;
                 int j_pred = 0;
                 int longest = 0;//最长有效期
                 int time_before_stimu = 0;
                 int failflag = 0;//连续
-
+                int i = 1;
+                int ij = 0;
+                for (i = 0; i < ComboBoxproperties.Items.Count; i++)//看看措施前用啥拟合的
+                {
+                    if (ComboBoxproperties.Items[i].ToString().Contains("措施前"))
+                        break;
+                }
+                for (ij = 0; ij < ComboBoxproperties.Items.Count; ij++)//看看措施前用啥拟合的
+                {
+                    if (ComboBoxproperties.Items[ij].ToString().Contains("措施后"))
+                        break;
+                }
                 while (failflag < fail_last_time)
                 {
                     double tempq = 0;
@@ -1095,15 +1227,15 @@ namespace fracture
 
                     if (ComboBoxproperties.Items[i].ToString().Contains("指数"))
                     {
-                        tempq = Qi * System.Math.Exp((-Di) * (j - (int)ployfitinfo[i - 1][0]));
+                        tempq = Qi_bef * System.Math.Exp((-Di_bef) * (j - firstindex_bef));
                     }
                     else if (ComboBoxproperties.Items[i].ToString().Contains("双曲"))
                     {
-                        tempq = Qi / (System.Math.Pow((1 + n * Di * (j - (int)ployfitinfo[i - 1][0])), 1 / n));
+                        tempq = Qi_bef / (System.Math.Pow((1 + n_bef * Di_bef * (j - firstindex_bef)), 1 / n_bef));
                     }
                     else if (ComboBoxproperties.Items[i].ToString().Contains("调和"))
                     {
-                        tempq = Qi / ((Di) * (j - (int)ployfitinfo[i - 1][0]) + 1);
+                        tempq = Qi_bef / ((Di_bef) * (j - firstindex_bef) + 1);
                     }
 
                     if (DataTime[1].Year - DataTime[0].Year == 0)
@@ -1152,18 +1284,18 @@ namespace fracture
                             his_result.Add(getData[j]);
                         }
                         else
-                        {
-                            if (ployfitinfo.Count == 2)
+                        {//措施后
+                            if (Qi_pred != 0)
                             {
-                                if (ComboBoxproperties.Items[i + 1].ToString().Contains("指数"))
+                                if (ComboBoxproperties.Items[ij].ToString().Contains("指数"))
                                 {
                                     tempq_pred = Qi_pred * System.Math.Exp((-Di_pred) * (countnum_pred + j_pred));
                                 }
-                                else if (ComboBoxproperties.Items[i + 1].ToString().Contains("双曲"))
+                                else if (ComboBoxproperties.Items[ij].ToString().Contains("双曲"))
                                 {
                                     tempq_pred = Qi_pred / (System.Math.Pow((1 + n_pred * Di_pred * (countnum_pred + j_pred)), 1 / n_pred));
                                 }
-                                else if (ComboBoxproperties.Items[i + 1].ToString().Contains("调和"))
+                                else if (ComboBoxproperties.Items[ij].ToString().Contains("调和"))
                                 {
                                     tempq_pred = Qi_pred / ((Di_pred) * (countnum_pred + j_pred) + 1);
                                 }
@@ -1227,12 +1359,15 @@ namespace fracture
                 }
                 result_bef.AddRange(result_aft);
                 redrawseries(1, result_bef, resultTime);
-                if (ployfitinfo.Count == 2)
-                {
-                    redrawseries(2, his_result, resultTime_aft);
-                }
-                stimu_draw(fail_date, increase_result, result_aft, resultTime_aft);
 
+                for (int ik = 0; ik < myChart.Series.Count; ik++)
+                {
+                    if (myChart.Series[ik].Name.Contains("措施后"))
+                        redrawseries(ik, his_result, resultTime_aft);
+                }
+                fail_date = resultTime_aft.Last();
+                stimu_draw(fail_date, increase_result, result_aft, resultTime_aft);
+                # endregion
             }
 
 
@@ -1361,99 +1496,6 @@ namespace fracture
             }
         }
 
-        private void btn_excel_output_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            //Worksheet worksheet = spreadsheetControl1.Document.Worksheets.ActiveWorksheet;
-            //IWorkbook workbook = spreadsheetControl1.Document;
-            //spreadsheetControl1.Visible = false;
-            // //Create a chart and specify its location.
-            //Chart chart = worksheet.Charts.Add(ChartType.ScatterSmooth);
-            //int topcell = 4;
-            //int leftcell = 5;
-            //chart.TopLeftCell = worksheet.Cells[topcell, leftcell];
-            //chart.BottomRightCell = worksheet.Cells[topcell + 20, leftcell + 7];
-
-            /////画图数据原
-            //DevExpress.Spreadsheet.Range range1;
-            //DevExpress.Spreadsheet.Range range2;
-
-            //    range1 = worksheet.Range.FromLTRB(0, 1, 0, getData.Count);
-            //    range2 = worksheet.Range.FromLTRB(2, 1, 2, getData.Count);
-            //    // Add chart series using worksheet ranges as the data sources.
-            //    chart.Series.Add(worksheet["B1"], range1, range2);//原始序列
-
-            //// A rectangular range whose left column index is 0, top row index is 0, 
-            //// right column index is 3 and bottom row index is 2. This is the A1:D3 cell range.
-            //    range1 = worksheet.Range.FromLTRB(3, 1, 3, getData.Count+int.Parse(predic_num.Text));
-            //    range2 = worksheet.Range.FromLTRB(4, 1, 4, getData.Count + int.Parse(predic_num.Text));
-            //// Add chart series using worksheet ranges as the data sources.
-            //chart.Series.Add(worksheet["E1"], range1, range2);//结果序列
-
-
-
-            //DevExpress.Spreadsheet.Charts.Axis axis = chart.PrimaryAxes[0];
-            //axis.Scaling.AutoMax = true;
-            ////axis.Scaling.Max = worksheet.Cells[resulty.Count, 5].Value.NumericValue;
-            //axis.Scaling.AutoMin = false;
-            //axis.Scaling.Min = worksheet.Cells[1, 0].Value.NumericValue;
-            //axis.Title.SetValue("生产时间");
-            //axis.NumberFormat.FormatCode = "YYYY-MM-DD";
-            //chart.PrimaryAxes[1].Title.SetValue("产油量");
-
-
-            //chart.Legend.Position = LegendPosition.Top;
-
-            //chart.Title.Visible = true;
-            //chart.Title.SetValue("递减曲线");
-            //chart.Title.Font.Size = 11;
-            //chart.Series[0].Marker.Symbol = MarkerStyle.Circle;
-            //chart.Series[0].Marker.Size = 5;
-            ////chart.Series[0].Outline.SetNoFill();
-            //chart.Series[0].ChangeType(ChartType.ScatterMarkers);
-
-            //    chart.Series[1].Outline.SetSolidFill(Color.Red);
-            //    chart.Series[0].Marker.Outline.SetSolidFill(Color.Orange);
-            //    chart.Series[0].Marker.Fill.SetSolidFill(Color.FromArgb(125, Color.Orange));
-
-
-            //chart.PlotArea.Outline.SetSolidFill(Color.Black);
-
-            //DocumentFormat format = DocumentFormat.Xlsx;
-            ////myChart.ExportToImage(fileName, format);
-
-            //SaveFileDialog fileDialog = new SaveFileDialog();
-            //fileDialog.RestoreDirectory = true;
-            //fileDialog.Title = "导出结果图表";
-            //fileDialog.Filter = "EXCEL|*.xlsx|EXCEL 97-03|*.xls";
-            //DialogResult dialogResult = fileDialog.ShowDialog(this);
-            //if (dialogResult == DialogResult.OK)
-            //{
-            //    if (System.IO.File.Exists(fileDialog.FileName))
-            //    {
-            //        System.IO.File.Delete(fileDialog.FileName);
-            //    }
-
-            //    //获得文件路径
-            //    string localFilePath = fileDialog.FileName.ToString();
-            //    //去除文件后缀名
-            //    string fileNameWithoutSuffix = localFilePath.Substring(0, localFilePath.LastIndexOf("."));
-            //    //后缀名
-            //    string aLastName = localFilePath.Substring(localFilePath.LastIndexOf(".") + 1, (localFilePath.Length - localFilePath.LastIndexOf(".") - 1));   //扩展名
-            //    switch (aLastName)
-            //    {
-            //        case "xlsx": format = DocumentFormat.Xlsx; break;
-            //        case "xls": format = DocumentFormat.Xls; break;
-            //    }
-            //    workbook.SaveDocument(localFilePath, format);
-            //    while (worksheet.Charts.Count > 0)
-            //    { worksheet.Charts[0].Delete(); }
-            //    DevExpress.XtraEditors.XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            //}
-            //while (worksheet.Charts.Count > 0)
-            //{ worksheet.Charts[0].Delete(); }
-            //spreadsheetControl1.Visible = true;
-        }
 
         private void barCheckItem2_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -1463,60 +1505,13 @@ namespace fracture
                 dockPanel1.Hide();
         }
 
-        private void spreadsheetCommandBarButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
 
-        }
-
-        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            //Worksheet worksheet = spreadsheetControl1.Document.Worksheets.ActiveWorksheet;
-            //IWorkbook workbook = spreadsheetControl1.Document;
-            //DocumentFormat format = DocumentFormat.Xlsx;
-            ////myChart.ExportToImage(fileName, format);
-
-            //SaveFileDialog fileDialog = new SaveFileDialog();
-            //fileDialog.RestoreDirectory = true;
-            //fileDialog.Title = "导出结果图表";
-            //fileDialog.Filter = "EXCEL|*.xlsx|EXCEL 97-03|*.xls";
-            //DialogResult dialogResult = fileDialog.ShowDialog(this);
-            //if (dialogResult == DialogResult.OK)
-            //{
-            //    if (System.IO.File.Exists(fileDialog.FileName))
-            //    {
-            //        System.IO.File.Delete(fileDialog.FileName);
-            //    }
-
-            //    //获得文件路径
-            //    string localFilePath = fileDialog.FileName.ToString();
-            //    //去除文件后缀名
-            //    string fileNameWithoutSuffix = localFilePath.Substring(0, localFilePath.LastIndexOf("."));
-            //    //后缀名
-            //    string aLastName = localFilePath.Substring(localFilePath.LastIndexOf(".") + 1, (localFilePath.Length - localFilePath.LastIndexOf(".") - 1));   //扩展名
-            //    switch (aLastName)
-            //    {
-            //        case "xlsx": format = DocumentFormat.Xlsx; break;
-            //        case "xls": format = DocumentFormat.Xls; break;
-            //    }
-            //    workbook.SaveDocument(localFilePath, format);
-            //    DevExpress.XtraEditors.XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-        }
 
         private void btnhelp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             //System.Diagnostics.Process.Start(Application.StartupPath.ToString() + "\\help\\递减分析.pdf");
         }
 
-        private void snapControl1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void fileOpenItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-
-        }
 
         private void btn_upload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {

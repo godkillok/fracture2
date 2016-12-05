@@ -1,6 +1,6 @@
 ﻿namespace fracture
 {
-    partial class decline
+    partial class Stimu_decline
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(decline));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Stimu_decline));
             DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup1 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
             DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup2 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
             DevExpress.XtraRichEdit.Model.BorderInfo borderInfo1 = new DevExpress.XtraRichEdit.Model.BorderInfo();
@@ -560,7 +560,7 @@
             this.btn_excel_output.Id = 19;
             this.btn_excel_output.LargeGlyph = global::fracture.Properties.Resources.Excel_2010;
             this.btn_excel_output.Name = "btn_excel_output";
-            this.btn_excel_output.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_excel_output_ItemClick);
+          //  this.btn_excel_output.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_excel_output_ItemClick);
             // 
             // barCheckItem2
             // 
@@ -577,7 +577,7 @@
             this.barButtonItem1.Id = 23;
             this.barButtonItem1.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.LargeGlyph")));
             this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+          //  this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // btnhelp
             // 
@@ -610,7 +610,7 @@
             this.fileOpenItem1.Id = 28;
             this.fileOpenItem1.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("fileOpenItem1.LargeGlyph")));
             this.fileOpenItem1.Name = "fileOpenItem1";
-            this.fileOpenItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.fileOpenItem1_ItemClick);
+           // this.fileOpenItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.fileOpenItem1_ItemClick);
             // 
             // fileSaveItem1
             // 
